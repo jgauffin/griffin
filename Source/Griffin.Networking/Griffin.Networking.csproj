@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6A40E082-4F3A-4BF7-85C7-81255EE44FEC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Griffin.Networking</RootNamespace>
+    <AssemblyName>Griffin.Networking</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BadRequestException.cs" />
+    <Compile Include="Buffers\BufferManager.cs" />
+    <Compile Include="Buffers\BufferSlice.cs" />
+    <Compile Include="Buffers\BufferSliceReader.cs" />
+    <Compile Include="Buffers\CircularBuffer.cs" />
+    <Compile Include="Buffers\ITextParser.cs" />
+    <Compile Include="Buffers\ObjectPool.cs" />
+    <Compile Include="Buffers\StreamReaderExtensions.cs" />
+    <Compile Include="Buffers\StringParser.cs" />
+    <Compile Include="Channels\Channel.cs" />
+    <Compile Include="Channels\IChannel.cs" />
+    <Compile Include="Channels\IChannelConfiguration.cs" />
+    <Compile Include="Channels\IChannelFactory.cs" />
+    <Compile Include="Channels\IClientChannel.cs" />
+    <Compile Include="Channels\TcpChannel.cs" />
+    <Compile Include="Channels\TcpChannelConfig.cs" />
+    <Compile Include="Channels\TcpChannelService.cs" />
+    <Compile Include="Channels\TcpClientChannel.cs" />
+    <Compile Include="Channels\TcpClientChannelFactory.cs" />
+    <Compile Include="Channels\TcpServerChannel.cs" />
+    <Compile Include="Channels\TcpServerChildChannel.cs" />
+    <Compile Include="Handlers\AutoReconnector.cs" />
+    <Compile Include="Handlers\ChannelHandlerContext.cs" />
+    <Compile Include="Handlers\ContextCollection.cs" />
+    <Compile Include="Handlers\IChannelHandler.cs" />
+    <Compile Include="Handlers\IChannelHandlerContext.cs" />
+    <Compile Include="Handlers\IContextCollection.cs" />
+    <Compile Include="Handlers\IDownstreamHandler.cs" />
+    <Compile Include="Handlers\IUpstreamHandler.cs" />
+    <Compile Include="Handlers\SimpleStreamHandler.cs" />
+    <Compile Include="Handlers\SimpleUpstreamHandler.cs" />
+    <Compile Include="IObjectPool.cs" />
+    <Compile Include="IReusable.cs" />
+    <Compile Include="IService.cs" />
+    <Compile Include="Messages\AcceptedEvent.cs" />
+    <Compile Include="Messages\BindEvent.cs" />
+    <Compile Include="Messages\BoundEvent.cs" />
+    <Compile Include="Messages\ClosedEvent.cs" />
+    <Compile Include="Messages\CloseEvent.cs" />
+    <Compile Include="Messages\ConnectedEvent.cs" />
+    <Compile Include="Messages\ConnectEvent.cs" />
+    <Compile Include="Messages\EventFactory.cs" />
+    <Compile Include="Messages\ExceptionEvent.cs" />
+    <Compile Include="Messages\IChannelEvent.cs" />
+    <Compile Include="Messages\IMessageEvent.cs" />
+    <Compile Include="Messages\IServerEvent.cs" />
+    <Compile Include="Messages\IUpstreamEvent.cs" />
+    <Compile Include="Messages\MessageEvent.cs" />
+    <Compile Include="Messages\SocketClosedEvent.cs" />
+    <Compile Include="Pipelines\IPipeline.cs" />
+    <Compile Include="Pipelines\IPipelineContext.cs" />
+    <Compile Include="Pipelines\IPipelineFactory.cs" />
+    <Compile Include="Pipelines\Pipeline.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocols\FreeSwitch\AnyCommand.cs" />
+    <Compile Include="Protocols\FreeSwitch\BackgroundCommand.cs" />
+    <Compile Include="Protocols\FreeSwitch\ClientHandler.cs" />
+    <Compile Include="Protocols\FreeSwitch\Command.cs" />
+    <Compile Include="Protocols\FreeSwitch\Decoder.cs" />
+    <Compile Include="Protocols\FreeSwitch\Encoder.cs" />
+    <Compile Include="Protocols\FreeSwitch\FreeSwitchBootstrap.cs" />
+    <Compile Include="Protocols\FreeSwitch\Message.cs" />
+    <Compile Include="Protocols\Http\Decoder.cs" />
+    <Compile Include="Protocols\Http\Encoder.cs" />
+    <Compile Include="Protocols\Http\HttpContext.cs" />
+    <Compile Include="Protocols\Http\HttpListener.cs" />
+    <Compile Include="Protocols\Http\HttpServer.cs" />
+    <Compile Include="Protocols\Http\Implementation\FactoryResponseEventArgs.cs" />
+    <Compile Include="Protocols\Http\Implementation\HeaderCollection.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\AuthorizationHeader.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\CacheControl.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\ConnectionHeader.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\ConnectionType.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\ContentTypeHeader.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\CookieHeader.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\DateHeader.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\HeaderCollection.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\HeaderFactory.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\HeaderParameterCollection.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\LazyHeader.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\Parsers\AuthorizationParser.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\Parsers\ConnectionParser.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\Parsers\ContentTypeParser.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\Parsers\CookieParser.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\Parsers\DateParser.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\Parsers\IHeaderParser.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\Parsers\ParserForAttribute.cs" />
+    <Compile Include="Protocols\Http\Implementation\Headers\Parsers\StringParser.cs" />
+    <Compile Include="Protocols\Http\Implementation\HttpClient.cs" />
+    <Compile Include="Protocols\Http\Implementation\HttpContext.cs" />
+    <Compile Include="Protocols\Http\Implementation\HttpCookie.cs" />
+    <Compile Include="Protocols\Http\Implementation\HttpFile.cs" />
+    <Compile Include="Protocols\Http\Implementation\HttpFileCollection.cs" />
+    <Compile Include="Protocols\Http\Implementation\HttpMessage.cs" />
+    <Compile Include="Protocols\Http\Implementation\HttpRequest.cs" />
+    <Compile Include="Protocols\Http\Implementation\HttpResponse.cs" />
+    <Compile Include="Protocols\Http\Implementation\Parameter.cs" />
+    <Compile Include="Protocols\Http\Implementation\ParameterCollection.cs" />
+    <Compile Include="Protocols\Http\Implementation\QueryStringDecoder.cs" />
+    <Compile Include="Protocols\Http\Implementation\RequestCookiesCollection.cs" />
+    <Compile Include="Protocols\Http\Implementation\ResponseCookie.cs" />
+    <Compile Include="Protocols\Http\ServerFactory.cs" />
+    <Compile Include="Protocols\Http\Specification\IHeader.cs" />
+    <Compile Include="Protocols\Http\Specification\IHeaderCollection.cs" />
+    <Compile Include="Protocols\Http\Specification\IHttpCookie.cs" />
+    <Compile Include="Protocols\Http\Specification\IHttpCookieCollection.cs" />
+    <Compile Include="Protocols\Http\Specification\IHttpFile.cs" />
+    <Compile Include="Protocols\Http\Specification\IHttpFileCollection.cs" />
+    <Compile Include="Protocols\Http\Specification\IMessage.cs" />
+    <Compile Include="Protocols\Http\Specification\IParameter.cs" />
+    <Compile Include="Protocols\Http\Specification\IParameterCollection.cs" />
+    <Compile Include="Protocols\Http\Specification\IRequest.cs" />
+    <Compile Include="Protocols\Http\Specification\IResponse.cs" />
+    <Compile Include="Protocols\Http\Specification\IResponseCookie.cs" />
+    <Compile Include="Service.cs" />
+    <Compile Include="ServiceBuilders\ClientServiceBuilder.cs" />
+    <Compile Include="ServiceBuilders\IClientService.cs" />
+    <Compile Include="ServiceBuilders\IService.cs" />
+    <Compile Include="ServiceBuilders\ServerBuilder.cs" />
+    <Compile Include="ServiceBuilders\ServerConfiguration.cs" />
+    <Compile Include="ServiceBuilders\ServiceBuilderConfiguration.cs" />
+    <Compile Include="ServiceBuilders\ServiceFactory.cs" />
+    <Compile Include="Services\ClientService.cs" />
+    <Compile Include="Services\ServerService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Protocols\FreeSwitch\Events\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Griffin.Core\Griffin.Core.csproj">
+      <Project>{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}</Project>
+      <Name>Griffin.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Griffin.Specification\Griffin.Specification.csproj">
+      <Project>{0A92E936-4A23-48D4-A792-181211EC0F2B}</Project>
+      <Name>Griffin.Specification</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

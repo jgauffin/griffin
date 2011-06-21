@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Griffin.Core", "Griffin.Core\Griffin.Core.csproj", "{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Griffin.MVC", "Griffin.MVC\Griffin.MVC.csproj", "{6FD6C97D-ED67-4752-B776-95ADD38AC039}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Griffin.Specification", "Griffin.Specification\Griffin.Specification.csproj", "{0A92E936-4A23-48D4-A792-181211EC0F2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Griffin.Networking", "Griffin.Networking\Griffin.Networking.csproj", "{6A40E082-4F3A-4BF7-85C7-81255EE44FEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Griffin.Logging", "Griffin.Logging\Griffin.Logging.csproj", "{CCDBDF6B-7314-4DB6-9481-38307BF1A284}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FD6C97D-ED67-4752-B776-95ADD38AC039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FD6C97D-ED67-4752-B776-95ADD38AC039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FD6C97D-ED67-4752-B776-95ADD38AC039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FD6C97D-ED67-4752-B776-95ADD38AC039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A92E936-4A23-48D4-A792-181211EC0F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A92E936-4A23-48D4-A792-181211EC0F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A92E936-4A23-48D4-A792-181211EC0F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A92E936-4A23-48D4-A792-181211EC0F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A40E082-4F3A-4BF7-85C7-81255EE44FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A40E082-4F3A-4BF7-85C7-81255EE44FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A40E082-4F3A-4BF7-85C7-81255EE44FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A40E082-4F3A-4BF7-85C7-81255EE44FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCDBDF6B-7314-4DB6-9481-38307BF1A284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCDBDF6B-7314-4DB6-9481-38307BF1A284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCDBDF6B-7314-4DB6-9481-38307BF1A284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCDBDF6B-7314-4DB6-9481-38307BF1A284}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
