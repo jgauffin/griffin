@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text;
 
-namespace Griffin.Core.Net.Buffers
+namespace Griffin.Networking.Buffers
 {
     public class BufferSliceReader : ITextParser
     {
@@ -53,6 +53,7 @@ namespace Griffin.Core.Net.Buffers
             get { return _slice.Buffer; }
         }
 
+        #region ITextParser Members
 
         /// <summary>
         /// Gets current character
@@ -118,23 +119,6 @@ namespace Griffin.Core.Net.Buffers
         public int RemainingLength
         {
             get { return _slice.RemainingCount; }
-        }
-
-        /// <summary>
-        /// Assign a new buffer
-        /// </summary>
-        /// <param name="buffer">Buffer to process.</param>
-        /// <param name="offset">Where to start process buffer</param>
-        /// <param name="count">Buffer length</param>
-        /// <exception cref="ArgumentException">Buffer needs to be a byte array</exception>
-        public void Assign(byte[] buffer, int offset, int count)
-        {
-            _slice = new BufferSlice(buffer, offset, count);
-        }
-
-        public void Assign(BufferSlice buffer)
-        {
-            _slice = buffer;
         }
 
         /// <summary>
@@ -219,23 +203,6 @@ namespace Griffin.Core.Net.Buffers
             bool found = Current == ch;
             Index = index;
             return found;
-        }
-
-        private string GetString(int startIndex, int endIndex)
-        {
-            return _encoding.GetString(_slice.Buffer, startIndex, endIndex - startIndex);
-        }
-
-        private string GetString(int startIndex, int endIndex, bool trimEnd)
-        {
-            if (trimEnd)
-            {
-                --endIndex; // need to move one back to be able to trim.
-                while (endIndex > 0 && _slice.Buffer[endIndex] == ' ' || _slice.Buffer[endIndex] == '\t')
-                    --endIndex;
-                ++endIndex;
-            }
-            return _encoding.GetString(_slice.Buffer, startIndex, endIndex - startIndex);
         }
 
         /// <summary>
@@ -495,6 +462,42 @@ namespace Griffin.Core.Net.Buffers
         public string ReadWord()
         {
             return ReadUntil(" \t");
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Assign a new buffer
+        /// </summary>
+        /// <param name="buffer">Buffer to process.</param>
+        /// <param name="offset">Where to start process buffer</param>
+        /// <param name="count">Buffer length</param>
+        /// <exception cref="ArgumentException">Buffer needs to be a byte array</exception>
+        public void Assign(byte[] buffer, int offset, int count)
+        {
+            _slice = new BufferSlice(buffer, offset, count);
+        }
+
+        public void Assign(BufferSlice buffer)
+        {
+            _slice = buffer;
+        }
+
+        private string GetString(int startIndex, int endIndex)
+        {
+            return _encoding.GetString(_slice.Buffer, startIndex, endIndex - startIndex);
+        }
+
+        private string GetString(int startIndex, int endIndex, bool trimEnd)
+        {
+            if (trimEnd)
+            {
+                --endIndex; // need to move one back to be able to trim.
+                while (endIndex > 0 && _slice.Buffer[endIndex] == ' ' || _slice.Buffer[endIndex] == '\t')
+                    --endIndex;
+                ++endIndex;
+            }
+            return _encoding.GetString(_slice.Buffer, startIndex, endIndex - startIndex);
         }
     }
 }

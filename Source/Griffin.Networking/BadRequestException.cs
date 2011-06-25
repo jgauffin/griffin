@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Griffin.Core.Net
+namespace Griffin.Networking
 {
-    class BadRequestException : Exception
+    internal class BadRequestException : Exception
     {
         public BadRequestException(string errorMessage)
         {
@@ -14,7 +11,6 @@ namespace Griffin.Core.Net
 
         public BadRequestException(string errorMessage, Exception innerException)
         {
-            
         }
     }
 }

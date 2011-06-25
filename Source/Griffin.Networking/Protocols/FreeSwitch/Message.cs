@@ -3,7 +3,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Text;
 
-namespace Griffin.Core.Net.Protocols.FreeSwitch
+namespace Griffin.Networking.Protocols.FreeSwitch
 {
     internal class Message
     {
@@ -22,7 +22,7 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
             {
                 if (_contentLength == -1)
                 {
-                    var header = _headers["Content-Length"];
+                    string header = _headers["Content-Length"];
                     if (header != null)
                         _contentLength = int.Parse(header);
                 }
@@ -42,7 +42,7 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
             _body.Write(buffer, offset, bytesToUse);
             return bytesToUse;
         }
-        
+
         public void Reset()
         {
             _body.SetLength(0);

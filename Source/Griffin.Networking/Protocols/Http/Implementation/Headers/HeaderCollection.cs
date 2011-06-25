@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Griffin.Core.Net.Protocols.Http.Implementation.Headers;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// Collection of headers.
@@ -22,28 +21,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         public HeaderCollection(HeaderFactory factory)
         {
             _factory = factory;
-        }
-
-        /// <summary>
-        /// Add a header.
-        /// </summary>
-        /// <param name="name">Header name</param>
-        /// <param name="value">Header value</param>
-        /// <remarks>
-        /// Will try to parse the header and create a <see cref="IHeader"/> object.
-        /// </remarks>
-        /// <exception cref="FormatException">Header value is not correctly formatted.</exception>
-        /// <exception cref="ArgumentNullException"><c>name</c> or <c>value</c> is <c>null</c>.</exception>
-        public void Add(string name, string value)
-        {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (value == null)
-                throw new ArgumentNullException("value");
-            IHeader header = _factory.Parse(name, value);
-            if (header == null)
-                throw new FormatException("Failed to parse header " + name + "/" + value + ".");
-            _headers[name] = value;
         }
 
         #region IHeaderCollection Members
@@ -95,5 +72,27 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         }
 
         #endregion
+
+        /// <summary>
+        /// Add a header.
+        /// </summary>
+        /// <param name="name">Header name</param>
+        /// <param name="value">Header value</param>
+        /// <remarks>
+        /// Will try to parse the header and create a <see cref="IHeader"/> object.
+        /// </remarks>
+        /// <exception cref="FormatException">Header value is not correctly formatted.</exception>
+        /// <exception cref="ArgumentNullException"><c>name</c> or <c>value</c> is <c>null</c>.</exception>
+        public void Add(string name, string value)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (value == null)
+                throw new ArgumentNullException("value");
+            IHeader header = _factory.Parse(name, value);
+            if (header == null)
+                throw new FormatException("Failed to parse header " + name + "/" + value + ".");
+            _headers[name] = value;
+        }
     }
 }

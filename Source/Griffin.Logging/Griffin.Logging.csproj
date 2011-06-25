@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
-    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="FluentConfiguration.cs" />
     <Compile Include="Filters\ILogFilter.cs" />
     <Compile Include="Filters\LevelFilter.cs" />
     <Compile Include="Filters\NamespaceFilter.cs" />
+    <Compile Include="FluentFilterConfiguration.cs" />
     <Compile Include="FluentLogManager.cs" />
+    <Compile Include="FluentNamespaceLogging.cs" />
+    <Compile Include="FluentTargetConfiguration.cs" />
+    <Compile Include="FluentTargetConfigurationTypes.cs" />
     <Compile Include="LogEntry.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="LogLevel.cs" />

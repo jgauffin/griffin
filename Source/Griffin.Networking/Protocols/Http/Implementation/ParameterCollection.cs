@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
     /// <summary>
     /// Collection of parameters.
@@ -14,7 +14,8 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
     /// </remarks>
     public class ParameterCollection : IParameterCollection
     {
-        private readonly Dictionary<string, Parameter> _items = new Dictionary<string, Parameter>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, Parameter> _items =
+            new Dictionary<string, Parameter>(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ParameterCollection"/> class.
@@ -42,48 +43,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// </summary>
         public ParameterCollection()
         {
-        }
-
-        /// <summary>
-        /// Get a list of string arrays.
-        /// </summary>
-        /// <returns></returns>
-        public string[] GetArrayNames()
-        {
-            var names = new List<string>();
-            foreach (var item in _items)
-            {
-                int pos = item.Key.IndexOf("[");
-                if (pos == -1)
-                    continue;
-
-                names.Add(item.Key.Substring(0, pos));
-            }
-
-            return names.ToArray();
-        }
-
-        /// <summary>
-        /// Get parameters 
-        /// </summary>
-        /// <param name="arrayName">Sub array (text array)</param>
-        /// <returns></returns>
-        public IParameterCollection GetParameters(string arrayName)
-        {
-            var collection = new ParameterCollection();
-            arrayName = arrayName + "[";
-            foreach (var item in _items)
-            {
-                if (!item.Key.StartsWith(arrayName)) continue;
-                int pos = arrayName.IndexOf("]");
-                if (pos == -1) continue;
-
-                string name = arrayName.Substring(arrayName.Length, pos - arrayName.Length);
-                foreach (string value in item.Value)
-                    collection.Add(name, value);
-            }
-
-            return collection;
         }
 
         #region IParameterCollection Members
@@ -161,7 +120,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
             }
             else
                 parameter.Add(value);
-
         }
 
         /// <summary>
@@ -175,5 +133,47 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         }
 
         #endregion
+
+        /// <summary>
+        /// Get a list of string arrays.
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetArrayNames()
+        {
+            var names = new List<string>();
+            foreach (var item in _items)
+            {
+                int pos = item.Key.IndexOf("[");
+                if (pos == -1)
+                    continue;
+
+                names.Add(item.Key.Substring(0, pos));
+            }
+
+            return names.ToArray();
+        }
+
+        /// <summary>
+        /// Get parameters 
+        /// </summary>
+        /// <param name="arrayName">Sub array (text array)</param>
+        /// <returns></returns>
+        public IParameterCollection GetParameters(string arrayName)
+        {
+            var collection = new ParameterCollection();
+            arrayName = arrayName + "[";
+            foreach (var item in _items)
+            {
+                if (!item.Key.StartsWith(arrayName)) continue;
+                int pos = arrayName.IndexOf("]");
+                if (pos == -1) continue;
+
+                string name = arrayName.Substring(arrayName.Length, pos - arrayName.Length);
+                foreach (string value in item.Value)
+                    collection.Add(name, value);
+            }
+
+            return collection;
+        }
     }
 }

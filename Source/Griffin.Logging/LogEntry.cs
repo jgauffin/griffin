@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 namespace Griffin.Logging
 {
@@ -43,5 +40,4 @@ namespace Griffin.Logging
         /// </summary>
         public LogLevel LogLevel { get; set; }
     }
-
 }

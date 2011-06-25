@@ -11,7 +11,6 @@ namespace Griffin.MVC.Helpers
 {
     public static class SelectExtensions
     {
-
         public static MvcHtmlString EnumDropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> htmlHelper,
                                                                            Expression<Func<TModel, TProperty>>
                                                                                expression) where TModel : class
@@ -24,13 +23,15 @@ namespace Griffin.MVC.Helpers
             return htmlHelper.DropDownList(inputName, ToSelectList(typeof (TProperty), value.ToString()));
         }
 
-        public static IEnumerable<SelectListItem> ToSelectItems<T>(this IEnumerable<T> items, Func<T, string> valueSelector, Func<T, string> textSelector)
+        public static IEnumerable<SelectListItem> ToSelectItems<T>(this IEnumerable<T> items,
+                                                                   Func<T, string> valueSelector,
+                                                                   Func<T, string> textSelector)
         {
             return items.Select(item => new SelectListItem
-            {
-                Text = textSelector(item),
-                Value = valueSelector(item)
-            }).ToList();
+                                            {
+                                                Text = textSelector(item),
+                                                Value = valueSelector(item)
+                                            }).ToList();
         }
 
 

@@ -1,7 +1,6 @@
 using System.Net;
-using Griffin.Core.Net.Protocols.Http.Implementation;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// Response to a request.
@@ -29,10 +28,10 @@ namespace Griffin.Core.Net.Protocols.Http
         /// <remarks>Default is <see cref="HttpStatusCode.OK"/></remarks>
         int StatusCode { get; set; }
 
-		///<summary>
-		/// Gets or sets content type
-		///</summary>
-		string ContentType { get; set; }
+        ///<summary>
+        /// Gets or sets content type
+        ///</summary>
+        string ContentType { get; set; }
 
         /// <summary>
         /// Redirect user.

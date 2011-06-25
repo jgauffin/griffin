@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
     /// <summary>
     /// Collection of files.
@@ -11,6 +11,8 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
     {
         private readonly Dictionary<string, IHttpFile> _files =
             new Dictionary<string, IHttpFile>(StringComparer.OrdinalIgnoreCase);
+
+        #region IHttpFileCollection Members
 
         /// <summary>
         /// Get a file
@@ -65,5 +67,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
                     File.Delete(file.TempFileName);
             }
         }
+
+        #endregion
     }
 }

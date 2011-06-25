@@ -1,29 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using Griffin.Core.Net.Buffers;
+using Griffin.Core;
+using Griffin.Networking.Buffers;
 
-namespace Griffin.Core.Tests.Net.Channels
+namespace Griffin.Networking.Tests.Channels
 {
     public class TcpClientHelper
     {
+        private readonly ManualResetEvent _readEvent = new ManualResetEvent(false);
+        private readonly List<BufferSlice> _receivedBuffers = new List<BufferSlice>();
         private Socket _socket;
-        List<BufferSlice> _receivedBuffers = new List<BufferSlice>();
-        ManualResetEvent _readEvent = new ManualResetEvent(false);
+
+        public List<BufferSlice> RecievedBuffers
+        {
+            get { return _receivedBuffers; }
+        }
 
         public void AcceptSocket()
         {
-            
         }
 
-        public List<BufferSlice> RecievedBuffers { get { return _receivedBuffers; } }
         public bool WaitForReceive(int ms)
         {
-            var res = _readEvent.WaitOne(ms);
+            bool res = _readEvent.WaitOne(ms);
             _readEvent.Reset();
             return res;
         }
@@ -35,12 +37,12 @@ namespace Griffin.Core.Tests.Net.Channels
 
         public Socket GetConnectedSocket()
         {
-            TcpListener listener = new TcpListener(IPAddress.Loopback, 0);
+            var listener = new TcpListener(IPAddress.Loopback, 0);
             listener.Start();
-            var res=listener.BeginAcceptSocket(null, null);
+            IAsyncResult res = listener.BeginAcceptSocket(null, null);
             _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             _socket.Connect(IPAddress.Loopback, listener.LocalEndpoint.As<IPEndPoint>().Port);
-            var clientSocket =listener.EndAcceptSocket(res);
+            Socket clientSocket = listener.EndAcceptSocket(res);
 
             StartRead();
             return clientSocket;
@@ -48,13 +50,13 @@ namespace Griffin.Core.Tests.Net.Channels
 
         private void StartRead()
         {
-            byte[] buffer = new byte[65535];
+            var buffer = new byte[65535];
             _socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, OnRecieve, buffer);
         }
 
         private void OnRecieve(IAsyncResult ar)
         {
-            var read = _socket.EndReceive(ar);
+            int read = _socket.EndReceive(ar);
             if (read == 0)
                 return;
 

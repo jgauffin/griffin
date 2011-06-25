@@ -1,8 +1,8 @@
 ﻿using System.Net.Sockets;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Pipelines;
+using Griffin.Networking.Buffers;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.Channels
+namespace Griffin.Networking.Channels
 {
     internal class TcpClientChannelFactory : IChannelFactory
     {
@@ -15,6 +15,17 @@ namespace Griffin.Core.Net.Channels
             _bufferManager.CreateBuffers();
             _asyncArgsFactory = new ObjectPool<SocketAsyncEventArgs>(CreateAsyncArgs);
         }
+
+        #region IChannelFactory Members
+
+        public IChannel CreateChannel(IPipeline pipeline)
+        {
+            var channel = new TcpClientChannel(pipeline);
+            channel.Initialize(CreateConfig());
+            return channel;
+        }
+
+        #endregion
 
         private SocketAsyncEventArgs CreateAsyncArgs()
         {
@@ -34,16 +45,5 @@ namespace Griffin.Core.Net.Channels
         {
             return new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
-
-        #region IChannelFactory Members
-
-        public IChannel CreateChannel(IPipeline pipeline)
-        {
-            var channel = new TcpClientChannel(pipeline);
-            channel.Initialize(CreateConfig());
-            return channel;
-        }
-
-        #endregion
     }
 }

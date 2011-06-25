@@ -1,6 +1,6 @@
 using System;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
     /// <summary>
     /// cookie being sent back to the browser.
@@ -52,6 +52,28 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         {
         }
 
+        #region IResponseCookie Members
+
+        /// <summary>
+        /// Gets when the cookie expires.
+        /// </summary>
+        /// <remarks><see cref="DateTime.MinValue"/> means that the cookie expires when the session do so.</remarks>
+        public DateTime Expires
+        {
+            get { return _expires; }
+            set { _expires = value; }
+        }
+
+        /// <summary>
+        /// Gets path that the cookie is valid under.
+        /// </summary>
+        public string Path
+        {
+            get { return _path; }
+            set { _path = !string.IsNullOrEmpty(value) ? value : NullPath; }
+        }
+
+        #endregion
 
         /// <summary>
         /// Gets the cookie HTML representation.
@@ -72,30 +94,5 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
 
             return temp;
         }
-
-
-
-        /// <summary>
-        /// Gets when the cookie expires.
-        /// </summary>
-        /// <remarks><see cref="DateTime.MinValue"/> means that the cookie expires when the session do so.</remarks>
-        public DateTime Expires
-        {
-            get { return _expires; }
-            set
-            {
-                _expires = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets path that the cookie is valid under.
-        /// </summary>
-        public string Path
-        {
-            get { return _path; }
-            set { _path = !string.IsNullOrEmpty(value) ? value : NullPath; }
-        }
-
     }
 }

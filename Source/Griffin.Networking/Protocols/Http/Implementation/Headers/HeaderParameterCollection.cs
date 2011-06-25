@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Griffin.Core.Net.Buffers;
+using Griffin.Networking.Buffers;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// Contains parameters for HTTP headers.

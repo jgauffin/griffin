@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// Header for "Date" and "If-Modified-Since"
@@ -83,17 +83,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         /// <value>Should be in UTC.</value>
         public DateTime Value { get; set; }
 
-        /// <summary>
-        /// Returns data formatted as a HTTP header value.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
-        public override string ToString()
-        {
-            return HeaderValue;
-        }
-
         #region IHeader Members
 
         /// <summary>
@@ -107,5 +96,16 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         }
 
         #endregion
+
+        /// <summary>
+        /// Returns data formatted as a HTTP header value.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        public override string ToString()
+        {
+            return HeaderValue;
+        }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Griffin.Core.Net.Buffers
+namespace Griffin.Networking.Buffers
 {
-    class StringParser : ITextParser
+    internal class StringParser : ITextParser
     {
         private string _buffer;
 
@@ -25,29 +22,12 @@ namespace Griffin.Core.Net.Buffers
         {
         }
 
-        private string GetString(int startIndex, int endIndex)
-        {
-            return _buffer.Substring(startIndex, endIndex - startIndex);
-        }
-
-        private string GetString(int startIndex, int endIndex, bool trimEnd)
-        {
-            if (trimEnd)
-            {
-                --endIndex; // need to move one back to be able to trim.
-                while (endIndex > 0 && _buffer[endIndex] == ' ' || _buffer[endIndex] == '\t')
-                    --endIndex;
-                ++endIndex;
-            }
-            return _buffer.Substring(startIndex, endIndex - startIndex);
-        }
-
-        #region ITextReader Members
-
         /// <summary>
         /// Gets or sets line number.
         /// </summary>
         public int LineNumber { get; set; }
+
+        #region ITextParser Members
 
         /// <summary>
         /// Gets if end of buffer have been reached
@@ -106,39 +86,6 @@ namespace Griffin.Core.Net.Buffers
         public int RemainingLength
         {
             get { return Length - Index; }
-        }
-
-        /// <summary>
-        /// Assign a new buffer
-        /// </summary>
-        /// <param name="buffer">Buffer to process.</param>
-        /// <param name="offset">Where to start process buffer</param>
-        /// <param name="count">Buffer length</param>
-        /// <remarks><paramref name="buffer"/> MUST be of type <see cref="string"/>.</remarks>
-        /// <exception cref="ArgumentException">buffer needs to be of type string</exception>
-        public void Assign(object buffer, int offset, int count)
-        {
-            if (!(buffer is string))
-                throw new ArgumentException("buffer needs to be of type string", "buffer");
-
-            _buffer = (string) buffer;
-            Index = offset;
-            Length = count;
-        }
-
-        /// <summary>
-        /// Assign a new buffer
-        /// </summary>
-        /// <param name="buffer">Buffer to process</param>
-        /// <remarks><paramref name="buffer"/> MUST be of type <see cref="string"/>.</remarks>
-        /// <exception cref="ArgumentException">buffer needs to be of type string</exception>
-        public void Assign(object buffer)
-        {
-            if (!(buffer is string))
-                throw new ArgumentException("buffer needs to be of type string", "buffer");
-            _buffer = (string) buffer;
-            Index = 0;
-            Length = _buffer.Length;
         }
 
         /// <summary>
@@ -309,7 +256,7 @@ namespace Griffin.Core.Net.Buffers
             while (HasMore)
             {
                 bool found = false;
-                foreach (var ch in chars)
+                foreach (char ch in chars)
                 {
                     if (Current != ch) continue;
                     found = true;
@@ -473,5 +420,55 @@ namespace Griffin.Core.Net.Buffers
         }
 
         #endregion
+
+        private string GetString(int startIndex, int endIndex)
+        {
+            return _buffer.Substring(startIndex, endIndex - startIndex);
+        }
+
+        private string GetString(int startIndex, int endIndex, bool trimEnd)
+        {
+            if (trimEnd)
+            {
+                --endIndex; // need to move one back to be able to trim.
+                while (endIndex > 0 && _buffer[endIndex] == ' ' || _buffer[endIndex] == '\t')
+                    --endIndex;
+                ++endIndex;
+            }
+            return _buffer.Substring(startIndex, endIndex - startIndex);
+        }
+
+        /// <summary>
+        /// Assign a new buffer
+        /// </summary>
+        /// <param name="buffer">Buffer to process.</param>
+        /// <param name="offset">Where to start process buffer</param>
+        /// <param name="count">Buffer length</param>
+        /// <remarks><paramref name="buffer"/> MUST be of type <see cref="string"/>.</remarks>
+        /// <exception cref="ArgumentException">buffer needs to be of type string</exception>
+        public void Assign(object buffer, int offset, int count)
+        {
+            if (!(buffer is string))
+                throw new ArgumentException("buffer needs to be of type string", "buffer");
+
+            _buffer = (string) buffer;
+            Index = offset;
+            Length = count;
+        }
+
+        /// <summary>
+        /// Assign a new buffer
+        /// </summary>
+        /// <param name="buffer">Buffer to process</param>
+        /// <remarks><paramref name="buffer"/> MUST be of type <see cref="string"/>.</remarks>
+        /// <exception cref="ArgumentException">buffer needs to be of type string</exception>
+        public void Assign(object buffer)
+        {
+            if (!(buffer is string))
+                throw new ArgumentException("buffer needs to be of type string", "buffer");
+            _buffer = (string) buffer;
+            Index = 0;
+            Length = _buffer.Length;
+        }
     }
 }

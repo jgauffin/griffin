@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// Collection of parameters

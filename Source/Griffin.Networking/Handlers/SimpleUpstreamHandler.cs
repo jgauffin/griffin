@@ -1,25 +1,14 @@
-﻿using Griffin.Core.Net.Messages;
+﻿using Griffin.Core;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Handlers
+namespace Griffin.Networking.Handlers
 {
     /// <summary>
     /// Calls different methods instead of us
     /// </summary>
     public abstract class SimpleUpstreamHandler : IUpstreamHandler
     {
-        /// <summary>
-        /// An exception have been caught during processing.
-        /// </summary>
-        /// <param name="ctx">Channel context</param>
-        /// <param name="e">Exception information</param>
-        protected abstract void ExceptionCaught(IChannelHandlerContext ctx, ExceptionEvent e);
-
-        /// <summary>
-        /// A message have been received from the channel
-        /// </summary>
-        /// <param name="ctx">Channel context</param>
-        /// <param name="e">Message information</param>
-        protected abstract void HandleMessage(IChannelHandlerContext ctx, MessageEvent e);
+        #region IUpstreamHandler Members
 
         void IUpstreamHandler.HandleUpstream(IChannelHandlerContext ctx, IChannelEvent e)
         {
@@ -34,6 +23,22 @@ namespace Griffin.Core.Net.Handlers
             else if (e is ConnectedEvent)
                 HandleConnected(ctx, e.As<ConnectedEvent>());
         }
+
+        #endregion
+
+        /// <summary>
+        /// An exception have been caught during processing.
+        /// </summary>
+        /// <param name="ctx">Channel context</param>
+        /// <param name="e">Exception information</param>
+        protected abstract void ExceptionCaught(IChannelHandlerContext ctx, ExceptionEvent e);
+
+        /// <summary>
+        /// A message have been received from the channel
+        /// </summary>
+        /// <param name="ctx">Channel context</param>
+        /// <param name="e">Message information</param>
+        protected abstract void HandleMessage(IChannelHandlerContext ctx, MessageEvent e);
 
         /// <summary>
         /// Channel have been connected.
@@ -55,7 +60,5 @@ namespace Griffin.Core.Net.Handlers
         /// <param name="ctx">Context unique for this handler/channel combination.</param>
         /// <param name="e">Event information</param>
         protected abstract void HandleBound(IChannelHandlerContext ctx, BoundEvent e);
-
-
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
-using Griffin.Core.Net.Channels;
+using Griffin.Networking.Channels;
 
-namespace Griffin.Core.Net.Messages
+namespace Griffin.Networking.Messages
 {
     public class ClosedEvent : IUpstreamEvent
     {
@@ -25,13 +25,9 @@ namespace Griffin.Core.Net.Messages
         /// </remarks>
         public EndPoint RemoteEndPoint { get; set; }
 
-        #region IUpstreamEvent Members
-
         public IChannel Channel
         {
             get { throw new NotImplementedException(); }
         }
-
-        #endregion
     }
 }

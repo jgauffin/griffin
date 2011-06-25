@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
     /// <summary>
     /// A list of request cookies.
@@ -81,8 +81,9 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// </summary>
         public HttpCookieCollection()
         {
-            
         }
+
+        #region IHttpCookieCollection<IHttpCookie> Members
 
         /// <summary>
         /// Gets the count of cookies in the collection.
@@ -99,27 +100,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         public IHttpCookie this[string id]
         {
             get { return _items.ContainsKey(id) ? _items[id] : null; }
-        }
-
-        /// <summary>
-        /// Adds a cookie in the collection.
-        /// </summary>
-        /// <param name="cookie">cookie to add</param>
-        /// <exception cref="ArgumentNullException">cookie is <c>null</c></exception>
-        /// <exception cref="ArgumentException">Name must be specified.</exception>
-        internal void Add(HttpCookie cookie)
-        {
-            // Verifies the parameter
-            if (cookie == null)
-                throw new ArgumentNullException("cookie");
-            if (cookie.Name == null || cookie.Name.Trim() == string.Empty)
-                throw new ArgumentException("Name must be specified.");
-            if (cookie.Value == null || cookie.Value.Trim() == string.Empty)
-                throw new ArgumentException("Content must be specified.");
-
-            if (_items.ContainsKey(cookie.Name))
-                _items[cookie.Name] = cookie;
-            else _items.Add(cookie.Name, cookie);
         }
 
 
@@ -146,8 +126,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
             }
         }
 
-        #region IEnumerable<IRequestCookie> Members
-
         /// <summary>
         /// Gets a collection enumerator on the cookie list.
         /// </summary>
@@ -171,5 +149,26 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         }
 
         #endregion
+
+        /// <summary>
+        /// Adds a cookie in the collection.
+        /// </summary>
+        /// <param name="cookie">cookie to add</param>
+        /// <exception cref="ArgumentNullException">cookie is <c>null</c></exception>
+        /// <exception cref="ArgumentException">Name must be specified.</exception>
+        internal void Add(HttpCookie cookie)
+        {
+            // Verifies the parameter
+            if (cookie == null)
+                throw new ArgumentNullException("cookie");
+            if (cookie.Name == null || cookie.Name.Trim() == string.Empty)
+                throw new ArgumentException("Name must be specified.");
+            if (cookie.Value == null || cookie.Value.Trim() == string.Empty)
+                throw new ArgumentException("Content must be specified.");
+
+            if (_items.ContainsKey(cookie.Name))
+                _items[cookie.Name] = cookie;
+            else _items.Add(cookie.Name, cookie);
+        }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Pipelines;
-using Griffin.Core.Net.ServiceBuilders;
+﻿using Griffin.Networking.Channels;
+using Griffin.Networking.Pipelines;
+using Griffin.Networking.ServiceBuilders;
 
-namespace Griffin.Core.Net.Protocols.FreeSwitch
+namespace Griffin.Networking.Protocols.FreeSwitch
 {
     public class FreeSwitchServiceBuilder : ServiceFactory, IPipelineFactory
     {
@@ -11,16 +11,6 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
         public FreeSwitchServiceBuilder(FreeSwitchClientService clientService)
         {
             _clientService = clientService;
-        }
-
-        /// <summary>
-        /// Configures the specified configuration.
-        /// </summary>
-        /// <param name="configuration">The configuration.</param>
-        protected override void Configure(IServiceBuilderConfiguration configuration)
-        {
-            configuration.ChannelFactory = new TcpClientChannelFactory();
-            configuration.PipelineFactory = this;
         }
 
         #region IPipelineFactory Members
@@ -38,5 +28,15 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
         }
 
         #endregion
+
+        /// <summary>
+        /// Configures the specified configuration.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
+        protected override void Configure(IServiceBuilderConfiguration configuration)
+        {
+            configuration.ChannelFactory = new TcpClientChannelFactory();
+            configuration.PipelineFactory = this;
+        }
     }
 }

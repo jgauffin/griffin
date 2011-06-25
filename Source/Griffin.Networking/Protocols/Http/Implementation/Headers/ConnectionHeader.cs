@@ -1,7 +1,4 @@
-﻿using System;
-using Griffin.Core.Net.Protocols.Http.Implementation.Headers;
-
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+﻿namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// The Connection general-header field allows the sender to specify options
@@ -91,17 +88,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         /// </summary>
         public ConnectionType Type { get; set; }
 
-        /// <summary>
-        /// Returns data formatted as a HTTP header value.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
-        public override string ToString()
-        {
-            return HeaderValue;
-        }
-
         #region IHeader Members
 
         /// <summary>
@@ -118,5 +104,16 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         }
 
         #endregion
+
+        /// <summary>
+        /// Returns data formatted as a HTTP header value.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        public override string ToString()
+        {
+            return HeaderValue;
+        }
     }
 }

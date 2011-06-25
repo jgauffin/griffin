@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Griffin.Core.Net.Protocols.FreeSwitch
+﻿namespace Griffin.Networking.Protocols.FreeSwitch
 {
-    class BackgroundCommand : Command
+    internal class BackgroundCommand : Command
     {
         private readonly Command _command;
+
+        public BackgroundCommand(Command command)
+        {
+            _command = command;
+        }
 
         /// <summary>
         /// Gets or sets job id
@@ -16,11 +16,6 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
         /// Identifier used to find a background command when it has completed.
         /// </remarks>
         public string JobId { get; set; }
-
-        public BackgroundCommand(Command command)
-        {
-            _command = command;
-        }
 
         /// <summary>
         /// Gets or sets description

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
 
 namespace Griffin.MVC
 {
@@ -13,6 +10,7 @@ namespace Griffin.MVC
         /// <param name="name">Name of string</param>
         /// <returns></returns>
         string GetString(string name);
-        string GetResourceFileName(System.Globalization.CultureInfo culture);
+
+        string GetResourceFileName(CultureInfo culture);
     }
 }

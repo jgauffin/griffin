@@ -1,6 +1,4 @@
-﻿using Griffin.Logging;
-
-namespace Griffin.Core.Logging.Targets
+﻿namespace Griffin.Logging.Targets
 {
     public interface ILogTarget
     {

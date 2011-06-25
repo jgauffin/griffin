@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
-using Griffin.Core.Net.Buffers;
+using Griffin.Networking.Buffers;
 
-namespace Griffin.Core.Net.Channels
+namespace Griffin.Networking.Channels
 {
     public class TcpChannelConfig
     {

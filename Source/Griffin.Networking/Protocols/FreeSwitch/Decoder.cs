@@ -1,39 +1,70 @@
 ﻿using System;
-using System.IO;
 using System.Text;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
+using Griffin.Core;
+using Griffin.Networking.Buffers;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Protocols.FreeSwitch
+namespace Griffin.Networking.Protocols.FreeSwitch
 {
     internal class Decoder : IUpstreamHandler
     {
         [ThreadStatic] private static DecoderContext _context;
 
-        private class DecoderContext
+        public bool IsSharable
         {
-            public DecoderContext()
-            {
-                Message  = new Message();
-                CurrentHeaderName = "";
-                IsComplete = false;
-                Reader = new BufferSliceReader();
-            }
-
-            public Encoding Encoding
-            {
-                get;
-                set;
-            }
-
-            public Message Message { get; set; }
-            public BufferSliceReader Reader { get; set; }
-            public string CurrentHeaderName { get; set; }
-            public bool IsComplete { get; set; }
-            public ParserMethod ParserMethod { get; set; }
+            get { return false; }
         }
 
+        #region IUpstreamHandler Members
+
+        public void HandleUpstream(IChannelHandlerContext ctx, IChannelEvent e)
+        {
+            if (e is ConnectedEvent)
+            {
+                ctx.State = new DecoderContext
+                                {
+                                    ParserMethod = ParseBeforeHeader
+                                };
+            }
+            else if (e is ClosedEvent)
+            {
+                ctx.State = null;
+            }
+            if (!(e is MessageEvent))
+            {
+                ctx.SendUpstream(e);
+                return;
+            }
+
+
+            var evt = e.As<MessageEvent>();
+            _context = ctx.State.As<DecoderContext>();
+
+            var buffer = evt.Message.As<BufferSlice>();
+            _context.Reader.Assign(buffer);
+
+
+            try
+            {
+                while (_context.ParserMethod()) ;
+            }
+            catch (Exception err)
+            {
+                ctx.SendUpstream(new ExceptionEvent(err));
+                return;
+            }
+
+            if (!_context.IsComplete)
+                return; // no more processing
+
+            evt.Message = _context.Message;
+            _context.ParserMethod = ParseBeforeHeader;
+            ctx.SendUpstream(evt);
+            _context.Message.Reset();
+        }
+
+        #endregion
 
         private bool ParseBeforeHeader()
         {
@@ -52,8 +83,8 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
                 return false;
             }
 
-            int bytesLeft = _context.Message.ContentLength - (int)_context.Message.Body.Length;
-            var count = Math.Min(bytesLeft, _context.Reader.RemainingLength);
+            int bytesLeft = _context.Message.ContentLength - (int) _context.Message.Body.Length;
+            int count = Math.Min(bytesLeft, _context.Reader.RemainingLength);
             _context.Message.Append(_context.Reader.Buffer, _context.Reader.Index, count);
             _context.IsComplete = _context.Message.Body.Length == _context.Message.ContentLength;
             _context.Reader.Index += count;
@@ -110,57 +141,25 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
             _context.CurrentHeaderName = null;
         }
 
-        #region IUpstreamHandler Members
+        #region Nested type: DecoderContext
 
-        public void HandleUpstream(IChannelHandlerContext ctx, IChannelEvent e)
+        private class DecoderContext
         {
-            if (e is ConnectedEvent)
+            public DecoderContext()
             {
-                ctx.State = new DecoderContext
-                                {
-                                    ParserMethod = ParseBeforeHeader
-                                };
-            }
-            else if (e is ClosedEvent)
-            {
-                ctx.State = null;
-            }
-            if (!(e is MessageEvent))
-            {
-                ctx.SendUpstream(e);
-                return;
+                Message = new Message();
+                CurrentHeaderName = "";
+                IsComplete = false;
+                Reader = new BufferSliceReader();
             }
 
+            public Encoding Encoding { get; set; }
 
-            var evt = e.As<MessageEvent>();
-            _context = ctx.State.As<DecoderContext>();
-
-            var buffer = evt.Message.As<BufferSlice>();
-            _context.Reader.Assign(buffer);
-           
-
-            try
-            {
-                while (_context.ParserMethod()) ;
-            }
-            catch (Exception err)
-            {
-                ctx.SendUpstream(new ExceptionEvent(err));
-                return;
-            }
-
-            if (!_context.IsComplete)
-                return; // no more processing
-
-            evt.Message = _context.Message;
-            _context.ParserMethod = ParseBeforeHeader;
-            ctx.SendUpstream(evt);
-            _context.Message.Reset();
-        }
-
-        public bool IsSharable
-        {
-            get { return false; }
+            public Message Message { get; set; }
+            public BufferSliceReader Reader { get; set; }
+            public string CurrentHeaderName { get; set; }
+            public bool IsComplete { get; set; }
+            public ParserMethod ParserMethod { get; set; }
         }
 
         #endregion

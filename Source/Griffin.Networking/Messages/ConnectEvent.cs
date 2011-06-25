@@ -1,7 +1,6 @@
-﻿using System.Net;
-using Griffin.Core.Net.Channels;
+﻿using Griffin.Networking.Channels;
 
-namespace Griffin.Core.Net.Messages
+namespace Griffin.Networking.Messages
 {
     /// <summary>
     /// Connect to a remote end point
@@ -12,14 +11,9 @@ namespace Griffin.Core.Net.Messages
     /// </remarks>
     internal class ConnectEvent : IChannelEvent
     {
-        #region IChannelEvent Members
-
         /// <summary>
         /// Gets channel that the event is for.
         /// </summary>
         public IChannel Channel { get; set; }
-
-        #endregion
-
     }
 }

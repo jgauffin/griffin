@@ -1,6 +1,6 @@
-﻿using Griffin.Logging;
+﻿using System;
 
-namespace Griffin.Core.Logging.Filters
+namespace Griffin.Logging.Filters
 {
     /// <summary>
     /// Validates log entries against the namespace that they are written from.
@@ -11,8 +11,8 @@ namespace Griffin.Core.Logging.Filters
     /// </remarks>
     public class NamespaceFilter : ILogFilter
     {
-        private readonly string _name;
         private readonly bool _logSubNamespaces;
+        private readonly string _name;
 
         /// <summary>
         /// Creates 
@@ -25,14 +25,18 @@ namespace Griffin.Core.Logging.Filters
             _logSubNamespaces = includeChildNameSpaces;
         }
 
+        #region ILogFilter Members
+
         public bool CanLog(LogEntry entry)
         {
-            var type = entry.StackFrames[0].GetMethod().ReflectedType;
+            Type type = entry.StackFrames[0].GetMethod().ReflectedType;
 
             if (_logSubNamespaces)
                 return type.Namespace.StartsWith(_name);
 
             return _name == type.Namespace;
         }
+
+        #endregion
     }
 }

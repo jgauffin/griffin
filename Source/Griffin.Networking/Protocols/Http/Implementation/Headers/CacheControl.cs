@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+﻿namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     ///   The Cache-Control general-header field is used to specify directives that

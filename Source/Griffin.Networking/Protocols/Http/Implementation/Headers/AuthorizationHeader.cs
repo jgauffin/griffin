@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// Authorization response

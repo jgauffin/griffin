@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Griffin.Core.Net.Buffers
+namespace Griffin.Networking.Buffers
 {
     /// <summary>
     /// Part of a larger buffer
@@ -12,6 +12,8 @@ namespace Griffin.Core.Net.Buffers
     /// </remarks>
     public class BufferSlice
     {
+        private int _currentOffset;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BufferSlice"/> class.
         /// </summary>
@@ -45,9 +47,10 @@ namespace Griffin.Core.Net.Buffers
         /// <summary>
         /// Gets index after the last byte
         /// </summary>
-        public int EndOffset { get { return AssignedOffset + AllocatedCount; } }
-
-        private int _currentOffset;
+        public int EndOffset
+        {
+            get { return AssignedOffset + AllocatedCount; }
+        }
 
         /// <summary>
         /// Gets or sets current position in he buffer
@@ -67,19 +70,22 @@ namespace Griffin.Core.Net.Buffers
         /// <summary>
         /// Gets or sets number of bytes that contains data
         /// </summary>
-        public  int Count { get; set; }
+        public int Count { get; set; }
 
         /// <summary>
         /// Gets the number of written bytes remaining in our slice.
         /// </summary>
-        public int RemainingCount { get { return Count - (CurrentOffset -  AssignedOffset); } }
+        public int RemainingCount
+        {
+            get { return Count - (CurrentOffset - AssignedOffset); }
+        }
 
         /// <summary>
         /// Move all not processed bytes to the beginning of the array
         /// </summary>
         public void MoveRemainingBytes()
         {
-            var bytes = RemainingCount;
+            int bytes = RemainingCount;
             Console.WriteLine("Remainging bytes: " + bytes);
             System.Buffer.BlockCopy(Buffer, CurrentOffset, Buffer, AssignedOffset, RemainingCount);
             Count = bytes;

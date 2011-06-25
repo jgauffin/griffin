@@ -1,6 +1,6 @@
-﻿using Griffin.Core.Net.Pipelines;
+﻿using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net
+namespace Griffin.Networking
 {
     internal class Service
     {

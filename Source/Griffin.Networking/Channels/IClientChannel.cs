@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net.Channels
+﻿namespace Griffin.Networking.Channels
 {
     /// <summary>
     /// Used to be able to attach extension methods

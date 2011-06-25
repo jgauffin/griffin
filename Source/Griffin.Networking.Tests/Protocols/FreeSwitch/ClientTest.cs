@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+﻿using System.Net;
 using System.Threading;
-using Griffin.Core.Net.Protocols.FreeSwitch;
+using Griffin.Networking.Protocols.FreeSwitch;
 using Xunit;
 
-namespace Griffin.Core.Tests.Net.Protocols.FreeSwitch
+namespace Griffin.Networking.Tests.Protocols.FreeSwitch
 {
     public class ClientTest
     {

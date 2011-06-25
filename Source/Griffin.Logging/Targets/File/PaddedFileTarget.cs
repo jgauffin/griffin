@@ -1,6 +1,4 @@
-﻿using Griffin.Logging;
-
-namespace Griffin.Core.Logging.Targets.File
+﻿namespace Griffin.Logging.Targets.File
 {
     /// <summary>
     /// File logger using padding for each column.
@@ -35,6 +33,5 @@ namespace Griffin.Core.Logging.Targets.File
                                  FormatMessage(entry.Message)
                 );
         }
-
     }
 }

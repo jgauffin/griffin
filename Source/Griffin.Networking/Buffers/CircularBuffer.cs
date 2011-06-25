@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Core.Net.Buffers
+namespace Griffin.Networking.Buffers
 {
     internal class CircularBuffer
     {

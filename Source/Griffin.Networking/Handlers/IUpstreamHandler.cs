@@ -1,6 +1,6 @@
-﻿using Griffin.Core.Net.Messages;
+﻿using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Handlers
+namespace Griffin.Networking.Handlers
 {
     /// <summary>
     /// Processes data that is moving from the channel towards the application.

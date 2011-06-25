@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// Represents a specific channel
     /// </summary>
-    class HttpChildChannel : SimpleStreamHandler
+    internal class HttpChildChannel : SimpleStreamHandler
     {
         /// <summary>
         /// Channel have been closed.
@@ -26,7 +23,7 @@ namespace Griffin.Core.Net.Protocols.Http
         /// <param name="e">Exception information</param>
         protected override void ExceptionCaught(IChannelHandlerContext ctx, ExceptionEvent e)
         {
-            UnhandledException(this, new UnhandledExceptionEventArgs("An exception was caught in a channel", e.Exception));
+            UnhandledException(this, new UnhandledExceptionEventArgs(e.Exception, true));
         }
 
         /// <summary>
@@ -36,7 +33,6 @@ namespace Griffin.Core.Net.Protocols.Http
         /// <param name="e">Message information</param>
         protected override void HandleMessage(IChannelHandlerContext ctx, MessageEvent e)
         {
-            
         }
 
         /// <summary>
@@ -46,7 +42,6 @@ namespace Griffin.Core.Net.Protocols.Http
         /// <param name="e">Event information</param>
         protected override void HandleConnected(IChannelHandlerContext ctx, ConnectedEvent e)
         {
-            
         }
 
         /// <summary>
@@ -56,7 +51,6 @@ namespace Griffin.Core.Net.Protocols.Http
         /// <param name="e">Event information</param>
         protected override void HandleClosed(IChannelHandlerContext ctx, ClosedEvent e)
         {
-            
         }
 
         /// <summary>
@@ -66,7 +60,6 @@ namespace Griffin.Core.Net.Protocols.Http
         /// <param name="e">Event information</param>
         protected override void HandleBound(IChannelHandlerContext ctx, BoundEvent e)
         {
-            
         }
     }
 }

@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
-using Griffin.Core.Net.Pipelines;
+using Griffin.Core;
+using Griffin.Networking.Buffers;
+using Griffin.Networking.Messages;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.Channels
+namespace Griffin.Networking.Channels
 {
     public abstract class TcpChannel : Channel
     {
+        private readonly ConcurrentQueue<BufferSlice> _sendQueue = new ConcurrentQueue<BufferSlice>();
         private TcpChannelConfig _channelConfig;
         private bool _isSending;
         private EndPoint _localEndPoint;
         private IPipeline _pipeline;
         private SocketAsyncEventArgs _readArgs;
+        private BufferSlice _readSlice;
         private EndPoint _remoteEndPoint;
         private SocketAsyncEventArgs _sendArgs;
-        private ConcurrentQueue<BufferSlice> _sendQueue = new ConcurrentQueue<BufferSlice>();
-        private BufferSlice _readSlice;
+        private int count;
 
         protected TcpChannel(IPipeline pipeline)
             : base(pipeline)
@@ -41,7 +40,7 @@ namespace Griffin.Core.Net.Channels
             {
                 Socket.Shutdown(SocketShutdown.Send);
             }
-            // throws if client process has already closed
+                // throws if client process has already closed
             catch
             {
             }
@@ -98,7 +97,6 @@ namespace Griffin.Core.Net.Channels
             Initialize();
         }
 
-        private int count = 0;
         private void ReadCompleted(object sender, SocketAsyncEventArgs e)
         {
             SocketError error = e.BytesTransferred == 0 ? SocketError.ConnectionReset : e.SocketError;

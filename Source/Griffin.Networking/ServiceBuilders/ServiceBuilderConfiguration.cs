@@ -1,7 +1,7 @@
-﻿using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Pipelines;
+﻿using Griffin.Networking.Channels;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.ServiceBuilders
+namespace Griffin.Networking.ServiceBuilders
 {
     public interface IServiceBuilderConfiguration
     {

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Protocols.Http.Implementation.Headers.Parsers;
-using StringParser = Griffin.Core.Net.Buffers.StringParser;
+using Griffin.Networking.Buffers;
+using Griffin.Networking.Protocols.Http.Implementation.Headers.Parsers;
+using StringParser = Griffin.Networking.Buffers.StringParser;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// Used to build headers.
@@ -19,7 +18,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         private readonly ObjectPool<StringParser> _readers =
             new ObjectPool<StringParser>(() => new StringParser());
 
-        private readonly IHeaderParser _stringParser = new  Parsers.StringParser();
+        private readonly IHeaderParser _stringParser = new Parsers.StringParser();
 
 
         /// <summary>

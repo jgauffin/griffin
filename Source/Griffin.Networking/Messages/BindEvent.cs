@@ -1,7 +1,6 @@
 ﻿using System.Net;
-using Griffin.Core.Net.Channels;
 
-namespace Griffin.Core.Net.Messages
+namespace Griffin.Networking.Messages
 {
     /// <summary>
     /// Bind a client or server to a specific end point.
@@ -36,7 +35,5 @@ namespace Griffin.Core.Net.Messages
         /// Gets if only secure connections should be used
         /// </summary>
         public bool IsSecure { get; private set; }
-
-        
     }
 }

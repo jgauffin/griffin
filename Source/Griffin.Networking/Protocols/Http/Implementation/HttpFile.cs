@@ -1,10 +1,12 @@
-﻿namespace Griffin.Core.Net.Protocols.Http.Implementation
+﻿namespace Griffin.Networking.Protocols.Http.Implementation
 {
     /// <summary>
     /// File sent from remote end.
     /// </summary>
     public class HttpFile : IHttpFile
     {
+        #region IHttpFile Members
+
         /// <summary>
         /// Gets or sets content type.
         /// </summary>
@@ -24,5 +26,7 @@
         /// Gets or sets filename for locally stored file.
         /// </summary>
         public string TempFileName { get; set; }
+
+        #endregion
     }
 }

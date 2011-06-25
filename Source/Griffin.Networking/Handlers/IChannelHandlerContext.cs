@@ -1,6 +1,6 @@
-﻿using Griffin.Core.Net.Messages;
+﻿using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Handlers
+namespace Griffin.Networking.Handlers
 {
     /// <summary>
     /// Context sensitive information for each event in a channel.

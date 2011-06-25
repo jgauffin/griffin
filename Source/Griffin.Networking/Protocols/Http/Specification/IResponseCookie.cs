@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     public interface IResponseCookie : IHttpCookie
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Griffin.Specification.Logging
+namespace Griffin.Logging
 {
     /// <summary>
     /// Simple wrapper to be able to provide logging objects even if no logging framework have been specified.

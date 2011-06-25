@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// Request sent to/from a HTTP server.

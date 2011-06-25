@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
-    class LazyHeader<T> : Lazy<T> where T : IHeader
+    internal class LazyHeader<T> : Lazy<T> where T : IHeader
     {
-        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers.Parsers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers.Parsers
 {
     /// <summary>
     /// Used to define which headers a parse is for.

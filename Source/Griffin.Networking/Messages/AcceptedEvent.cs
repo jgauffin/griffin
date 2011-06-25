@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Channels;
+﻿using Griffin.Networking.Channels;
 
-namespace Griffin.Core.Net.Messages
+namespace Griffin.Networking.Messages
 {
-    class AcceptedEvent : IServerEvent
+    internal class AcceptedEvent : IServerEvent
     {
         public IChannel ClientChannel { get; set; }
     }

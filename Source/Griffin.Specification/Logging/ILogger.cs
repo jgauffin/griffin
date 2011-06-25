@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Specification.Logging
+namespace Griffin.Logging
 {
     public interface ILogger
     {

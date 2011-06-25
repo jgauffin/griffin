@@ -1,26 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using Griffin.Core.Logging.Filters;
-using Griffin.Core.Logging.Targets;
-using Griffin.Core.Logging.Targets.File;
-using Griffin.Logging;
-using Griffin.Specification.Logging;
+using Griffin.Core;
+using Griffin.Logging.Filters;
+using Griffin.Logging.Targets;
+using Griffin.Logging.Targets.File;
 
-namespace Griffin.Core.Logging
+namespace Griffin.Logging
 {
     public class SimpleLogManager : ILogManager
     {
-        private ILogger _logger;
-        private static SimpleLogManager _instance = null;
-        private static List<ILogFilter> _filters = new List<ILogFilter>();
-        private static List<ILogTarget> _targets = new List<ILogTarget>();
+        private static SimpleLogManager _instance;
+        private static readonly List<ILogFilter> _filters = new List<ILogFilter>();
+        private static readonly List<ILogTarget> _targets = new List<ILogTarget>();
+        private readonly ILogger _logger;
 
         private SimpleLogManager()
         {
             _logger = new Logger(_filters, _targets);
         }
+
+        #region ILogManager Members
+
+        public ILogger GetLogger(Type type)
+        {
+            return _logger;
+        }
+
+        #endregion
 
         public static void AddFile(string fileNameWithoutExtension, FileConfiguration configuration)
         {
@@ -57,13 +64,6 @@ namespace Griffin.Core.Logging
 
         public static void AddFilter(ILogFilter logFilter)
         {
-            
-        }
-
-
-        public ILogger GetLogger(Type type)
-        {
-            return _logger;
         }
     }
 }

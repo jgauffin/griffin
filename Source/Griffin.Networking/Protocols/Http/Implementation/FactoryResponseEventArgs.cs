@@ -1,5 +1,5 @@
 using System;
-using Griffin.Core.Net.Protocols.Http;
+using Griffin.Networking.Protocols.Http;
 
 namespace HttpServer.Messages.Parser
 {

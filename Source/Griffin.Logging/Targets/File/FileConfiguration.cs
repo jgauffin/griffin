@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Logging.Targets.File
+﻿namespace Griffin.Logging.Targets.File
 {
     public class FileConfiguration
     {

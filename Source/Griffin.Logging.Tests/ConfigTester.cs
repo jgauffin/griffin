@@ -1,0 +1,53 @@
+﻿using System.Linq;
+using Griffin.Core;
+using Griffin.Logging;
+using Griffin.Logging.Targets;
+using Xunit;
+
+namespace Temp
+{
+    public class LoggerTest
+    {
+        private readonly ILogger _logger = LogManager.GetLogger<LoggerTest>();
+
+        public ILogger Logger
+        {
+            get { return _logger; }
+        }
+    }
+}
+
+namespace Griffin.Logging.Tests
+{
+    public class ConfigTester
+    {
+        [Fact]
+        public void TestSimpleLog()
+        {
+            Configure.Griffin.Logging()
+                .LogNamespace("Griffin.Logging.Tests").AndSubNamespaces.ToTargetNamed("Console")
+                .AddTarget("Console").As.ConsoleLogger();
+
+
+            var logger = LogManager.GetLogger<ConfigTester>().As<Logger>();
+            Assert.IsType(typeof (ConsoleTarget), logger.Targets.First());
+        }
+
+        [Fact]
+        public void Test()
+        {
+            Configure.Griffin.Logging()
+                .LogNamespace("Griffin.Logging.Tests").AndSubNamespaces.ToTargetNamed("Console")
+                .LogNamespace("System").AndSubNamespaces.ToTargetNamed("DefaultFile")
+                .LogEverything.ToTargetNamed("DefaultFile")
+                .AddTarget("Console")
+                .As.ConsoleLogger().Filter.OnLogLevelBetween(LogLevel.Info, LogLevel.Warning)
+                .Done
+                .AddTarget("DefaultFile")
+                .As.FileLogger("ErrorsOnly").Filter.OnLogLevel(LogLevel.Error)
+                .As.FileLogger("Everything")
+                .Done
+                .Build();
+        }
+    }
+}

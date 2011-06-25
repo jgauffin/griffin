@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net.Messages
+﻿namespace Griffin.Networking.Messages
 {
     public interface IMessageEvent : IChannelEvent
     {

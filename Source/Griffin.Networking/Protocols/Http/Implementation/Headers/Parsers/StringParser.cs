@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Buffers;
+using Griffin.Networking.Buffers;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers.Parsers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers.Parsers
 {
-    class StringParser : IHeaderParser
+    internal class StringParser : IHeaderParser
     {
+        #region IHeaderParser Members
+
         /// <summary>
         /// Parse a header
         /// </summary>
@@ -19,5 +18,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers.Parsers
         {
             return null;
         }
+
+        #endregion
     }
 }

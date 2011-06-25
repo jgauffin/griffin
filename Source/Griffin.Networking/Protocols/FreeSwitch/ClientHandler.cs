@@ -2,21 +2,20 @@
 using System.Collections.Concurrent;
 using System.Collections.Specialized;
 using System.IO;
-using System.Net;
-using System.Text;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
-using Griffin.Core.Net.Services;
+using Griffin.Core;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
+using Griffin.Networking.Services;
 
-namespace Griffin.Core.Net.Protocols.FreeSwitch
+namespace Griffin.Networking.Protocols.FreeSwitch
 {
     public class FreeSwitchClientService : ClientService
     {
+        private readonly ConcurrentStack<Command> _commands = new ConcurrentStack<Command>();
         private readonly string _password;
-        ConcurrentStack<Command> _commands = new ConcurrentStack<Command>();
-        ConcurrentDictionary<string, BackgroundCommand> _waitingCommands = new ConcurrentDictionary<string, BackgroundCommand>();
+
+        private readonly ConcurrentDictionary<string, BackgroundCommand> _waitingCommands =
+            new ConcurrentDictionary<string, BackgroundCommand>();
 
         public FreeSwitchClientService(string password)
         {
@@ -31,12 +30,12 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
 
         protected override void HandleMessage(IChannelHandlerContext ctx, MessageEvent e)
         {
-            var msg = (Message)e.Message;
-            var contentType = msg.Headers["Content-Type"];
+            var msg = (Message) e.Message;
+            string contentType = msg.Headers["Content-Type"];
 
 
             var reader = new StreamReader(msg.Body);
-            var body = reader.ReadToEnd();
+            string body = reader.ReadToEnd();
             msg.Body.Position = 0;
 
             switch (contentType)
@@ -48,10 +47,11 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
                     {
                         Command cmd;
                         if (!_commands.TryPop(out cmd))
-                            throw new InvalidOperationException("Failed to find a command for the recieved command/reply");
+                            throw new InvalidOperationException(
+                                "Failed to find a command for the recieved command/reply");
                         OnCommand(cmd, msg);
                     }
-                    
+
                     break;
                 case "text/event-plain":
                     ParseEvent(msg.Body);
@@ -64,14 +64,14 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
         private void ParseEvent(Stream body)
         {
             string line = "";
-            NameValueCollection lines = new NameValueCollection();
-            StreamReader reader = new StreamReader(body);
+            var lines = new NameValueCollection();
+            var reader = new StreamReader(body);
             while ((line = reader.ReadLine()) != null)
             {
                 if (line == string.Empty)
                     break;
 
-                var parts = line.Split(':');
+                string[] parts = line.Split(':');
                 lines.Add(parts[0], parts[1].Trim());
             }
 
@@ -118,7 +118,7 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
 
         private void HandleBgApiResponse(Command cmd, Message reply)
         {
-            var uid = reply.Headers["Job-UUID"];
+            string uid = reply.Headers["Job-UUID"];
             cmd.As<BackgroundCommand>().JobId = uid;
             _waitingCommands[uid] = cmd.As<BackgroundCommand>();
         }

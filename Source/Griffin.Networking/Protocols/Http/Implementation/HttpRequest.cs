@@ -1,20 +1,19 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Protocols.Http.Implementation.Headers;
-using Griffin.Core.Net.Protocols.Http.Implementation.Headers.Parsers;
+using Griffin.Networking.Protocols.Http.Implementation.Headers;
+using Griffin.Networking.Protocols.Http.Implementation.Headers.Parsers;
+using StringParser = Griffin.Networking.Buffers.StringParser;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
     /// <summary>
     /// Request implementation.
     /// </summary>
     internal class HttpRequest : HttpMessage, IRequest
     {
+        private readonly MemoryStream _memoryStream = new MemoryStream();
         private HttpCookieCollection _cookies;
-        private IParameterCollection _form;
-        private MemoryStream _memoryStream = new MemoryStream();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequest"/> class.
@@ -25,7 +24,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         public HttpRequest()
         {
             Body = _memoryStream;
-        	ContentEncoding = Encoding.UTF8;
+            ContentEncoding = Encoding.UTF8;
         }
 
 
@@ -33,6 +32,8 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// Gets request URI.
         /// </summary>
         public Uri Uri { get; private set; }
+
+        #region IRequest Members
 
         /// <summary>
         /// Gets cookies.
@@ -50,14 +51,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// <summary>
         /// Gets form parameters.
         /// </summary>
-        public IParameterCollection Form
-        {
-            get { return _form; }
-            internal set
-            {
-                _form = value;
-            }
-        }
+        public IParameterCollection Form { get; internal set; }
 
         /// <summary>
         /// Gets query string.
@@ -69,10 +63,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// </summary>
         public bool IsAjax
         {
-            get
-            {
-                return Headers["X-Requested-With"].Contains("XMLHttpRequest");
-            }
+            get { return Headers["X-Requested-With"].Contains("XMLHttpRequest"); }
         }
 
         /// <summary>
@@ -88,6 +79,8 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
             get { return Uri; }
             set { Uri = value; }
         }
+
+        #endregion
 
         public override void Add(string name, string value)
         {
@@ -110,7 +103,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
             if (lowerName == "content-type")
             {
                 var parser = new ContentTypeParser();
-                var header = (ContentTypeHeader) parser.Parse("fejk", new Buffers.StringParser(value));
+                var header = (ContentTypeHeader) parser.Parse("fejk", new StringParser(value));
                 ContentType = header.Value;
                 string charset = header.Parameters["charset"];
                 if (!string.IsNullOrEmpty(charset))

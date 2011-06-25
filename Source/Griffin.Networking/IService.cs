@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net
+﻿namespace Griffin.Networking
 {
     public interface IServiceFactory
     {

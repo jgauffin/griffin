@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+﻿namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// Type of HTTP connection

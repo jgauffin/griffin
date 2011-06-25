@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 
-namespace Griffin.Core.Net.Buffers
+namespace Griffin.Networking.Buffers
 {
     public class ObjectPool<T> : IObjectPool<T> where T : class
     {
@@ -11,12 +11,6 @@ namespace Griffin.Core.Net.Buffers
         public ObjectPool(Func<T> factoryMethod)
         {
             _factoryMethod = factoryMethod;
-        }
-
-        public void Allocate(int count)
-        {
-            for (int i = 0; i < count; i++)
-                _queue.Enqueue(_factoryMethod());
         }
 
         #region IObjectPool<T> Members
@@ -33,5 +27,11 @@ namespace Griffin.Core.Net.Buffers
         }
 
         #endregion
+
+        public void Allocate(int count)
+        {
+            for (int i = 0; i < count; i++)
+                _queue.Enqueue(_factoryMethod());
+        }
     }
 }

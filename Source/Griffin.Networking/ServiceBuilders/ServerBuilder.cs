@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Pipelines;
+﻿using Griffin.Networking.Channels;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.ServiceBuilders
+namespace Griffin.Networking.ServiceBuilders
 {
-    abstract class ServerBuilder
+    internal abstract class ServerBuilder
     {
-        protected ServerConfiguration Configuration { get; set; }
-
         protected ServerBuilder()
         {
             Configure(Configuration);
         }
+
+        protected ServerConfiguration Configuration { get; set; }
 
         public IChannel CreateClientChannel()
         {

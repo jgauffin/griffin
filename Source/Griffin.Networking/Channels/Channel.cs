@@ -1,9 +1,8 @@
-﻿using System;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
-using Griffin.Core.Net.Pipelines;
+﻿using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.Channels
+namespace Griffin.Networking.Channels
 {
     public abstract class Channel : IChannel
     {
@@ -13,12 +12,6 @@ namespace Griffin.Core.Net.Channels
         {
             Pipeline = pipeline;
             _contexts = new ContextCollection(this);
-        
-        }
-        
-        protected virtual void Initialize()
-        {
-            _contexts.Initialize();
         }
 
         #region IChannel Members
@@ -46,14 +39,19 @@ namespace Griffin.Core.Net.Channels
             UpstreamHandlingComplete(e);
         }
 
-        protected abstract void UpstreamHandlingComplete(IChannelEvent e);
-        protected abstract void DownstreamHandlingComplete(IChannelEvent e);
-
         void IDownstreamHandler.HandleDownstream(IChannelHandlerContext ctx, IChannelEvent e)
         {
             DownstreamHandlingComplete(e);
         }
 
         #endregion
+
+        protected virtual void Initialize()
+        {
+            _contexts.Initialize();
+        }
+
+        protected abstract void UpstreamHandlingComplete(IChannelEvent e);
+        protected abstract void DownstreamHandlingComplete(IChannelEvent e);
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Net;
-using System.Reflection;
-using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Pipelines;
-using Griffin.Core.Net.Services;
+using Griffin.Networking.Channels;
+using Griffin.Networking.Pipelines;
+using Griffin.Networking.Services;
 
-namespace Griffin.Core.Net.ServiceBuilders
+namespace Griffin.Networking.ServiceBuilders
 {
     public abstract class ClientServiceBuilder<T> where T : ClientService
     {
@@ -17,7 +15,7 @@ namespace Griffin.Core.Net.ServiceBuilders
             Configure(Configuration);
             IPipeline pipeline = Configuration.PipelineFactory.CreatePipeline();
             IChannel channel = Configuration.ChannelFactory.CreateChannel(pipeline);
-            return (T)Activator.CreateInstance(typeof(T), new []{channel});
+            return (T) Activator.CreateInstance(typeof (T), new[] {channel});
         }
 
         /// <summary>
@@ -28,7 +26,11 @@ namespace Griffin.Core.Net.ServiceBuilders
 
     public class ServiceBuilderConfiguration : IServiceBuilderConfiguration
     {
+        #region IServiceBuilderConfiguration Members
+
         public IChannelFactory ChannelFactory { get; set; }
         public IPipelineFactory PipelineFactory { get; set; }
+
+        #endregion
     }
 }

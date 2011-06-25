@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net.Protocols.Http
+﻿namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// Header in a message

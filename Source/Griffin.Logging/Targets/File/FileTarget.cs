@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
-using Griffin.Logging;
 
-namespace Griffin.Core.Logging.Targets.File
+namespace Griffin.Logging.Targets.File
 {
     public class FileTarget : ILogTarget
     {
-        IFileWriter _fileWriter;
+        private readonly IFileWriter _fileWriter;
 
         public FileTarget(string name, FileConfiguration configuration)
         {
@@ -23,6 +22,20 @@ namespace Griffin.Core.Logging.Targets.File
             get { return _fileWriter.Configuration; }
         }
 
+        #region ILogTarget Members
+
+        public string Name
+        {
+            get { return _fileWriter.Name; }
+        }
+
+        public void Enqueue(LogEntry entry)
+        {
+            string entryString = FormatLogEntry(entry);
+            _fileWriter.Write(entryString);
+        }
+
+        #endregion
 
         protected virtual string FormatException(Exception exception, int itendentation)
         {
@@ -65,9 +78,9 @@ namespace Griffin.Core.Logging.Targets.File
 
         protected virtual string FormatStackTrace(StackFrame[] frames, int maxSize)
         {
-            var typeName = frames[0].GetMethod().ReflectedType.Name;
-            var methodName = frames[0].GetMethod().Name;
-            var result = string.Format("{0}.{1}", typeName, methodName);
+            string typeName = frames[0].GetMethod().ReflectedType.Name;
+            string methodName = frames[0].GetMethod().Name;
+            string result = string.Format("{0}.{1}", typeName, methodName);
             if (result.Length < maxSize)
                 return result;
 
@@ -95,18 +108,6 @@ namespace Griffin.Core.Logging.Targets.File
             if (tmp.Length > size)
                 return tmp.Substring(0, size - 1) + ".";
             return tmp;
-        }
-
-
-        public string Name
-        {
-            get { return _fileWriter.Name; }
-        }
-
-        public void Enqueue(LogEntry entry)
-        {
-            var entryString = FormatLogEntry(entry);
-            _fileWriter.Write(entryString);
         }
     }
 }

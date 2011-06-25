@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading;
-using Griffin.Core.Net.Messages;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Handlers
+namespace Griffin.Networking.Handlers
 {
     /// <summary>
     /// Will try to reconnect automatically if getting disconnected.
@@ -24,10 +24,15 @@ namespace Griffin.Core.Net.Handlers
             _interval = interval;
         }
 
-        private void OnTryReconnect(object state)
+        /// <summary>
+        /// Gets if this pipeline can be shared between multiple channels
+        /// </summary>
+        /// <remarks>
+        /// Return <c>false</c> if you have member variables.
+        /// </remarks>
+        public bool IsSharable
         {
-            var ctx = (IChannelHandlerContext) state;
-            ctx.SendDownstream(new ConnectEvent());
+            get { return false; }
         }
 
         #region IDownstreamHandler Members
@@ -51,17 +56,6 @@ namespace Griffin.Core.Net.Handlers
         #region IUpstreamHandler Members
 
         /// <summary>
-        /// Gets if this pipeline can be shared between multiple channels
-        /// </summary>
-        /// <remarks>
-        /// Return <c>false</c> if you have member variables.
-        /// </remarks>
-        public bool IsSharable
-        {
-            get { return false; }
-        }
-
-        /// <summary>
         /// Process data that was received from the channel.
         /// </summary>
         /// <param name="ctx">Context which is used for the currently processed channel</param>
@@ -82,5 +76,11 @@ namespace Griffin.Core.Net.Handlers
         }
 
         #endregion
+
+        private void OnTryReconnect(object state)
+        {
+            var ctx = (IChannelHandlerContext) state;
+            ctx.SendDownstream(new ConnectEvent());
+        }
     }
 }

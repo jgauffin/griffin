@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Griffin.Core.Net.Messages
+﻿namespace Griffin.Networking.Messages
 {
     public interface IServerEvent : IChannelEvent
     {

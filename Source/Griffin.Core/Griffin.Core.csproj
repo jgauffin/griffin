@@ -45,7 +45,15 @@
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="ConsoleDetector.cs" />
     <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="ExceptionHandler.cs" />
     <Compile Include="ExceptionPolicy.cs" />
+    <Compile Include="InversionOfControl\AssemblyLoader.cs" />
+    <Compile Include="InversionOfControl\ContainerBuilder.cs" />
+    <Compile Include="InversionOfControl\LightWeightIoc.cs" />
+    <Compile Include="InversionOfControl\ParameterInstanceEventArgs.cs" />
+    <Compile Include="InversionOfControl\ParameterTypeEventArgs.cs" />
+    <Compile Include="InversionOfControl\ServiceMapping.cs" />
+    <Compile Include="InversionOfControl\TypeScannedEventArgs.cs" />
     <Compile Include="Multitenancy\ITenant.cs" />
     <Compile Include="Multitenancy\ITenantAuthorizer.cs" />
     <Compile Include="Multitenancy\ITenantModel.cs" />
@@ -55,6 +63,13 @@
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="Threading\TimedJob.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Threading\TimedJobObserver.cs" />
+    <Compile Include="Threading\TimedJobObserverContext.cs" />
+    <Compile Include="Threading\TimerService.cs" />
+    <Compile Include="UnhandledExceptionEventArgs.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

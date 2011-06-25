@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Griffin.Core.Net.Handlers;
+using Griffin.Networking.Handlers;
 
-namespace Griffin.Core.Net.Pipelines
+namespace Griffin.Networking.Pipelines
 {
     /// <summary>
     /// A pipeline is used to process data when it's going from the channel to your application and vice versa.

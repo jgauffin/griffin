@@ -1,7 +1,4 @@
-﻿using System;
-using Griffin.Core.Net.Protocols.Http.Implementation.Headers;
-
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+﻿namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// Content-type
@@ -12,6 +9,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         /// Header name.
         /// </summary>
         public const string NAME = "Content-Type";
+
         private readonly HeaderParameterCollection _parameters;
 
         /// <summary>
@@ -48,17 +46,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         /// </summary>
         public string Value { get; set; }
 
-        /// <summary>
-        /// Returns data formatted as a HTTP header value.
-        /// </summary>
-        /// <returns>
-        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
-        /// </returns>
-        public override string ToString()
-        {
-            return HeaderValue;
-        }
-
         #region IHeader Members
 
         /// <summary>
@@ -82,5 +69,16 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
         }
 
         #endregion
+
+        /// <summary>
+        /// Returns data formatted as a HTTP header value.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// </returns>
+        public override string ToString()
+        {
+            return HeaderValue;
+        }
     }
 }

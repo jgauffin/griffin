@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net.Pipelines
+﻿namespace Griffin.Networking.Pipelines
 {
     public interface IPipelineFactory
     {

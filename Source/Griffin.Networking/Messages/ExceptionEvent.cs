@@ -1,24 +1,20 @@
 ﻿using System;
-using Griffin.Core.Net.Channels;
+using Griffin.Networking.Channels;
 
-namespace Griffin.Core.Net.Messages
+namespace Griffin.Networking.Messages
 {
     public class ExceptionEvent : IChannelEvent
     {
-        public Exception Exception { get; set; }
-
         public ExceptionEvent(Exception exception)
         {
             Exception = exception;
         }
 
-        #region IChannelEvent Members
+        public Exception Exception { get; set; }
 
         public IChannel Channel
         {
             get { throw new NotImplementedException(); }
         }
-
-        #endregion
     }
 }

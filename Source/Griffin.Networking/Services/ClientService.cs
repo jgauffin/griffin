@@ -1,29 +1,28 @@
 ﻿using System;
-using System.Linq;
 using System.Net;
 using System.Threading;
-using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
+using Griffin.Networking.Channels;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Services
+namespace Griffin.Networking.Services
 {
     public abstract class ClientService : SimpleUpstreamHandler
     {
-        private IChannel _channel;
-        Timer _reconnectTimer;
-
         /// <summary>
         /// Span to set 
         /// </summary>
-        public static readonly TimeSpan Disabled = new TimeSpan(0,0,0,0,-1);
+        public static readonly TimeSpan Disabled = new TimeSpan(0, 0, 0, 0, -1);
+
+        private IChannel _channel;
+        private EndPoint _localEndPoint = new IPEndPoint(IPAddress.Any, 0);
+        private Timer _reconnectTimer;
 
         protected ClientService()
         {
             ReconnectInterval = Disabled;
         }
 
-        private EndPoint _localEndPoint = new IPEndPoint(IPAddress.Any, 0);
         public virtual EndPoint LocalEndPoint
         {
             get { return _localEndPoint; }
@@ -67,13 +66,13 @@ namespace Griffin.Core.Net.Services
                 _reconnectTimer = null;
             }
         }
+
         public void Close()
         {
             var evt = new CloseEvent();
             SendDownstream(evt);
         }
 
-        
 
         protected override void HandleBound(IChannelHandlerContext ctx, BoundEvent e)
         {

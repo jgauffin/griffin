@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Pipelines;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.Channels
+namespace Griffin.Networking.Channels
 {
     /// <summary>
     /// I/O Channel

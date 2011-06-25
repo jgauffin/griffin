@@ -1,21 +1,20 @@
-﻿using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Pipelines;
-using Griffin.Core.Net.Services;
+﻿using Griffin.Networking.Channels;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.ServiceBuilders
+namespace Griffin.Networking.ServiceBuilders
 {
     /// <summary>
     /// Used to build all components needed to create a network server/client.
     /// </summary>
     public abstract class ServiceFactory
     {
-        protected IServiceBuilderConfiguration Configuration { get; set; }
-
         protected ServiceFactory()
         {
             Configuration = new ServiceBuilderConfiguration();
             Configure(Configuration);
         }
+
+        protected IServiceBuilderConfiguration Configuration { get; set; }
 
         public IChannel CreateChannel()
         {
@@ -29,5 +28,4 @@ namespace Griffin.Core.Net.ServiceBuilders
         /// </summary>
         protected abstract void Configure(IServiceBuilderConfiguration configuration);
     }
-
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+﻿namespace Griffin.Networking.Protocols.Http.Implementation
 {
-    class HttpContext
+    internal class HttpContext
     {
         private bool _isSecure;
 
@@ -13,9 +8,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
 
         public bool IsSecure
         {
-            get {
-                return _isSecure;
-            }
+            get { return _isSecure; }
         }
     }
 }

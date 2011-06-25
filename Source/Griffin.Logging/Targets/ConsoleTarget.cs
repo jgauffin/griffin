@@ -1,7 +1,6 @@
 ﻿using System;
-using Griffin.Logging;
 
-namespace Griffin.Core.Logging.Targets
+namespace Griffin.Logging.Targets
 {
     public class ConsoleTarget : ILogTarget
     {
@@ -17,10 +16,43 @@ namespace Griffin.Core.Logging.Targets
             _configuration = new ConsoleConfiguration();
         }
 
+        #region ILogTarget Members
+
         public string Name
         {
             get { return "Console"; }
         }
+
+        public void Enqueue(LogEntry entry)
+        {
+            string method = entry.StackFrames[0].GetMethod().ReflectedType.Name + "." +
+                            entry.StackFrames[0].GetMethod().Name;
+
+            string tmp = String.Format("{0} {1} {2} {3} {4}",
+                                       entry.CreatedAt.ToString("HH:mm:ss.fff"),
+                                       entry.ThreadId.ToString().PadLeft(3),
+                                       entry.UserName.PadRight(25),
+                                       method.PadRight(40),
+                                       entry.Message.Replace("\r\n", "\r\n\t"));
+
+            Console.ForegroundColor = GetColor(entry);
+            Console.WriteLine(tmp);
+            if (entry.Exception != null)
+            {
+                Exception exception = entry.Exception;
+                string tabs = "\t";
+                while (exception != null)
+                {
+                    Console.WriteLine(tabs + entry.Exception.ToString().Replace("\r\n", "\r\n" + tabs));
+
+                    exception = exception.InnerException;
+                    tabs += "\t";
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        #endregion
 
         protected virtual ConsoleColor GetColor(LogEntry entry)
         {
@@ -37,35 +69,6 @@ namespace Griffin.Core.Logging.Targets
                 default:
                     return ConsoleColor.Gray;
             }
-        }
-
-        public void Enqueue(LogEntry entry)
-        {
-            string method = entry.StackFrames[0].GetMethod().ReflectedType.Name + "." + entry.StackFrames[0].GetMethod().Name;
-
-            string tmp = String.Format("{0} {1} {2} {3} {4}",
-                                       entry.CreatedAt.ToString("HH:mm:ss.fff"),
-                                       entry.ThreadId.ToString().PadLeft(3),
-                                       entry.UserName.PadRight(25),
-                                       method.PadRight(40),
-                                       entry.Message.Replace("\r\n", "\r\n\t"));
-
-            Console.ForegroundColor = GetColor(entry);
-            Console.WriteLine(tmp);
-            if (entry.Exception != null)
-            {
-                var exception = entry.Exception;
-                string tabs = "\t";
-                while (exception != null)
-                {
-                    Console.WriteLine(tabs + entry.Exception.ToString().Replace("\r\n", "\r\n" + tabs));
-
-                    exception = exception.InnerException;
-                    tabs += "\t";
-                }
-                
-            }
-            Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
 }

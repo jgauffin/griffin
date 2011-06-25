@@ -1,6 +1,6 @@
-﻿using Griffin.Core.Net.Pipelines;
+﻿using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.Channels
+namespace Griffin.Networking.Channels
 {
     public interface IChannelFactory
     {

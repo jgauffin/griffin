@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using HttpServer.Messages.Parser;
-
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+﻿namespace Griffin.Networking.Protocols.Http.Implementation
 {
-    class HttpClient
+    internal class HttpClient
     {
         private IMessage _currentMessage;
-
-        public HttpClient()
-        {
-        }
-
     }
 }

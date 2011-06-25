@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Principal;
-using System.Text;
 
 namespace Griffin.Core.Multitenancy
 {
@@ -12,13 +9,21 @@ namespace Griffin.Core.Multitenancy
     public class TenantIdentity : IIdentity
     {
         private readonly IEnumerable<string> _roles;
-        public ITenantUser User { get; private set; }
 
         public TenantIdentity(ITenantUser user, IEnumerable<string> roles)
         {
             _roles = roles;
             User = user;
         }
+
+        public ITenantUser User { get; private set; }
+
+        public IEnumerable<string> Roles
+        {
+            get { return _roles; }
+        }
+
+        #region IIdentity Members
 
         /// <summary>
         /// Gets the name of the current user.
@@ -53,9 +58,6 @@ namespace Griffin.Core.Multitenancy
             get { return true; }
         }
 
-        public IEnumerable<string> Roles
-        {
-            get { return _roles; }
-        }
+        #endregion
     }
 }

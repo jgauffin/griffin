@@ -1,7 +1,7 @@
 ﻿using System.Net;
-using Griffin.Core.Net.Channels;
+using Griffin.Networking.Channels;
 
-namespace Griffin.Core.Net.Messages
+namespace Griffin.Networking.Messages
 {
     public class ConnectedEvent : IUpstreamEvent
     {
@@ -21,13 +21,9 @@ namespace Griffin.Core.Net.Messages
         /// </summary>
         public EndPoint RemoteEndPoint { get; set; }
 
-        #region IUpstreamEvent Members
-
         public IChannel Channel
         {
             get { return null; }
         }
-
-        #endregion
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Griffin.Core.Net.Services
+﻿namespace Griffin.Networking.Services
 {
-    class ServerService
+    internal class ServerService
     {
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
     /// <summary>
     /// Collection of headers.
@@ -12,26 +12,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         private readonly Dictionary<string, string> _headers =
             new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-  
-        /// <summary>
-        /// Add a header.
-        /// </summary>
-        /// <param name="name">Header name</param>
-        /// <param name="value">Header value</param>
-        /// <remarks>
-        /// Will try to parse the header and create a <see cref="IHeader"/> object.
-        /// </remarks>
-        /// <exception cref="FormatException">Header value is not correctly formatted.</exception>
-        /// <exception cref="ArgumentNullException"><c>name</c> or <c>value</c> is <c>null</c>.</exception>
-        public void Add(string name, string value)
-        {
-            if (name == null)
-                throw new ArgumentNullException("name");
-            if (value == null)
-                throw new ArgumentNullException("value");
-            Add(name,value);
-        }
-
+        #region IHeaderCollection Members
 
         /// <summary>
         /// Gets a header
@@ -40,10 +21,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// <returns>header if found; otherwise <c>null</c>.</returns>
         public string this[string name]
         {
-            get
-            {
-                return Get(name);
-            }
+            get { return Get(name); }
             set
             {
                 if (value == null)
@@ -51,22 +29,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
                 else
                     _headers[name] = value;
             }
-        }
-
-        /// <summary>
-        /// Get a header 
-        /// </summary>
-        /// <param name="name">Name of header</param>
-        /// <returns>Header if found and casted properly; otherwise <c>null</c>.</returns>
-        public string Get(string name)
-        {
-            string value;
-            return _headers.TryGetValue(name, out value) ? value : null;
-        }
-
-        public void Clear()
-        {
-            _headers.Clear();
         }
 
         /// <summary>
@@ -91,6 +53,43 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Add a header.
+        /// </summary>
+        /// <param name="name">Header name</param>
+        /// <param name="value">Header value</param>
+        /// <remarks>
+        /// Will try to parse the header and create a <see cref="IHeader"/> object.
+        /// </remarks>
+        /// <exception cref="FormatException">Header value is not correctly formatted.</exception>
+        /// <exception cref="ArgumentNullException"><c>name</c> or <c>value</c> is <c>null</c>.</exception>
+        public void Add(string name, string value)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (value == null)
+                throw new ArgumentNullException("value");
+            Add(name, value);
+        }
+
+        /// <summary>
+        /// Get a header 
+        /// </summary>
+        /// <param name="name">Name of header</param>
+        /// <returns>Header if found and casted properly; otherwise <c>null</c>.</returns>
+        public string Get(string name)
+        {
+            string value;
+            return _headers.TryGetValue(name, out value) ? value : null;
+        }
+
+        public void Clear()
+        {
+            _headers.Clear();
         }
     }
 }

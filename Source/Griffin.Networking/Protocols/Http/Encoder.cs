@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     public class Encoder : IDownstreamHandler
     {
@@ -20,6 +17,8 @@ namespace Griffin.Core.Net.Protocols.Http
             get { throw new NotImplementedException(); }
         }
 
+        #region IDownstreamHandler Members
+
         /// <summary>
         /// Handle the data that is going to be sent to the remote end point
         /// </summary>
@@ -29,5 +28,7 @@ namespace Griffin.Core.Net.Protocols.Http
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

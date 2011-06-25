@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Globalization;
-using Griffin.Core.Net.Buffers;
+using Griffin.Networking.Buffers;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers.Parsers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers.Parsers
 {
     /// <summary>
     /// Parses "Date" header.
@@ -26,7 +26,8 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers.Parsers
 
             try
             {
-                return new DateHeader(name, DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal));
+                return new DateHeader(name,
+                                      DateTime.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal));
             }
             catch (FormatException err)
             {

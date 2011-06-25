@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
     /// <summary>
     /// A parameter in <see cref="IParameterCollection"/>.
@@ -16,10 +16,7 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
             _values.AddRange(values);
         }
 
-        public void Add(string value)
-        {
-            _values.Add(value);
-        }
+        #region IParameter Members
 
         /// <summary>
         /// Gets last value.
@@ -46,8 +43,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
             get { return _values; }
         }
 
-        #region IEnumerable<string> Members
-
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
@@ -73,5 +68,10 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         }
 
         #endregion
+
+        public void Add(string value)
+        {
+            _values.Add(value);
+        }
     }
 }

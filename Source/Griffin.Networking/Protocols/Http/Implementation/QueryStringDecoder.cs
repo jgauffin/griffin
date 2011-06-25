@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Buffers;
+using Griffin.Networking.Buffers;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
-    class QueryStringDecoder
+    internal class QueryStringDecoder
     {
         public static ParameterCollection Parse(ITextParser reader)
         {
@@ -56,6 +53,5 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
             var reader = new StringParser(queryString);
             return Parse(reader);
         }
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Core.Net
+namespace Griffin.Networking
 {
     /// <summary>
     /// Object can be reused
@@ -16,11 +16,6 @@ namespace Griffin.Core.Net
             _objectPool = objectPool;
         }
 
-        /// <summary>
-        /// Reset object so that it can be reused.
-        /// </summary>
-        public abstract void Reset();
-
         #region IDisposable Members
 
         /// <summary>
@@ -33,5 +28,10 @@ namespace Griffin.Core.Net
         }
 
         #endregion
+
+        /// <summary>
+        /// Reset object so that it can be reused.
+        /// </summary>
+        public abstract void Reset();
     }
 }

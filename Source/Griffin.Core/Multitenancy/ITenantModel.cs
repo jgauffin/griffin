@@ -9,7 +9,7 @@
     /// prinicals.
     /// </remarks>
     /// <seealso cref="TenantPrincipal"/>
-    interface ITenantModel
+    internal interface ITenantModel
     {
         /// <summary>
         /// Gets tenant that the model belongs to.

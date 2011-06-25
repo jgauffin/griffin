@@ -1,27 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Griffin.Core.Net.Buffers;
+using Griffin.Networking.Buffers;
 using Xunit;
 
-namespace Griffin.Core.Tests.Net.Buffers
+namespace Griffin.Networking.Tests.Buffers
 {
     public class BufferSliceReaderTest
     {
-        private byte[] _sourceBuffer;
-        private byte[] _buffer;
-        private BufferSlice _slice;
-        private BufferSliceReader _reader;
         private const int Offset = 1024;
         private const int Length = 1024;
+        private readonly byte[] _buffer;
+        private readonly BufferSliceReader _reader;
+        private readonly BufferSlice _slice;
+        private readonly byte[] _sourceBuffer;
 
         public BufferSliceReaderTest()
         {
             _sourceBuffer = Encoding.ASCII.GetBytes("Hello world!\r\nSays \"SomeONe not powerful\"");
             _buffer = new byte[65535];
             Buffer.BlockCopy(_sourceBuffer, 0, _buffer, Offset, _sourceBuffer.Length);
-            _slice = new BufferSlice(_buffer, Offset, Length) { Count = _sourceBuffer.Length };
+            _slice = new BufferSlice(_buffer, Offset, Length) {Count = _sourceBuffer.Length};
 
             _reader = new BufferSliceReader(_slice);
         }
@@ -78,7 +76,7 @@ namespace Griffin.Core.Tests.Net.Buffers
         [Fact]
         public void TestConsumeWhiteSpaces()
         {
-            var temp = "   \t  :WORLD";
+            string temp = "   \t  :WORLD";
             SetBuffer(temp);
 
             _reader.ConsumeWhiteSpaces();
@@ -88,7 +86,7 @@ namespace Griffin.Core.Tests.Net.Buffers
         [Fact]
         public void TestConsumeWhiteSpacesAndExtra()
         {
-            var temp = "   \t  :WORLD";
+            string temp = "   \t  :WORLD";
             SetBuffer(temp);
 
             _reader.ConsumeWhiteSpaces(':');
@@ -97,7 +95,7 @@ namespace Griffin.Core.Tests.Net.Buffers
 
         private void SetBuffer(string temp)
         {
-            var bytes = Encoding.ASCII.GetBytes(temp);
+            byte[] bytes = Encoding.ASCII.GetBytes(temp);
             Buffer.BlockCopy(bytes, 0, _buffer, Offset, bytes.Length);
             _slice.Count = bytes.Length;
         }
@@ -151,14 +149,12 @@ namespace Griffin.Core.Tests.Net.Buffers
             _slice.CurrentOffset = _slice.EndOffset - 1;
             Assert.True(_reader.HasMore);
             Assert.Equal('!', _reader.Current);
-            
         }
 
         [Fact]
         public void TestLength()
         {
             Assert.Equal(_sourceBuffer.Length, _reader.Length);
-            
         }
 
         [Fact]
@@ -191,7 +187,7 @@ namespace Griffin.Core.Tests.Net.Buffers
         [Fact]
         public void ReadOnlyQuoted()
         {
-            var actual = @"""Only quoted""";
+            string actual = @"""Only quoted""";
             SetBuffer(actual);
             Assert.Equal("Only quoted", _reader.ReadQuotedString());
             Assert.True(_reader.EndOfFile);
@@ -230,12 +226,10 @@ namespace Griffin.Core.Tests.Net.Buffers
         }
 
 
-
-
         [Fact]
         public void TestReadWord()
         {
-            var actual = _reader.ReadWord();
+            string actual = _reader.ReadWord();
             Assert.Equal("Hello", actual);
             Assert.Equal(' ', _reader.Current);
         }
@@ -253,8 +247,6 @@ namespace Griffin.Core.Tests.Net.Buffers
         {
             Assert.Equal("Hello", _reader.ReadUntil(' '));
             Assert.Equal(' ', _reader.Current);
-
-            
         }
     }
 }

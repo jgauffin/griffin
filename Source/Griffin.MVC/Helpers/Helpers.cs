@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Griffin.MVC.Helpers
 {
@@ -12,7 +9,7 @@ namespace Griffin.MVC.Helpers
         {
             if (expression.Body.NodeType == ExpressionType.Call)
             {
-                var methodCallExpression = (MethodCallExpression)expression.Body;
+                var methodCallExpression = (MethodCallExpression) expression.Body;
                 string name = GetInputName(methodCallExpression);
                 return name.Substring(expression.Parameters[0].Name.Length + 1);
             }
@@ -25,6 +22,5 @@ namespace Griffin.MVC.Helpers
             var methodCallExpression = expression.Object as MethodCallExpression;
             return methodCallExpression != null ? GetInputName(methodCallExpression) : expression.Object.ToString();
         }
-
     }
 }

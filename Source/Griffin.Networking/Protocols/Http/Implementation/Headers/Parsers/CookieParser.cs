@@ -1,8 +1,7 @@
 ﻿using System;
-using Griffin.Core.Net.Buffers;
-using HttpServer.Messages;
+using Griffin.Networking.Buffers;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers.Parsers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers.Parsers
 {
     /// <summary>
     /// Parses Cookie header.

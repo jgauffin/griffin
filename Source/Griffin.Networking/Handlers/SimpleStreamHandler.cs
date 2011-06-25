@@ -1,26 +1,29 @@
 ﻿using System;
-using Griffin.Core.Net.Messages;
+using Griffin.Core;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Handlers
+namespace Griffin.Networking.Handlers
 {
     /// <summary>
     /// Convinience class making it easier to process events.
     /// </summary>
     public abstract class SimpleStreamHandler : IUpstreamHandler, IDownstreamHandler
     {
-        /// <summary>
-        /// An exception have been caught during processing.
-        /// </summary>
-        /// <param name="ctx">Channel context</param>
-        /// <param name="e">Exception information</param>
-        protected abstract void ExceptionCaught(IChannelHandlerContext ctx, ExceptionEvent e);
+        #region IDownstreamHandler Members
 
         /// <summary>
-        /// A message have been received from the channel
+        /// Handle the data that is going to be sent to the remote end point
         /// </summary>
-        /// <param name="ctx">Channel context</param>
-        /// <param name="e">Message information</param>
-        protected abstract void HandleMessage(IChannelHandlerContext ctx, MessageEvent e);
+        /// <param name="ctx">Context information</param>
+        /// <param name="e">Chennel event.</param>
+        public void HandleDownstream(IChannelHandlerContext ctx, IChannelEvent e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IUpstreamHandler Members
 
         void IUpstreamHandler.HandleUpstream(IChannelHandlerContext ctx, IChannelEvent e)
         {
@@ -35,6 +38,22 @@ namespace Griffin.Core.Net.Handlers
             else if (e is ConnectedEvent)
                 HandleConnected(ctx, e.As<ConnectedEvent>());
         }
+
+        #endregion
+
+        /// <summary>
+        /// An exception have been caught during processing.
+        /// </summary>
+        /// <param name="ctx">Channel context</param>
+        /// <param name="e">Exception information</param>
+        protected abstract void ExceptionCaught(IChannelHandlerContext ctx, ExceptionEvent e);
+
+        /// <summary>
+        /// A message have been received from the channel
+        /// </summary>
+        /// <param name="ctx">Channel context</param>
+        /// <param name="e">Message information</param>
+        protected abstract void HandleMessage(IChannelHandlerContext ctx, MessageEvent e);
 
         /// <summary>
         /// Channel have been connected.
@@ -56,15 +75,5 @@ namespace Griffin.Core.Net.Handlers
         /// <param name="ctx">Context unique for this handler/channel combination.</param>
         /// <param name="e">Event information</param>
         protected abstract void HandleBound(IChannelHandlerContext ctx, BoundEvent e);
-
-        /// <summary>
-        /// Handle the data that is going to be sent to the remote end point
-        /// </summary>
-        /// <param name="ctx">Context information</param>
-        /// <param name="e">Chennel event.</param>
-        public void HandleDownstream(IChannelHandlerContext ctx, IChannelEvent e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

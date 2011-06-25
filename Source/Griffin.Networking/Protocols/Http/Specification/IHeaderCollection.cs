@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// Collection of headers.
@@ -13,6 +13,5 @@ namespace Griffin.Core.Net.Protocols.Http
         /// <param name="name">header name.</param>
         /// <returns>value if found; otherwise <c>null</c>.</returns>
         string this[string name] { get; set; }
-
     }
 }

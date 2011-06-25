@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Griffin.Core.Net.Buffers
+namespace Griffin.Networking.Buffers
 {
     public class BufferManager
     {
@@ -25,7 +25,7 @@ namespace Griffin.Core.Net.Buffers
         /// <returns>true if the buffer was successfully set; otherwise false</returns>
         public BufferSlice AssignBufferTo(SocketAsyncEventArgs args)
         {
-            var index = GetIndex();
+            int index = GetIndex();
             args.SetBuffer(_buffer, index, _returnedBufferSize);
             return new BufferSlice(_buffer, index, _returnedBufferSize);
         }
@@ -65,6 +65,5 @@ namespace Griffin.Core.Net.Buffers
             for (int i = 0; i < _sizeOfEntireBuffer; i += _returnedBufferSize)
                 _freeIndexes.Push(i);
         }
-
     }
 }

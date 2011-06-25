@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Messages;
-using Griffin.Core.Net.Pipelines;
+using Griffin.Networking.Channels;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Handlers
+namespace Griffin.Networking.Handlers
 {
     public class ContextCollection : IContextCollection
     {
@@ -20,6 +17,62 @@ namespace Griffin.Core.Net.Handlers
         {
             _channel = channel;
         }
+
+        #region IContextCollection Members
+
+        /// <summary>
+        /// Send a message down stream
+        /// </summary>
+        /// <param name="channelEvent">Event to send</param>
+        public void SendDownstream(IChannelEvent channelEvent)
+        {
+            SendDownstream(_channel.Pipeline.DownstreamHandlers.First(), channelEvent);
+        }
+
+        /// <summary>
+        /// Send a message down stream (from application to channel)
+        /// </summary>
+        /// <param name="handler">Handler to start with</param>
+        /// <param name="channelEvent">Event to send</param>
+        /// <remarks>
+        /// All handlers above the specified one will be ignored and not invoked.
+        /// </remarks>
+        public void SendDownstream(IDownstreamHandler handler, IChannelEvent channelEvent)
+        {
+            ChannelHandlerContext ctx = _contexts[handler];
+            handler.HandleDownstream(ctx, channelEvent);
+        }
+
+        /// <summary>
+        /// Send an event upstream (from channels to application)
+        /// </summary>
+        /// <param name="channelEvent">Event to send</param>
+        public void SendUpstream(IChannelEvent channelEvent)
+        {
+            SendUpstream(_channel.Pipeline.UpstreamHandlers.First(), channelEvent);
+        }
+
+        /// <summary>
+        /// Send an event upstream (from channels to application)
+        /// </summary>
+        /// <param name="handlerToStartFrom">Handler that should be invoked</param>
+        /// <param name="channelEvent">Event to send</param>
+        public void SendUpstream(IUpstreamHandler handlerToStartFrom, IChannelEvent channelEvent)
+        {
+            ChannelHandlerContext ctx = _contexts[handlerToStartFrom];
+            handlerToStartFrom.HandleUpstream(ctx, channelEvent);
+        }
+
+        /// <summary>
+        /// Get context for a specific channel
+        /// </summary>
+        /// <param name="value"></param>
+        public IChannelHandlerContext Get(IChannelHandler value)
+        {
+            return _contexts[value];
+        }
+
+        #endregion
 
         /// <summary>
         /// Each handler should have it's own context (per channel) to be able to 
@@ -47,7 +100,7 @@ namespace Griffin.Core.Net.Handlers
                 ChannelHandlerContext ctx;
                 if (!_contexts.TryGetValue(downstream[i], out ctx))
                 {
-                    ctx = new ChannelHandlerContext(_channel, this) { Name = downstream[i].GetType().Name };
+                    ctx = new ChannelHandlerContext(_channel, this) {Name = downstream[i].GetType().Name};
                     _contexts.Add(downstream[i], ctx);
                 }
 
@@ -57,59 +110,7 @@ namespace Griffin.Core.Net.Handlers
 
             // always add the channel as the last downstream handler.
             _contexts[_channel.Pipeline.DownstreamHandlers.Last()].NextDownstreamHandler = _channel;
-            _contexts[_channel] = new ChannelHandlerContext(_channel, this); 
-        }
-
-        /// <summary>
-        /// Send a message down stream
-        /// </summary>
-        /// <param name="channelEvent">Event to send</param>
-        public void SendDownstream(IChannelEvent channelEvent)
-        {
-            SendDownstream(_channel.Pipeline.DownstreamHandlers.First(), channelEvent);
-        }
-
-        /// <summary>
-        /// Send a message down stream (from application to channel)
-        /// </summary>
-        /// <param name="handler">Handler to start with</param>
-        /// <param name="channelEvent">Event to send</param>
-        /// <remarks>
-        /// All handlers above the specified one will be ignored and not invoked.
-        /// </remarks>
-        public void SendDownstream(IDownstreamHandler handler, IChannelEvent channelEvent)
-        {
-            var ctx = _contexts[handler];
-            handler.HandleDownstream(ctx, channelEvent);
-        }
-
-        /// <summary>
-        /// Send an event upstream (from channels to application)
-        /// </summary>
-        /// <param name="channelEvent">Event to send</param>
-        public void SendUpstream(IChannelEvent channelEvent)
-        {
-            SendUpstream(_channel.Pipeline.UpstreamHandlers.First(), channelEvent);
-        }
-
-        /// <summary>
-        /// Send an event upstream (from channels to application)
-        /// </summary>
-        /// <param name="handlerToStartFrom">Handler that should be invoked</param>
-        /// <param name="channelEvent">Event to send</param>
-        public void SendUpstream(IUpstreamHandler handlerToStartFrom, IChannelEvent channelEvent)
-        {
-            var ctx = _contexts[handlerToStartFrom];
-            handlerToStartFrom.HandleUpstream(ctx, channelEvent);
-        }
-
-        /// <summary>
-        /// Get context for a specific channel
-        /// </summary>
-        /// <param name="value"></param>
-        public IChannelHandlerContext Get(IChannelHandler value)
-        {
-            return _contexts[value];
+            _contexts[_channel] = new ChannelHandlerContext(_channel, this);
         }
 
         public void Initialize()

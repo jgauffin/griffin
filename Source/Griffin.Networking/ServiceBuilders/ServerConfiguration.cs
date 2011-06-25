@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Pipelines;
+﻿using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.ServiceBuilders
+namespace Griffin.Networking.ServiceBuilders
 {
     public class ServerConfiguration
     {
@@ -17,7 +13,5 @@ namespace Griffin.Core.Net.ServiceBuilders
         /// Gets or sets factory used to create a server pipeline
         /// </summary>
         public IPipelineFactory ServerPipelineFactory { get; set; }
-
-
     }
 }

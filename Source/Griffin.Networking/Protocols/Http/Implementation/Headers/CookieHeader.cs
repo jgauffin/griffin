@@ -1,7 +1,6 @@
 ﻿using System;
-using HttpServer.Messages;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation.Headers
+namespace Griffin.Networking.Protocols.Http.Implementation.Headers
 {
     /// <summary>
     /// Contents of a cookie header.

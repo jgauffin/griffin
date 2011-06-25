@@ -1,12 +1,16 @@
-﻿using Griffin.Logging;
-
-namespace Griffin.Core.Logging.Filters
+﻿namespace Griffin.Logging.Filters
 {
     /// <summary>
     /// Log entries must be between (or equal to) the specified limits.
     /// </summary>
     public class LevelFilter : ILogFilter
     {
+        public LevelFilter(LogLevel minLevel, LogLevel maxLevel)
+        {
+            MinLevel = minLevel;
+            MaxLevel = maxLevel;
+        }
+
         /// <summary>
         /// All log entries must be at least this level
         /// </summary>
@@ -23,11 +27,7 @@ namespace Griffin.Core.Logging.Filters
         /// </remarks>
         public LogLevel MaxLevel { get; set; }
 
-        public LevelFilter(LogLevel minLevel, LogLevel maxLevel)
-        {
-            MinLevel=minLevel;
-            MaxLevel = maxLevel;
-        }
+        #region ILogFilter Members
 
         /// <summary>
         /// Determines if the specified entry got an allowed log level
@@ -38,5 +38,7 @@ namespace Griffin.Core.Logging.Filters
         {
             return entry.LogLevel >= MinLevel && entry.LogLevel <= MaxLevel;
         }
+
+        #endregion
     }
 }

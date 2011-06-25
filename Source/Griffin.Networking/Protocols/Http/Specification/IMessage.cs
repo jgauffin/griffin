@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// Base interface for request and response.
@@ -26,9 +26,9 @@ namespace Griffin.Core.Net.Protocols.Http
         /// </summary>
         int ContentLength { get; }
 
-		/// <summary>
-		/// Gets or sets content encoding
-		/// </summary>
+        /// <summary>
+        /// Gets or sets content encoding
+        /// </summary>
         Encoding ContentEncoding { get; set; }
 
         /// <summary>

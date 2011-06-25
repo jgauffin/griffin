@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net.Channels
+﻿namespace Griffin.Networking.Channels
 {
     internal class TcpChannelService
     {

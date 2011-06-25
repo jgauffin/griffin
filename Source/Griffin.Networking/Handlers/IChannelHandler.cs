@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net.Handlers
+﻿namespace Griffin.Networking.Handlers
 {
     /// <summary>
     /// All channel handlers MUST be thread safe.

@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Threading;
-using System.Globalization;
+using Griffin.Core;
 
-namespace Griffin.Core.Logging.Targets.File
+namespace Griffin.Logging.Targets.File
 {
-    class FileWriter : IFileWriter
+    internal class FileWriter : IFileWriter
     {
+        private readonly FileConfiguration _configuration;
         private readonly string _name;
-        string _fileName;
+        private string _fileName;
+        private DateTime _logDate;
 
         public FileWriter(string name, FileConfiguration configuration)
         {
@@ -16,6 +19,8 @@ namespace Griffin.Core.Logging.Targets.File
             _configuration = configuration;
             _logDate = DateTime.Today;
         }
+
+        #region IFileWriter Members
 
         public FileConfiguration Configuration
         {
@@ -28,6 +33,41 @@ namespace Griffin.Core.Logging.Targets.File
             get { return _name; }
         }
 
+        public void Write(string logEntry)
+        {
+            int attempts = 0;
+            try
+            {
+                while (true)
+                {
+                    try
+                    {
+                        System.IO.File.AppendAllText(BuildFileName(), logEntry);
+                        break;
+                    }
+                    catch (IOException err)
+                    {
+                        Thread.Sleep(100);
+                        ++attempts;
+                        if (attempts >= 5)
+                        {
+                            Console.WriteLine("Failed to write to log {0}: " + err, BuildFileName());
+                            if (ExceptionHandler.ThrownInThread(GetType(), err) == ExceptionPolicy.Throw)
+                                throw;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Failed to write to log {0}: " + err, BuildFileName());
+                if (ExceptionHandler.ThrownInThread(GetType(), err) == ExceptionPolicy.Throw)
+                    throw;
+            }
+        }
+
+        #endregion
 
         private string BuildFileName()
         {
@@ -63,42 +103,6 @@ namespace Griffin.Core.Logging.Targets.File
             RemoveOldDirectories();
         }
 
-        public void Write(string logEntry)
-        {
-            int attempts = 0;
-            try
-            {
-                while (true)
-                {
-                    try
-                    {
-                        global::System.IO.File.AppendAllText(BuildFileName(), logEntry);
-                        break;
-                    }
-                    catch (IOException err)
-                    {
-                        Thread.Sleep(100);
-                        ++attempts;
-                        if (attempts >= 5)
-                        {
-                            Console.WriteLine("Failed to write to log {0}: " + err, BuildFileName());
-                            if (ExceptionHandler.ThrownInThread(GetType(), err) == ExceptionPolicy.Throw)
-                                throw;
-                            break;
-                        }
-                    }
-                }
-
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine("Failed to write to log {0}: " + err, BuildFileName());
-                if (ExceptionHandler.ThrownInThread(GetType(), err) == ExceptionPolicy.Throw)
-                    throw;
-
-            }
-        }
-
         private void RemoveOldDirectories()
         {
             if (_configuration.DaysToKeep == 0)
@@ -123,8 +127,5 @@ namespace Griffin.Core.Logging.Targets.File
                 }
             }
         }
-        private readonly Core.Logging.Targets.File.FileConfiguration _configuration;
-        private DateTime _logDate;
-
     }
 }

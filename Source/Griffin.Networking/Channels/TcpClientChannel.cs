@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
-using Griffin.Core.Net.Messages;
-using Griffin.Core.Net.Pipelines;
+using Griffin.Core;
+using Griffin.Networking.Messages;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.Channels
+namespace Griffin.Networking.Channels
 {
     public class TcpClientChannel : TcpChannel
     {
@@ -13,8 +14,8 @@ namespace Griffin.Core.Net.Channels
         public TcpClientChannel(IPipeline pipeline) : base(pipeline)
         {
         }
-        
-        protected override void DownstreamHandlingComplete(Messages.IChannelEvent e)
+
+        protected override void DownstreamHandlingComplete(IChannelEvent e)
         {
             if (e is BindEvent)
             {
@@ -45,7 +46,6 @@ namespace Griffin.Core.Net.Channels
                 socket.Dispose();
                 ReportException(err);
             }
-            
         }
     }
 }

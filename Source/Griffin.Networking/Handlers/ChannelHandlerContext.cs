@@ -1,8 +1,8 @@
 ﻿using System;
-using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Messages;
+using Griffin.Networking.Channels;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Handlers
+namespace Griffin.Networking.Handlers
 {
     /// <summary>
     /// Context for a specific handler in a specific channel.

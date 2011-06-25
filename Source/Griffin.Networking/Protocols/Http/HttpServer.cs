@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
-    class HttpServer : IUpstreamHandler
+    internal class HttpServer : IUpstreamHandler
     {
+        #region IUpstreamHandler Members
+
         /// <summary>
         /// Process data that was received from the channel.
         /// </summary>
@@ -18,5 +17,7 @@ namespace Griffin.Core.Net.Protocols.Http
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

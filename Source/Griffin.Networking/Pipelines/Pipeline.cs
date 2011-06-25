@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Channels;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
+using Griffin.Networking.Channels;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Pipelines
+namespace Griffin.Networking.Pipelines
 {
     public class Pipeline : IPipeline
     {
-        LinkedList<IUpstreamHandler> _upstreamHandlers = new LinkedList<IUpstreamHandler>();
-        LinkedList<IDownstreamHandler> _downstreamHandlers = new LinkedList<IDownstreamHandler>();
+        private readonly LinkedList<IDownstreamHandler> _downstreamHandlers = new LinkedList<IDownstreamHandler>();
+        private readonly LinkedList<IUpstreamHandler> _upstreamHandlers = new LinkedList<IUpstreamHandler>();
 
         #region IPipeline Members
 
@@ -27,7 +25,8 @@ namespace Griffin.Core.Net.Pipelines
             if (handler == null)
                 throw new ArgumentNullException("handler");
             if (handler is IChannel)
-                throw new InvalidOperationException("Channels will be registered by the framework, do not add them to the pipeline");
+                throw new InvalidOperationException(
+                    "Channels will be registered by the framework, do not add them to the pipeline");
 
             _downstreamHandlers.AddLast(handler);
         }

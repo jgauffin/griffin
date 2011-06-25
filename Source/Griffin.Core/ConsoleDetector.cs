@@ -2,6 +2,9 @@
 
 namespace Griffin.Core
 {
+    /// <summary>
+    /// Utility class used to detect if the running application has an attached console window.
+    /// </summary>
     public static class ConsoleDetector
     {
         private const uint ATTACH_PARENT_PROCESS = 0x0ffffffff;

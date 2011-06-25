@@ -43,13 +43,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Net\Buffers\BufferSliceReaderTest.cs" />
-    <Compile Include="Net\Buffers\BufferSliceTests.cs" />
-    <Compile Include="Net\Channels\TcpChannelTest.cs" />
-    <Compile Include="Net\Channels\TcpClientHelper.cs" />
-    <Compile Include="Net\MemoryStreamTests.cs" />
-    <Compile Include="Net\Protocols\FreeSwitch\ClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,33 +1,18 @@
 ﻿using System;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
-using Griffin.Core.Net.Protocols.Http.Implementation;
+using Griffin.Core;
+using Griffin.Networking.Buffers;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
+using Griffin.Networking.Protocols.Http.Implementation;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// A HTTP parser using delegates to switch parsing methods.
     /// </summary>
     public class Decoder : IUpstreamHandler
     {
-        [ThreadStatic]
-        private static Context _context;
-
-        private class Context
-        {
-            public readonly BufferSliceReader _reader = new BufferSliceReader();
-            public int _bodyBytesLeft;
-            public BufferSlice _buffer;
-            public string _headerName;
-            public string _headerValue;
-            public Func<bool> _parserMethod;
-            public HttpMessage _message;
-            public bool _isComplete;
-
-            public HttpRequest Request = new HttpRequest();
-            public HttpResponse Response = new HttpResponse();
-        }
+        [ThreadStatic] private static Context _context;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Decoder"/> class.
@@ -36,6 +21,54 @@ namespace Griffin.Core.Net.Protocols.Http
         {
             _context._parserMethod = ParseFirstLine;
         }
+
+        /// <summary>
+        /// Gets if this pipeline can be shared between multiple channels
+        /// </summary>
+        /// <remarks>
+        /// Return <c>false</c> if you have member variables.
+        /// </remarks>
+        public bool IsSharable
+        {
+            get { return false; }
+        }
+
+        #region IUpstreamHandler Members
+
+        /// <summary>
+        /// Process data that was received from the channel.
+        /// </summary>
+        /// <param name="ctx">Context which is used for the currently processed channel</param>
+        /// <param name="e">Event being processed.</param>
+        public void HandleUpstream(IChannelHandlerContext ctx, IChannelEvent e)
+        {
+            if (e is ConnectedEvent)
+            {
+                ctx.State = new Context();
+            }
+            if (e is ClosedEvent)
+            {
+                Reset();
+            }
+            else if (e is MessageEvent)
+            {
+                _context = ctx.State.As<Context>();
+                _context._buffer = e.As<MessageEvent>().Message.As<BufferSlice>();
+                _context._reader.Assign(_context._buffer);
+                while (_context._parserMethod()) ;
+
+                if (_context._isComplete)
+                {
+                    e.As<MessageEvent>().Message = _context._message;
+                    OnComplete(ctx, e);
+                }
+                return;
+            }
+
+            ctx.SendUpstream(e);
+        }
+
+        #endregion
 
         /// <summary>
         /// Parser method to copy all body bytes.
@@ -48,7 +81,10 @@ namespace Griffin.Core.Net.Protocols.Http
             if (_context._reader.RemainingLength == 0)
                 return false;
 
-            int bytesLeft = (int)Math.Min(_context._message.ContentLength - _context._message.Body.Length, _context._buffer.RemainingCount);
+            var bytesLeft =
+                (int)
+                Math.Min(_context._message.ContentLength - _context._message.Body.Length,
+                         _context._buffer.RemainingCount);
             _context._message.Body.Write(_context._buffer.Buffer, _context._buffer.CurrentOffset, bytesLeft);
             _context._buffer.CurrentOffset += bytesLeft;
 
@@ -141,7 +177,7 @@ namespace Griffin.Core.Net.Protocols.Http
             }
 
             OnHeader(_context._headerName, value);
-            
+
             _context._headerName = null;
             _context._headerValue = string.Empty;
             _context._parserMethod = GetHeaderName;
@@ -157,7 +193,7 @@ namespace Griffin.Core.Net.Protocols.Http
         {
             string firstWord = words[0].ToUpper();
 
-            _context._message = firstWord.StartsWith("HTTP") ? (HttpMessage)_context.Response : _context.Request;
+            _context._message = firstWord.StartsWith("HTTP") ? (HttpMessage) _context.Response : _context.Request;
             _context._message.SetFirstLine(words[0], words[1], words[2]);
         }
 
@@ -208,50 +244,6 @@ namespace Griffin.Core.Net.Protocols.Http
 
 
         /// <summary>
-        /// Gets if this pipeline can be shared between multiple channels
-        /// </summary>
-        /// <remarks>
-        /// Return <c>false</c> if you have member variables.
-        /// </remarks>
-        public bool IsSharable
-        {
-            get { return false; }
-        }
-
-        /// <summary>
-        /// Process data that was received from the channel.
-        /// </summary>
-        /// <param name="ctx">Context which is used for the currently processed channel</param>
-        /// <param name="e">Event being processed.</param>
-        public void HandleUpstream(IChannelHandlerContext ctx, IChannelEvent e)
-        {
-            if (e is ConnectedEvent)
-            {
-                ctx.State = new Context();
-            }
-            if (e is ClosedEvent)
-            {
-                Reset();
-            }
-            else if (e is MessageEvent)
-            {
-                _context = ctx.State.As<Context>();
-                _context._buffer = e.As<MessageEvent>().Message.As<BufferSlice>();
-                _context._reader.Assign(_context._buffer);
-                while (_context._parserMethod()) ;
-            
-                if (_context._isComplete)
-                {
-                    e.As<MessageEvent>().Message = _context._message;
-                    OnComplete(ctx, e);
-                }
-                return;
-            }
-
-            ctx.SendUpstream(e);
-        }
-
-        /// <summary>
         /// Called when a message has been parsed successfully.
         /// </summary>
         /// <param name="ctx"></param>
@@ -260,5 +252,23 @@ namespace Griffin.Core.Net.Protocols.Http
         {
             ctx.SendUpstream(channelEvent);
         }
+
+        #region Nested type: Context
+
+        private class Context
+        {
+            public readonly HttpRequest Request = new HttpRequest();
+            public readonly HttpResponse Response = new HttpResponse();
+            public readonly BufferSliceReader _reader = new BufferSliceReader();
+            public int _bodyBytesLeft;
+            public BufferSlice _buffer;
+            public string _headerName;
+            public string _headerValue;
+            public bool _isComplete;
+            public HttpMessage _message;
+            public Func<bool> _parserMethod;
+        }
+
+        #endregion
     }
 }

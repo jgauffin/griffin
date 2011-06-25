@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
-using Griffin.Core.Net.Pipelines;
+using Griffin.Core;
+using Griffin.Networking.Buffers;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
+using Griffin.Networking.Pipelines;
 
-namespace Griffin.Core.Net.Channels
+namespace Griffin.Networking.Channels
 {
     /// <summary>
     /// TCP server.
@@ -33,41 +33,7 @@ namespace Griffin.Core.Net.Channels
         /// </summary>
         public IPipeline ChildPipeline { get; private set; }
 
-        private SocketAsyncEventArgs AllocateArgs()
-        {
-            return new SocketAsyncEventArgs();
-        }
-
-
-        private void HandleException(Exception err)
-        {
-            SendUpstream(new ExceptionEvent(err));
-        }
-
-        private void OnAcceptSocket(IAsyncResult ar)
-        {
-            try
-            {
-                Socket socket = _listener.EndAcceptSocket(ar);
-                var client = new TcpServerChildChannel(ChildPipeline);
-
-                var config = new TcpChannelConfig(_bufferManager, _argsPool) {Socket = socket};
-                client.Initialize(config);
-                SendUpstream(new AcceptedEvent {ClientChannel = client});
-            }
-            catch (Exception err)
-            {
-                HandleException(err);
-            }
-        }
-
-        private void SendUpstream(IChannelEvent channelEvent)
-        {
-            HandlerContexts.SendUpstream(channelEvent);
-        }
-
         #region IChannel Members
-
 
         /// <summary>
         /// Process data that was received from the channel.
@@ -115,5 +81,38 @@ namespace Griffin.Core.Net.Channels
         }
 
         #endregion
+
+        private SocketAsyncEventArgs AllocateArgs()
+        {
+            return new SocketAsyncEventArgs();
+        }
+
+
+        private void HandleException(Exception err)
+        {
+            SendUpstream(new ExceptionEvent(err));
+        }
+
+        private void OnAcceptSocket(IAsyncResult ar)
+        {
+            try
+            {
+                Socket socket = _listener.EndAcceptSocket(ar);
+                var client = new TcpServerChildChannel(ChildPipeline);
+
+                var config = new TcpChannelConfig(_bufferManager, _argsPool) {Socket = socket};
+                client.Initialize(config);
+                SendUpstream(new AcceptedEvent {ClientChannel = client});
+            }
+            catch (Exception err)
+            {
+                HandleException(err);
+            }
+        }
+
+        private void SendUpstream(IChannelEvent channelEvent)
+        {
+            HandlerContexts.SendUpstream(channelEvent);
+        }
     }
 }

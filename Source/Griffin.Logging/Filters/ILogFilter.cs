@@ -1,6 +1,4 @@
-﻿using Griffin.Logging;
-
-namespace Griffin.Core.Logging.Filters
+﻿namespace Griffin.Logging.Filters
 {
     /// <summary>
     /// Used to determine which entries that can be logged

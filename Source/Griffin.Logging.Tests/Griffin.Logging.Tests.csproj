@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9234D35E-CDBD-4DC7-8848-60363245C3D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Griffin.Logging.Tests</RootNamespace>
+    <AssemblyName>Griffin.Logging.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\assemblies\xunit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="ConfigTester.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleLogManager.cs" />
+    <Compile Include="Targets\FileTargetTest.cs" />
+    <Compile Include="TextLogger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Targets\.svn\all-wcprops" />
+    <None Include="Targets\.svn\entries" />
+    <None Include="Targets\.svn\text-base\FileTargetTest.cs.svn-base" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Targets\.svn\prop-base\" />
+    <Folder Include="Targets\.svn\props\" />
+    <Folder Include="Targets\.svn\tmp\prop-base\" />
+    <Folder Include="Targets\.svn\tmp\props\" />
+    <Folder Include="Targets\.svn\tmp\text-base\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Griffin.Core\Griffin.Core.csproj">
+      <Project>{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}</Project>
+      <Name>Griffin.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Griffin.Logging\Griffin.Logging.csproj">
+      <Project>{CCDBDF6B-7314-4DB6-9481-38307BF1A284}</Project>
+      <Name>Griffin.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Griffin.Specification\Griffin.Specification.csproj">
+      <Project>{0A92E936-4A23-48D4-A792-181211EC0F2B}</Project>
+      <Name>Griffin.Specification</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

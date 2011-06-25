@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using Griffin.Core.Logging.Filters;
-using Griffin.Core.Logging.Targets;
-using Griffin.Logging;
-using Griffin.Specification.Logging;
+using Griffin.Core;
+using Griffin.Logging.Filters;
+using Griffin.Logging.Targets;
 
-namespace Griffin.Core.Logging
+namespace Griffin.Logging
 {
     public class Logger : ILogger
     {
@@ -21,35 +20,14 @@ namespace Griffin.Core.Logging
             _targets = targets;
         }
 
-        private void WriteEntry(LogLevel level, string message, Exception exception)
+        internal IEnumerable<ILogFilter> Filters
         {
-            StackFrame[] frames = new StackTrace(2).GetFrames();
-            if (frames != null)
-                frames = frames.Take(5).ToArray();
+            get { return _filters; }
+        }
 
-            string userName = Thread.CurrentPrincipal.Identity.Name;
-            if (string.IsNullOrEmpty(userName))
-                userName = Environment.UserName;
-
-            var entry = new LogEntry
-                            {
-                                CreatedAt = DateTime.Now,
-                                Exception = exception,
-                                LogLevel = level,
-                                Message = message,
-                                StackFrames = frames,
-                                ThreadId = Thread.CurrentThread.ManagedThreadId,
-                                UserName = userName
-                            };
-
-            // find any filter that says no to logging
-            if (_filters.Any(filter => !filter.CanLog(entry)))
-            {
-                Console.WriteLine("Filter blocks");
-                return;
-            }
-
-            _targets.Each(e => e.Enqueue(entry));
+        internal IEnumerable<ILogTarget> Targets
+        {
+            get { return _targets; }
         }
 
         #region ILogger Members
@@ -136,5 +114,36 @@ namespace Griffin.Core.Logging
         }
 
         #endregion
+
+        private void WriteEntry(LogLevel level, string message, Exception exception)
+        {
+            StackFrame[] frames = new StackTrace(2).GetFrames();
+            if (frames != null)
+                frames = frames.Take(5).ToArray();
+
+            string userName = Thread.CurrentPrincipal.Identity.Name;
+            if (string.IsNullOrEmpty(userName))
+                userName = Environment.UserName;
+
+            var entry = new LogEntry
+                            {
+                                CreatedAt = DateTime.Now,
+                                Exception = exception,
+                                LogLevel = level,
+                                Message = message,
+                                StackFrames = frames,
+                                ThreadId = Thread.CurrentThread.ManagedThreadId,
+                                UserName = userName
+                            };
+
+            // find any filter that says no to logging
+            if (_filters.Any(filter => !filter.CanLog(entry)))
+            {
+                Console.WriteLine("Filter blocks");
+                return;
+            }
+
+            _targets.Each(e => e.Enqueue(entry));
+        }
     }
 }

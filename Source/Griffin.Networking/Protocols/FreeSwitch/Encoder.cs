@@ -1,23 +1,24 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Griffin.Core.Net.Buffers;
-using Griffin.Core.Net.Handlers;
-using Griffin.Core.Net.Messages;
+using Griffin.Core;
+using Griffin.Networking.Buffers;
+using Griffin.Networking.Handlers;
+using Griffin.Networking.Messages;
 
-namespace Griffin.Core.Net.Protocols.FreeSwitch
+namespace Griffin.Networking.Protocols.FreeSwitch
 {
     public class Encoder : IDownstreamHandler
     {
         private static readonly byte[] LineFeed = Encoding.ASCII.GetBytes("\n");
-        MemoryStream _stream = new MemoryStream();
-
-        #region IDownstreamHandler Members
+        private MemoryStream _stream = new MemoryStream();
 
         public bool IsSharable
         {
             get { return true; }
         }
+
+        #region IDownstreamHandler Members
 
         /// <summary>
         /// Takes a <see cref="Message"/> and converts it into a byte buffer.
@@ -38,9 +39,11 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
             ctx.SendDownstream(e);
         }
 
+        #endregion
+
         private BufferSlice EncodeCommand(Command command)
         {
-            var cmd = Encoding.ASCII.GetBytes(command.BuildCommandString() + "\n\n");
+            byte[] cmd = Encoding.ASCII.GetBytes(command.BuildCommandString() + "\n\n");
             Console.WriteLine("Sending " + command.BuildCommandString() + "\n\n");
             return new BufferSlice(cmd, 0, cmd.Length);
         }
@@ -69,11 +72,8 @@ namespace Griffin.Core.Net.Protocols.FreeSwitch
                 }
             }
 
-            var tmp = Encoding.ASCII.GetString(buffer, 0, (int)length);
-            return new BufferSlice(buffer, 0, (int)length);
-
+            string tmp = Encoding.ASCII.GetString(buffer, 0, (int) length);
+            return new BufferSlice(buffer, 0, (int) length);
         }
-
-        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
     /// <summary>
     /// Parameter in <see cref="IParameterCollection"/>

@@ -1,20 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using Griffin.Core.Net.Protocols.Http.Implementation.Headers;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
-    abstract class HttpMessage : IMessage
+    internal abstract class HttpMessage : IMessage
     {
-        HeaderCollection _headers = new HeaderCollection();
+        private readonly HeaderCollection _headers = new HeaderCollection();
 
         public HttpMessage()
         {
             _headers = new HeaderCollection();
         }
+
+        /// <summary>
+        /// Gets connection type.
+        /// </summary>
+        public bool KeepAlive
+        {
+            get { return Headers["Connection"].Contains("Keep-Alive"); }
+            set { Headers["Connection"] = value ? "Keep-Alive" : "Close"; }
+        }
+
+        /// <summary>
+        /// Kind of content in the body
+        /// </summary>
+        /// <remarks>Default is <c>text/html</c></remarks>
+        public string ContentType { get; set; }
+
+        #region IMessage Members
 
         /// <summary>
         /// Gets current protocol version
@@ -23,11 +36,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// Default is HTTP/1.1
         /// </value>
         public string ProtocolVersion { get; protected set; }
-
-        /// <summary>
-        /// Gets connection type.
-        /// </summary>
-        public bool KeepAlive { get { return Headers["Connection"].Contains("Keep-Alive"); } set { Headers["Connection"] = value ? "Keep-Alive" : "Close"; } }
 
         /// <summary>
         /// Gets or sets body stream.
@@ -40,12 +48,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         public int ContentLength { get; set; }
 
         /// <summary>
-        /// Kind of content in the body
-        /// </summary>
-        /// <remarks>Default is <c>text/html</c></remarks>
-        public string ContentType { get; set; }
-
-        /// <summary>
         /// Gets or sets encoding
         /// </summary>
         public Encoding ContentEncoding { get; set; }
@@ -53,8 +55,12 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// <summary>
         /// Gets headers.
         /// </summary>
-        public IHeaderCollection Headers { get { return _headers; } }
+        public IHeaderCollection Headers
+        {
+            get { return _headers; }
+        }
 
+        #endregion
 
         /// <summary>
         /// Add a new header.

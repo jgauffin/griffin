@@ -1,6 +1,4 @@
-﻿using Griffin.Core.Net.Channels;
-
-namespace Griffin.Core.Net.Messages
+﻿namespace Griffin.Networking.Messages
 {
     public interface IChannelEvent
     {

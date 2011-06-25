@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Specification.InversionOfControl
+namespace Griffin.InversionOfControl
 {
     /// <summary>
     /// Used to build an inversion of control container.

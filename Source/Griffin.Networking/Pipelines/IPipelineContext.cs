@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core.Net.Pipelines
+﻿namespace Griffin.Networking.Pipelines
 {
     /// <summary>
     /// Context valid for a specific pipeline invocation

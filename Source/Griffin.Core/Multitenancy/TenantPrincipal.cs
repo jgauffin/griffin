@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Principal;
-using System.Text;
 
 namespace Griffin.Core.Multitenancy
 {
-    class TenantPrincipal : IPrincipal
+    internal class TenantPrincipal : IPrincipal
     {
-        /// <summary>
-        /// Gets tenant that has a logged in user.
-        /// </summary>
-        public ITenant Tenant { get; private set; }
-
         private readonly TenantIdentity _identity;
 
         public TenantPrincipal(ITenant tenant, TenantIdentity identity)
@@ -20,6 +12,13 @@ namespace Griffin.Core.Multitenancy
             Tenant = tenant;
             _identity = identity;
         }
+
+        /// <summary>
+        /// Gets tenant that has a logged in user.
+        /// </summary>
+        public ITenant Tenant { get; private set; }
+
+        #region IPrincipal Members
 
         /// <summary>
         /// Determines whether the current principal belongs to the specified role.
@@ -43,5 +42,7 @@ namespace Griffin.Core.Multitenancy
         {
             get { return _identity; }
         }
+
+        #endregion
     }
 }

@@ -1,21 +1,15 @@
 ﻿using System.Collections.Generic;
-using Griffin.Logging;
 
-namespace Griffin.Core.Logging.Targets
+namespace Griffin.Logging.Targets
 {
     public class CompositeTarget : ILogTarget
     {
         private readonly string _name;
-        private List<ILogTarget> _targets = new List<ILogTarget>();
+        private readonly List<ILogTarget> _targets = new List<ILogTarget>();
 
         public CompositeTarget(string name)
         {
             _name = name;
-        }
-
-        public string Name
-        {
-            get { return _name; }
         }
 
         public List<ILogTarget> Targets
@@ -23,12 +17,21 @@ namespace Griffin.Core.Logging.Targets
             get { return _targets; }
         }
 
+        #region ILogTarget Members
+
+        public string Name
+        {
+            get { return _name; }
+        }
+
         public void Enqueue(LogEntry entry)
         {
-            foreach (var target in _targets)
+            foreach (ILogTarget target in _targets)
             {
                 target.Enqueue(entry);
             }
         }
+
+        #endregion
     }
 }

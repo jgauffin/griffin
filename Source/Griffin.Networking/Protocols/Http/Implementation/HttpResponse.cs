@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using Griffin.Core.Net.Protocols.Http.Implementation.Headers;
-using HttpServer;
+using Griffin.Core;
+using Griffin.Networking.Protocols.Http.Implementation.Headers;
 
-namespace Griffin.Core.Net.Protocols.Http.Implementation
+namespace Griffin.Networking.Protocols.Http.Implementation
 {
-    class HttpResponse : HttpMessage, IResponse
+    internal class HttpResponse : HttpMessage, IResponse
     {
-        public HttpResponse()
-        {
-        }
+        ///<summary>
+        /// Gets or sets content type
+        ///</summary>
+        public ContentTypeHeader ContentType { get; set; }
 
+        #region IResponse Members
 
         /// <summary>
         /// Gets cookies.
@@ -31,11 +30,6 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         /// <remarks>Default is <see cref="HttpStatusCode.OK"/></remarks>
         public int StatusCode { get; set; }
 
-        ///<summary>
-        /// Gets or sets content type
-        ///</summary>
-        public ContentTypeHeader ContentType { get; set; }
-
         /// <summary>
         /// Redirect user.
         /// </summary>
@@ -47,6 +41,8 @@ namespace Griffin.Core.Net.Protocols.Http.Implementation
         {
             throw new NotImplementedException();
         }
+
+        #endregion
 
         public override void SetFirstLine(string version, string codeStr, string reason)
         {

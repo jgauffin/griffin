@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Griffin.Core.Net.Pipelines;
-using Griffin.Core.Net.ServiceBuilders;
+﻿using Griffin.Networking.Pipelines;
+using Griffin.Networking.ServiceBuilders;
 
-namespace Griffin.Core.Net.Protocols.Http
+namespace Griffin.Networking.Protocols.Http
 {
-    class ServerFactory : ServiceFactory, IPipelineFactory
+    internal class ServerFactory : ServiceFactory, IPipelineFactory
     {
-        /// <summary>
-        /// Configure service
-        /// </summary>
-        protected override void Configure(IServiceBuilderConfiguration configuration)
-        {
-            //configuration.ChannelFactory = new TcpServerChannelFactory();
-            //configuration.PipelineFactory = new 
-        }
+        #region IPipelineFactory Members
 
         /// <summary>
         /// Create a new pipeline with all attached channel handlers.
@@ -24,6 +13,17 @@ namespace Griffin.Core.Net.Protocols.Http
         public IPipeline CreatePipeline()
         {
             return null;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Configure service
+        /// </summary>
+        protected override void Configure(IServiceBuilderConfiguration configuration)
+        {
+            //configuration.ChannelFactory = new TcpServerChannelFactory();
+            //configuration.PipelineFactory = new 
         }
     }
 }
