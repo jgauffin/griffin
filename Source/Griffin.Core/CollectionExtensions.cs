@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Griffin.Core
 {
@@ -16,6 +17,7 @@ namespace Griffin.Core
         /// <param name="action">Action to invoke</param>
         public static void Each<T>(this IEnumerable<T> list, Action<T> action)
         {
+            Contract.Requires<ArgumentNullException>(action != null);
             if (list == null)
                 return;
 

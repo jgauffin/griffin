@@ -5,7 +5,7 @@ namespace Griffin.Core
     /// <summary>
     /// Utility class used to detect if the running application has an attached console window.
     /// </summary>
-    public static class ConsoleDetector
+    public static class ConsoleHelper
     {
         private const uint ATTACH_PARENT_PROCESS = 0x0ffffffff;
         private const int ERROR_ACCESS_DENIED = 5;
@@ -14,7 +14,7 @@ namespace Griffin.Core
         /// <summary>
         /// Gets if the current process has a console window.
         /// </summary>
-        public static bool HasOne
+        public static bool HasConsole
         {
             get
             {

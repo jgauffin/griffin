@@ -52,7 +52,7 @@ namespace Griffin.Logging.Targets.File
                         if (attempts >= 5)
                         {
                             Console.WriteLine("Failed to write to log {0}: " + err, BuildFileName());
-                            if (ExceptionHandler.ThrownInThread(GetType(), err) == ExceptionPolicy.Throw)
+                            if (ExceptionPolicyHandler.ThrownInWorkerThread(GetType(), err) == ExceptionPolicy.Throw)
                                 throw;
                             break;
                         }
@@ -62,7 +62,7 @@ namespace Griffin.Logging.Targets.File
             catch (Exception err)
             {
                 Console.WriteLine("Failed to write to log {0}: " + err, BuildFileName());
-                if (ExceptionHandler.ThrownInThread(GetType(), err) == ExceptionPolicy.Throw)
+                if (ExceptionPolicyHandler.ThrownInWorkerThread(GetType(), err) == ExceptionPolicy.Throw)
                     throw;
             }
         }

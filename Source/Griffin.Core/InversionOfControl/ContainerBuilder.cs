@@ -56,7 +56,7 @@ namespace Griffin.Core.InversionOfControl
             }
             catch (TargetInvocationException e)
             {
-                throw e.FixStacktrace();
+                throw e.PreserveStacktrace();
             }
         }
 

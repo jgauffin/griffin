@@ -58,8 +58,8 @@ namespace Griffin.Logging
         {
             CreateIfNeeded();
             _targets.Add(new ConsoleTarget());
-            if (!ConsoleDetector.HasOne && createConsole)
-                ConsoleDetector.CreateConsole();
+            if (!ConsoleHelper.HasConsole && createConsole)
+                ConsoleHelper.CreateConsole();
         }
 
         public static void AddFilter(ILogFilter logFilter)
