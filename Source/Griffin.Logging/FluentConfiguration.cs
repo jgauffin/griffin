@@ -9,7 +9,6 @@ namespace Griffin.Logging
         public static FluentConfiguration _generated;
         private readonly List<FluentNamespaceLogging> _namespaces = new List<FluentNamespaceLogging>();
         private readonly List<FluentTargetConfiguration> _targets = new List<FluentTargetConfiguration>();
-        private FluentLogManager _logManager;
 
 
         public FluentConfiguration()
@@ -64,6 +63,7 @@ namespace Griffin.Logging
         /// </remarks>
         public Configure Build()
         {
+            FluentLogManager logManager = new FluentLogManager();
             foreach (FluentNamespaceLogging ns in _namespaces)
             {
                 var filters = new List<ILogFilter>();
@@ -71,10 +71,10 @@ namespace Griffin.Logging
 
                 IEnumerable<ILogTarget> targets = GetTargets(ns.Targets);
 
-                _logManager.AddLogger(new Logger(filters, targets));
+                logManager.AddLogger(new Logger(filters, targets));
             }
 
-            LogManager.Assign(_logManager);
+            LogManager.Assign(logManager);
             return Configure.Griffin;
         }
 

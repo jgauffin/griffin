@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Griffin.Logging
 {
@@ -13,8 +14,17 @@ namespace Griffin.Logging
     {
         private static ILogManager _logManager = new NullLogManager();
 
+        /// <summary>
+        /// Assigns the specified log manager.
+        /// </summary>
+        /// <param name="logManager">The log manager.</param>
+        /// <remarks>
+        /// Assigns a log manager which will be used to generate loggers for
+        /// each class that requests one.
+        /// </remarks>
         public static void Assign(ILogManager logManager)
         {
+            Contract.Requires<ArgumentNullException>(logManager != null);
             _logManager = logManager;
         }
 
@@ -28,6 +38,8 @@ namespace Griffin.Logging
         /// </remarks>
         public static ILogger GetLogger(Type type)
         {
+            Contract.Requires<ArgumentNullException>(type != null);
+            Contract.Ensures(Contract.Result<ILogger>() != null);
             return _logManager.GetLogger(type);
         }
 
@@ -40,6 +52,7 @@ namespace Griffin.Logging
         /// </remarks>
         public static ILogger GetLogger<T>()
         {
+            Contract.Ensures(Contract.Result<ILogger>() != null);
             return _logManager.GetLogger(typeof (T));
         }
     }

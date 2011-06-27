@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Griffin.InversionOfControl
 {
@@ -7,6 +8,7 @@ namespace Griffin.InversionOfControl
     /// Used to locate registered services.
     /// </summary>
     /// <seealso cref="IContainerBuilder"/>.
+    [ContractClass(typeof(IServiceLocatorContract))]
     public interface IServiceLocator
     {
         /// <summary>

@@ -7,17 +7,25 @@ namespace Griffin.InversionOfControl
     /// </summary>
     public class ComponentAttribute : Attribute
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComponentAttribute"/> class.
+        /// </summary>
         public ComponentAttribute()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ComponentAttribute"/> class.
+        /// </summary>
+        /// <param name="flags">Defines object type.</param>
         public ComponentAttribute(ComponentFlags flags)
         {
+            Flags = flags;
         }
-    }
 
-    public enum ComponentFlags
-    {
-        Singleton
+        /// <summary>
+        /// Gets flags defining how to instantiate the object etc.
+        /// </summary>
+        public ComponentFlags Flags { get; private set; }
     }
 }

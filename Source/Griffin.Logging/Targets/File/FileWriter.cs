@@ -88,6 +88,7 @@ namespace Griffin.Logging.Targets.File
             }
 
             fullPath += _name + ".log";
+            _fileName = fullPath;
             return fullPath;
         }
 

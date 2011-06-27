@@ -1,6 +1,9 @@
 ﻿namespace Griffin.Core.Threading
 {
-    public class TimedJob
+    /// <summary>
+    /// Ignore me.
+    /// </summary>
+    public class TimedJob 
     {
     }
 }
