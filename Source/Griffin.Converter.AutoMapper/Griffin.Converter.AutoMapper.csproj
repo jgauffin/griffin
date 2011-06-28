@@ -43,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AutoMapperConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Griffin.Core\Griffin.Core.csproj">
-      <Project>{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}</Project>
-      <Name>Griffin.Core</Name>
+    <ProjectReference Include="..\Griffin.Specification\Griffin.Specification.csproj">
+      <Project>{0A92E936-4A23-48D4-A792-181211EC0F2B}</Project>
+      <Name>Griffin.Specification</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

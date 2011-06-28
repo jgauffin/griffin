@@ -1,16 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Griffin.Converter;
 
-namespace Griffin.Core
+namespace Griffin.Core.Converters
 {
     /// <summary>
-    /// Used to do conversion between types.
+    /// Default implementation for the converter.
     /// </summary>
-    public static class Converter
+    public class DefaultConverterService : IConverterService
     {
-        private static readonly Dictionary<Type, Dictionary<Type, ConverterWrapper>> Converters =
+        private readonly Dictionary<Type, Dictionary<Type, ConverterWrapper>> Converters =
             new Dictionary<Type, Dictionary<Type, ConverterWrapper>>();
+
+        private static object TryDefaultConversion(object source, Type targetType)
+        {
+            try
+            {
+                return System.Convert.ChangeType(source, targetType);
+            }
+            catch (InvalidCastException exception)
+            {
+                throw new NotSupportedException(
+                    "There are no registered converter from {0} to {1}.".FormatWith(source.GetType().FullName,
+                                                                                    targetType.FullName), exception);
+            }
+        }
+
+        #region IConverterService Members
 
         /// <summary>
         /// Convert from a type to another.
@@ -19,7 +36,7 @@ namespace Griffin.Core
         /// <typeparam name="TTo">Target type</typeparam>
         /// <param name="from">Object to convert</param>
         /// <returns>Created object</returns>
-        public static TTo Convert<TFrom, TTo>(TFrom from)
+        public TTo Convert<TFrom, TTo>(TFrom from)
         {
             return (TTo) Convert(from, typeof (TFrom));
         }
@@ -30,7 +47,7 @@ namespace Griffin.Core
         /// <param name="source">Source object</param>
         /// <param name="targetType">Type to convert to</param>
         /// <returns>Created object</returns>
-        public static object Convert(object source, Type targetType)
+        public object Convert(object source, Type targetType)
         {
             Dictionary<Type, ConverterWrapper> items;
             if (!Converters.TryGetValue(source.GetType(), out items))
@@ -53,7 +70,7 @@ namespace Griffin.Core
         /// <remarks>
         /// Any existing converter will be replaced with the new one.
         /// </remarks>
-        public static void Register<TFrom, TTo>(IConverter<TFrom, TTo> converter)
+        public void Register<TFrom, TTo>(IConverter<TFrom, TTo> converter)
         {
             Dictionary<Type, ConverterWrapper> items;
             if (!Converters.TryGetValue(typeof (TFrom), out items))
@@ -65,19 +82,7 @@ namespace Griffin.Core
             items[typeof (TTo)] = new ConverterWrapper(converter, typeof (TFrom));
         }
 
-        private static object TryDefaultConversion(object source, Type targetType)
-        {
-            try
-            {
-                return System.Convert.ChangeType(source, targetType);
-            }
-            catch (InvalidCastException exception)
-            {
-                throw new NotSupportedException(
-                    "There are no registered converter from {0} to {1}.".FormatWith(source.GetType().FullName,
-                                                                                    targetType.FullName), exception);
-            }
-        }
+        #endregion
 
         #region Nested type: ConverterWrapper
 

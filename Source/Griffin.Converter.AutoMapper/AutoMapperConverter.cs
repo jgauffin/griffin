@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-using Griffin.Core;
 
 namespace Griffin.Converter.AutoMapper
 {
@@ -11,6 +10,9 @@ namespace Griffin.Converter.AutoMapper
     /// <typeparam name="TTo"></typeparam>
     public class AutoMapperConverter<TFrom, TTo> : IConverter<TFrom, TTo>, IConverter<IEnumerable<TFrom>, IEnumerable<TTo>>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoMapperConverter&lt;TFrom, TTo&gt;"/> class.
+        /// </summary>
         public AutoMapperConverter()
         {
             Mapper.CreateMap(typeof (TFrom), typeof (TTo));

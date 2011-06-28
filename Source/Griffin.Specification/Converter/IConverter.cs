@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Griffin.Core
+﻿namespace Griffin.Converter
 {
     /// <summary>
     /// Use to convert from a specific type to another.
@@ -11,7 +6,7 @@ namespace Griffin.Core
     /// <remarks>
     /// The conversion is not a regular casting but an attempt to make a real conversion.
     /// </remarks>
-    public interface IConverter<TFrom, TTo>
+    public interface IConverter<in TFrom, out TTo>
     {
         /// <summary>
         /// Convert from one type to another.

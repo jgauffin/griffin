@@ -77,6 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configure.cs" />
+    <Compile Include="Converter\IConverter.cs" />
+    <Compile Include="Converter\IConverterProvider.cs" />
+    <Compile Include="Converter\IConverterService.cs" />
+    <Compile Include="Converter\IConverterServiceContract.cs" />
     <Compile Include="EmptyStartableContext.cs" />
     <Compile Include="InversionOfControl\ComponentAttribute.cs" />
     <Compile Include="InversionOfControl\ComponentFlags.cs" />

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Diagnostics.Contracts;
-
-namespace Griffin.Core
+﻿namespace Griffin.Core
 {
     /// <summary>
     /// Extensions used to work with objects
@@ -37,7 +34,7 @@ namespace Griffin.Core
         /// </example>
         public static T ConvertTo<T>(this object instance)
         {
-            return (T) Converter.Convert(instance, typeof (T));
+            return (T) ConverterService.Convert(instance, typeof (T));
         }
 
         /*

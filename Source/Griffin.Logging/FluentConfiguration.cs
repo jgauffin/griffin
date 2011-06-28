@@ -4,6 +4,9 @@ using Griffin.Logging.Targets;
 
 namespace Griffin.Logging
 {
+    /// <summary>
+    /// Fluent configuration api for the logging library.
+    /// </summary>
     public class FluentConfiguration
     {
         public static FluentConfiguration _generated;
@@ -11,6 +14,9 @@ namespace Griffin.Logging
         private readonly List<FluentTargetConfiguration> _targets = new List<FluentTargetConfiguration>();
 
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FluentConfiguration"/> class.
+        /// </summary>
         public FluentConfiguration()
         {
             _generated = this;
@@ -44,7 +50,7 @@ namespace Griffin.Logging
         /// <summary>
         /// Log a specific name space to a named target (see <see cref="AddTarget"/> method)
         /// </summary>
-        /// <param name="ns">Name space to log</param>
+        /// <param name="name">Name space to log</param>
         /// <returns>Current configuration instance (to be able to configure fluently)</returns>
         public FluentNamespaceLogging LogNamespace(string name)
         {
@@ -95,14 +101,6 @@ namespace Griffin.Logging
                 }
             }
             return targets;
-        }
-    }
-
-    public static class ConfigureExtension
-    {
-        public static FluentConfiguration Logging(this Configure instance)
-        {
-            return new FluentConfiguration();
         }
     }
 }

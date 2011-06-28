@@ -71,13 +71,16 @@
   <ItemGroup>
     <Compile Include="CollectionExtensions.cs" />
     <Compile Include="ConsoleHelper.cs" />
-    <Compile Include="Converter.cs" />
+    <Compile Include="ConverterService.cs" />
+    <Compile Include="Converters\DataRecordMapper.cs" />
+    <Compile Include="Converters\DefaultConverterService.cs" />
+    <Compile Include="Converters\NameValueModelBinder.cs" />
     <Compile Include="Converters\StringToDateTimeConverter.cs" />
     <Compile Include="Converters\StringToIntegers.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="ExceptionPolicyHandler.cs" />
     <Compile Include="ExceptionPolicy.cs" />
-    <Compile Include="IConverter.cs" />
+    <Compile Include="ExpressionExtensions.cs" />
     <Compile Include="InversionOfControl\AssemblyLoader.cs" />
     <Compile Include="InversionOfControl\ContainerBuilder.cs" />
     <Compile Include="InversionOfControl\LightWeightIoc.cs" />

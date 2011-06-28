@@ -20,7 +20,7 @@ namespace Griffin.Core.Tests
         [Fact]
         public void ConvertFromStringToDateTime()
         {
-            Converter.Register(new StringToDateTimeConverter());
+            ConverterService.Register(new StringToDateTimeConverter());
             var date = "2011-01-02".ConvertTo<DateTime>();
             Assert.Equal(new DateTime(2011,01,02), date);
         }

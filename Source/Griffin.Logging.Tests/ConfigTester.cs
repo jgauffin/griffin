@@ -26,7 +26,8 @@ namespace Griffin.Logging.Tests
         {
             Configure.Griffin.Logging()
                 .LogNamespace("Griffin.Logging.Tests").AndSubNamespaces.ToTargetNamed("Console")
-                .AddTarget("Console").As.ConsoleLogger();
+                .AddTarget("Console").As.ConsoleLogger().Done
+                .Build();
 
 
             var logger = LogManager.GetLogger<ConfigTester>().As<Logger>();

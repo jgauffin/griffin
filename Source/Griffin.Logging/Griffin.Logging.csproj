@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigureExtension.cs" />
     <Compile Include="FluentConfiguration.cs" />
     <Compile Include="Filters\ILogFilter.cs" />
     <Compile Include="Filters\LevelFilter.cs" />
