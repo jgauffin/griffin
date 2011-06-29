@@ -60,6 +60,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NHibernate">
+      <HintPath>..\Griffin.Repository.NHibernate\assemblies\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -77,6 +80,8 @@
     <Compile Include="Converters\NameValueModelBinder.cs" />
     <Compile Include="Converters\StringToDateTimeConverter.cs" />
     <Compile Include="Converters\StringToIntegers.cs" />
+    <Compile Include="Data\SimpleDataLayer\Mappings\IEntityMapper.cs" />
+    <Compile Include="Data\SimpleDataLayer\Mappings\MappingException.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="ExceptionPolicyHandler.cs" />
     <Compile Include="ExceptionPolicy.cs" />
@@ -88,6 +93,12 @@
     <Compile Include="InversionOfControl\ParameterTypeEventArgs.cs" />
     <Compile Include="InversionOfControl\ServiceMapping.cs" />
     <Compile Include="InversionOfControl\TypeScannedEventArgs.cs" />
+    <Compile Include="Messaging\IInvoker.cs" />
+    <Compile Include="Messaging\InvocationFailure.cs" />
+    <Compile Include="Messaging\Invoker.cs" />
+    <Compile Include="Messaging\MessageBroker.cs" />
+    <Compile Include="Messaging\RequestAsyncResult.cs" />
+    <Compile Include="Messaging\RequestAsyncResultBase.cs" />
     <Compile Include="Multitenancy\ITenant.cs" />
     <Compile Include="Multitenancy\ITenantAuthorizer.cs" />
     <Compile Include="Multitenancy\ITenantModel.cs" />
@@ -96,6 +107,12 @@
     <Compile Include="Multitenancy\TenantPrincipal.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Data\SimpleDataLayer\Mappings\ContainerMappingProvider.cs" />
+    <Compile Include="Data\SimpleDataLayer\Mappings\EntityMapper.cs" />
+    <Compile Include="Data\SimpleDataLayer\Mappings\IMappingProvider.cs" />
+    <Compile Include="Data\SimpleDataLayer\Mappings\IPropertyMapperWithConverter.cs" />
+    <Compile Include="Data\SimpleDataLayer\Mappings\IPropertyMapping.cs" />
+    <Compile Include="Data\SimpleDataLayer\Mappings\PropertyMapping.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Threading\TimedJob.cs">
       <SubType>Code</SubType>
@@ -104,6 +121,7 @@
     <Compile Include="Threading\TimedJobObserverContext.cs" />
     <Compile Include="Threading\TimerService.cs" />
     <Compile Include="UnhandledExceptionEventArgs.cs" />
+    <Compile Include="XElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -98,7 +98,22 @@
     <Compile Include="Logging\LogManager.cs" />
     <Compile Include="Logging\NullLogger.cs" />
     <Compile Include="Logging\NullLogManager.cs" />
+    <Compile Include="Messaging\IHandlerOf.cs" />
+    <Compile Include="Messaging\IMessage.cs" />
+    <Compile Include="Messaging\IMessageBroker.cs" />
+    <Compile Include="Messaging\IRequest.cs" />
+    <Compile Include="Messaging\IRequestContext.cs" />
+    <Compile Include="Messaging\IResponse.cs" />
+    <Compile Include="Messaging\ISubscriberOf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\RepositoryException.cs" />
+    <Compile Include="Repository\IDbSession.cs" />
+    <Compile Include="Repository\IDbSessionFactory.cs" />
+    <Compile Include="Repository\IQuery.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\ITransaction.cs" />
+    <Compile Include="Repository\ITransactionManager.cs" />
+    <Compile Include="Repository\Query.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -106,6 +121,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Griffin.Core
 {
@@ -9,22 +10,83 @@ namespace Griffin.Core
     public static class ExpressionExtensions
     {
         /// <summary>
-        /// Get name from a property name from an expression
+        ///   Get member info from an expression
         /// </summary>
-        /// <typeparam name="T">Return value from the property</typeparam>
-        /// <param name="instance">Expression</param>
-        /// <returns>Property name</returns>
-        public static string GetPropertyName<T>(this Expression<Func<T>> instance)
+        /// <param name="expression">The expression.</param>
+        /// <returns>Member info if conversion was successful; otherwise <c>null</c>.</returns>
+        public static MemberInfo GetMember(this LambdaExpression expression)
         {
-            var body = instance.Body as MemberExpression;
-            if (body != null)
+            MemberExpression memberExp = RemoveUnary(expression.Body);
+            return memberExp == null ? null : memberExp.Member;
+        }
+
+        /// <summary>
+        ///   Get member info from an expression
+        /// </summary>
+        /// <typeparam name="T">Class type (the class that contains the property)</typeparam>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///   Member info if conversion was successful; otherwise <c>null</c>.
+        /// </returns>
+        public static MemberInfo GetMember<T, TProperty>(this Expression<Func<T, TProperty>> expression)
+        {
+            MemberExpression memberExp = RemoveUnary(expression.Body);
+            return memberExp == null ? null : memberExp.Member;
+        }
+
+        /// <summary>
+        ///   Gets the name of the property.
+        /// </summary>
+        /// <typeparam name="T">Type of object</typeparam>
+        /// <typeparam name="TProp">The type of the property.</typeparam>
+        /// <param name="expression">The expression.</param>
+        /// <returns>Name of property if found; otherwise <c>null</c>.</returns>
+        /// <example>
+        ///   <code>
+        ///     ExpressionHelpers.GetPropertyName(user => user.FirstName);
+        ///   </code>
+        /// </example>
+        public static string GetPropertyName<T, TProp>(Expression<Func<T, TProp>> expression)
+        {
+            var memberExpression = expression.Body as MemberExpression;
+            return memberExpression == null ? null : memberExpression.Member.Name;
+        }
+
+        /// <summary>
+        ///   Gets the name of the property.
+        /// </summary>
+        /// <typeparam name="T">Type of object</typeparam>
+        /// <typeparam name="TProp">The type of the property.</typeparam>
+        /// <param name="instance">Object to get property value for.</param>
+        /// <param name="expression">The expression.</param>
+        /// <returns>
+        ///   Name of property if found; otherwise <c>null</c>.
+        /// </returns>
+        /// <example>
+        ///   <code>
+        ///     ExpressionHelpers.GetPropertyValue(user =&gt; user.FirstName);
+        ///   </code>
+        /// </example>
+        public static TProp GetPropertyValue<T, TProp>(T instance, Expression<Func<T, TProp>> expression)
+        {
+            var memberExpression = expression.Body as MemberExpression;
+            return memberExpression == null ? default(TProp) : expression.Compile()(instance);
+        }
+
+        /// <summary>
+        ///   Remove unary expression from an expression.
+        /// </summary>
+        /// <param name="toUnwrap">To unwrap.</param>
+        /// <returns></returns>
+        private static MemberExpression RemoveUnary(Expression toUnwrap)
+        {
+            if (toUnwrap is UnaryExpression)
             {
-                return body.Member.Name;
+                return ((UnaryExpression) toUnwrap).Operand as MemberExpression;
             }
 
-            var ubody = (UnaryExpression) instance.Body;
-            body = (MemberExpression) ubody.Operand;
-            return body.Member.Name;
+            return toUnwrap as MemberExpression;
         }
     }
 }

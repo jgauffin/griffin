@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Griffin.Networking.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Griffin.Converter.AutoMapper", "Griffin.Converter.AutoMapper\Griffin.Converter.AutoMapper.csproj", "{1B3447AD-9290-4BF2-9A18-A1522919D536}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Griffin.Repository.NHibernate", "Griffin.Repository.NHibernate\Griffin.Repository.NHibernate.csproj", "{D6F2E1EE-4719-41E1-864F-9DDD8073D410}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{1B3447AD-9290-4BF2-9A18-A1522919D536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B3447AD-9290-4BF2-9A18-A1522919D536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B3447AD-9290-4BF2-9A18-A1522919D536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6F2E1EE-4719-41E1-864F-9DDD8073D410}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6F2E1EE-4719-41E1-864F-9DDD8073D410}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6F2E1EE-4719-41E1-864F-9DDD8073D410}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6F2E1EE-4719-41E1-864F-9DDD8073D410}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
