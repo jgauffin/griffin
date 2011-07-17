@@ -1,4 +1,22 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011, Jonas Gauffin. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301 USA
+ */
+using System;
 using System.Diagnostics.Contracts;
 
 namespace Griffin.Logging
@@ -7,7 +25,14 @@ namespace Griffin.Logging
     /// Used to write log entries to one or more log targets.
     /// </summary>
     /// <remarks>
+    /// <para>
+    /// A logger can be a facade to multiple targets like a network logger, a file logger or a database logger. It all depends on
+    /// how the <see cref="LogManager"/> implementation is made. Do no try to create logger implementations manually, but use
+    /// the <see cref="LogManager"/> instead.
+    /// </para>
+    /// <para>
     /// It's very important that none of the methods in logger implementations throw exceptions. 
+    /// </para>
     /// </remarks>
     [ContractClass(typeof(ILoggerContract))]
     public interface ILogger

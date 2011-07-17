@@ -16,8 +16,12 @@
         /// </remarks>
         public static T As<T>(this object instance)
         {
+            if (typeof(T) == typeof(string))
+                return instance == null ? default(T) : (T)(object)instance.ToString();
+
             return (T) instance;
         }
+
 
         /// <summary>
         /// Convert one type to another type
