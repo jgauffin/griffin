@@ -1,16 +1,47 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011, Jonas Gauffin. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301 USA
+ */
+using System;
+using System.Collections.Generic;
+using Griffin.Logging.Filters;
 
 namespace Griffin.Logging.Targets
 {
+    /// <summary>
+    /// Write entry to the console.
+    /// </summary>
     public class ConsoleTarget : ILogTarget
     {
         private readonly ConsoleConfiguration _configuration;
+        private readonly List<ILogFilter> _filters = new List<ILogFilter>();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleTarget"/> class.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
         public ConsoleTarget(ConsoleConfiguration configuration)
         {
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConsoleTarget"/> class.
+        /// </summary>
         public ConsoleTarget()
         {
             _configuration = new ConsoleConfiguration();
@@ -18,18 +49,40 @@ namespace Griffin.Logging.Targets
 
         #region ILogTarget Members
 
+        /// <summary>
+        /// Gets name of target.
+        /// </summary>
         public string Name
         {
             get { return "Console"; }
         }
 
+        /// <summary>
+        /// Add a filter for this target.
+        /// </summary>
+        /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
+        public void AddFilter(ILogFilter filter)
+        {
+            _filters.Add(filter);
+        }
+
+        /// <summary>
+        /// Enqueue to be written
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <remarks>
+        /// The entry might be written directly in the same thread or enqueued to be written
+        /// later. It's up to each implementation to decide. Keep in mind that a logger should not
+        /// introduce delays in the thread execution. If it's possible that it will delay the thread,
+        /// enqueue entries instead and write them in a seperate thread.
+        /// </remarks>
         public void Enqueue(LogEntry entry)
         {
             string method = entry.StackFrames[0].GetMethod().ReflectedType.Name + "." +
                             entry.StackFrames[0].GetMethod().Name;
 
             string tmp = String.Format("{0} {1} {2} {3} {4}",
-                                       entry.CreatedAt.ToString("HH:mm:ss.fff"),
+                                       entry.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                                        entry.ThreadId.ToString().PadLeft(3),
                                        entry.UserName.PadRight(25),
                                        method.PadRight(40),
@@ -54,6 +107,11 @@ namespace Griffin.Logging.Targets
 
         #endregion
 
+        /// <summary>
+        /// Get color that should be used for a log entry.
+        /// </summary>
+        /// <param name="entry">Entry to be colored</param>
+        /// <returns>Console color</returns>
         protected virtual ConsoleColor GetColor(LogEntry entry)
         {
             switch (entry.LogLevel)

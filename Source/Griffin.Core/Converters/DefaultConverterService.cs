@@ -10,7 +10,7 @@ namespace Griffin.Core.Converters
     /// </summary>
     public class DefaultConverterService : IConverterService
     {
-        private readonly Dictionary<Type, Dictionary<Type, ConverterWrapper>> Converters =
+        private readonly Dictionary<Type, Dictionary<Type, ConverterWrapper>> _converters =
             new Dictionary<Type, Dictionary<Type, ConverterWrapper>>();
 
         private static object TryDefaultConversion(object source, Type targetType)
@@ -50,7 +50,7 @@ namespace Griffin.Core.Converters
         public object Convert(object source, Type targetType)
         {
             Dictionary<Type, ConverterWrapper> items;
-            if (!Converters.TryGetValue(source.GetType(), out items))
+            if (!_converters.TryGetValue(source.GetType(), out items))
             {
                 return TryDefaultConversion(source, targetType);
             }
@@ -73,10 +73,10 @@ namespace Griffin.Core.Converters
         public void Register<TFrom, TTo>(IConverter<TFrom, TTo> converter)
         {
             Dictionary<Type, ConverterWrapper> items;
-            if (!Converters.TryGetValue(typeof (TFrom), out items))
+            if (!_converters.TryGetValue(typeof (TFrom), out items))
             {
                 items = new Dictionary<Type, ConverterWrapper>();
-                Converters.Add(typeof (TFrom), items);
+                _converters.Add(typeof (TFrom), items);
             }
 
             items[typeof (TTo)] = new ConverterWrapper(converter, typeof (TFrom));

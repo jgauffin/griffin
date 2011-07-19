@@ -23,7 +23,7 @@ namespace Griffin.Networking.Protocols.Http
         /// <param name="e">Exception information</param>
         protected override void ExceptionCaught(IChannelHandlerContext ctx, ExceptionEvent e)
         {
-            UnhandledException(this, new UnhandledExceptionEventArgs(e.Exception, true));
+            UnhandledException(this, new UnhandledExceptionEventArgs(this, e.Exception));
         }
 
         /// <summary>

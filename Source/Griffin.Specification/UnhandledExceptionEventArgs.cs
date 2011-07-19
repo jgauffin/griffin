@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Griffin.Core
+namespace Griffin
 {
     /// <summary>
     /// Arguments for the unhandled exception event
@@ -27,7 +27,7 @@ namespace Griffin.Core
         protected object Source { get; private set; }
 
         /// <summary>
-        /// Gets exception that was not caught.
+        /// Gets the exception that was not caught.
         /// </summary>
         public Exception UnhandledException { get; private set; }
 

@@ -48,6 +48,13 @@ namespace Griffin.InversionOfControl
         void RegisterInstance<TService>(TService implementation) where TService : class;
 
         /// <summary>
+        /// Register an instance
+        /// </summary>
+        /// <param name="service">Type of service</param>
+        /// <param name="instance">Instance implementing the service</param>
+        void RegisterInstance(Type service, object instance);
+
+        /// <summary>
         /// Build the service locator
         /// </summary>
         /// <returns>Created container</returns>

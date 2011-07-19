@@ -1,10 +1,9 @@
 ﻿using System;
-using Griffin.InversionOfControl;
 
-namespace Griffin.Core.InversionOfControl
+namespace Griffin.Core.Reflection
 {
     /// <summary>
-    /// A type that is decorated with the <see cref="ComponentAttribute"/>.
+    /// A type that was found in an assembly.
     /// </summary>
     public class TypeScannedEventArgs : EventArgs
     {

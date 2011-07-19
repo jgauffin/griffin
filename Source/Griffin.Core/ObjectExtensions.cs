@@ -1,4 +1,6 @@
-﻿namespace Griffin.Core
+﻿using System;
+
+namespace Griffin.Core
 {
     /// <summary>
     /// Extensions used to work with objects
@@ -35,6 +37,14 @@
         public static T ConvertTo<T>(this object instance)
         {
             return (T) ConverterService.Convert(instance, typeof (T));
+        }
+
+        public static bool Check<T>(this T instance, Func<T, bool> check) where T : class
+        {
+            if (instance == null)
+                return false;
+
+            return check(instance);
         }
 
         /*

@@ -82,6 +82,8 @@
     <Compile Include="Converter\IConverterService.cs" />
     <Compile Include="Converter\IConverterServiceContract.cs" />
     <Compile Include="EmptyStartableContext.cs" />
+    <Compile Include="ExceptionPolicy.cs" />
+    <Compile Include="ExceptionPolicyHandler.cs" />
     <Compile Include="InversionOfControl\ComponentAttribute.cs" />
     <Compile Include="InversionOfControl\ComponentFlags.cs" />
     <Compile Include="InversionOfControl\IContainerBuilder.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Repository\ITransaction.cs" />
     <Compile Include="Repository\ITransactionManager.cs" />
     <Compile Include="Repository\Query.cs" />
+    <Compile Include="UnhandledExceptionEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

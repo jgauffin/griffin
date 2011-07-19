@@ -83,16 +83,15 @@
     <Compile Include="Data\SimpleDataLayer\Mappings\IEntityMapper.cs" />
     <Compile Include="Data\SimpleDataLayer\Mappings\MappingException.cs" />
     <Compile Include="ExceptionExtensions.cs" />
-    <Compile Include="ExceptionPolicyHandler.cs" />
-    <Compile Include="ExceptionPolicy.cs" />
     <Compile Include="ExpressionExtensions.cs" />
-    <Compile Include="InversionOfControl\AssemblyLoader.cs" />
+    <Compile Include="InversionOfControl\IBuilderStrategy.cs" />
+    <Compile Include="Reflection\AssemblyObserver.cs" />
     <Compile Include="InversionOfControl\ContainerBuilder.cs" />
     <Compile Include="InversionOfControl\LightWeightIoc.cs" />
     <Compile Include="InversionOfControl\ParameterInstanceEventArgs.cs" />
     <Compile Include="InversionOfControl\ParameterTypeEventArgs.cs" />
     <Compile Include="InversionOfControl\ServiceMapping.cs" />
-    <Compile Include="InversionOfControl\TypeScannedEventArgs.cs" />
+    <Compile Include="Reflection\TypeScannedEventArgs.cs" />
     <Compile Include="Messaging\IInvoker.cs" />
     <Compile Include="Messaging\InvocationFailure.cs" />
     <Compile Include="Messaging\Invoker.cs" />
@@ -113,6 +112,7 @@
     <Compile Include="Data\SimpleDataLayer\Mappings\IPropertyMapperWithConverter.cs" />
     <Compile Include="Data\SimpleDataLayer\Mappings\IPropertyMapping.cs" />
     <Compile Include="Data\SimpleDataLayer\Mappings\PropertyMapping.cs" />
+    <Compile Include="ReflectionHelpers.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Threading\TimedJob.cs">
       <SubType>Code</SubType>
@@ -120,7 +120,6 @@
     <Compile Include="Threading\TimedJobObserver.cs" />
     <Compile Include="Threading\TimedJobObserverContext.cs" />
     <Compile Include="Threading\TimerService.cs" />
-    <Compile Include="UnhandledExceptionEventArgs.cs" />
     <Compile Include="XElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup />

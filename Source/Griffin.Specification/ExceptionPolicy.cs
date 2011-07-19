@@ -1,4 +1,4 @@
-﻿namespace Griffin.Core
+﻿namespace Griffin
 {
     /// <summary>
     /// Action to take when an unhandled exception is caught.

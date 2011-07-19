@@ -17,7 +17,7 @@ namespace Griffin.Logging
         /// Get a logger for the specified type
         /// </summary>
         /// <param name="type">Type that requests a logger</param>
-        /// <returns>A logger</returns>
+        /// <returns>A logger (always)</returns>
         /// <remarks>
         /// A logger should <c>always</c> be returned by this method. Simply use a empty
         /// logger if none can be found.

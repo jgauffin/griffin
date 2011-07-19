@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Griffin.Logging.Tests.Targets
 {
-    internal class FileTargetTest : IFileWriter
+    public class FileTargetTest : IFileWriter
     {
         private readonly FileTarget _target;
 
