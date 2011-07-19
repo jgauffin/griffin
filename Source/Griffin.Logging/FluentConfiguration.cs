@@ -1,12 +1,36 @@
-﻿using System.Collections.Generic;
-using Griffin.Logging.Filters;
-using Griffin.Logging.Targets;
+﻿/*
+ * Copyright (c) 2011, Jonas Gauffin. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301 USA
+ */
+using System.Collections.Generic;
 
 namespace Griffin.Logging
 {
     /// <summary>
     /// Fluent configuration api for the logging library.
     /// </summary>
+    /// <example>
+    /// <code>
+    /// Configure.Griffin.Logging()
+    ///    .LogNamespace("Griffin.Logging.Tests").AndSubNamespaces.ToTargetNamed("Console")
+    ///    .AddTarget("Console").As.ConsoleLogger().Done
+    ///    .Build();
+    ///</code>
+    /// </example>
     public class FluentConfiguration
     {
         public static FluentConfiguration _generated;
@@ -21,7 +45,7 @@ namespace Griffin.Logging
         {
             _generated = this;
             AddTarget("fileLogger").As.ConsoleLogger().Filter.OnLogLevelBetween(LogLevel.Debug, LogLevel.Warning).Done
-                .LogNamespace("*").AndSubNamespaces.ToTargetNamed("fileLogger");
+                .LogNamespace("*").AndChildNamespaces.ToTargetNamed("fileLogger");
         }
 
         /// <summary>
@@ -69,38 +93,11 @@ namespace Griffin.Logging
         /// </remarks>
         public Configure Build()
         {
-            FluentLogManager logManager = new FluentLogManager();
-            foreach (FluentNamespaceLogging ns in _namespaces)
-            {
-                var filters = new List<ILogFilter>();
-                filters.Add(new NamespaceFilter(ns.Name, ns.LogSubNamespaces));
-
-                IEnumerable<ILogTarget> targets = GetTargets(ns.Targets);
-
-                logManager.AddLogger(new Logger(filters, targets));
-            }
-
+            var logManager = new FluentLogManager();
+            logManager.AddNamespaceFilters(_namespaces);
+            logManager.AddTargets(_targets);
             LogManager.Assign(logManager);
             return Configure.Griffin;
-        }
-
-        private IEnumerable<ILogTarget> GetTargets(IEnumerable<string> names)
-        {
-            var targets = new List<ILogTarget>();
-            foreach (string targetName in names)
-            {
-                foreach (FluentTargetConfiguration target in _targets)
-                {
-                    if (target.Name != targetName)
-                        continue;
-
-                    foreach (ILogTarget t in target.Targets)
-                        if (!targets.Contains(t))
-                            targets.Add(t);
-                    break;
-                }
-            }
-            return targets;
         }
     }
 }

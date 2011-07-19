@@ -1,51 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Griffin.Core.Reflection;
 using Griffin.InversionOfControl;
 using Griffin.Logging;
 
 namespace Griffin.Core.InversionOfControl
 {
+    /// <summary>
+    /// Scans through all assemblies (loaded and assemblies that will be loaded)
+    /// </summary>
+    /// <remarks>
+    /// ReflectionBuilder is a small class which can use reflection to build components. All components that should
+    /// be added to the container must be decorated with the [Component]
+    /// </remarks>
     public abstract class ReflectionBuilder
     {
-        private readonly AssemblyLoader _loader = new AssemblyLoader();
+        private readonly IBuilderStrategy _builderStrategy;
         private readonly ILogger _logger = LogManager.GetLogger<IServiceLocator>();
-        private IContainerBuilder _builder;
-        private IServiceLocator _serviceResolver;
+        private readonly AssemblyObserver _observer = new AssemblyObserver();
 
-        protected ReflectionBuilder()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReflectionBuilder"/> class.
+        /// </summary>
+        protected ReflectionBuilder(IBuilderStrategy builderStrategy)
         {
-            _loader.TypeScanned += OnType;
+            _builderStrategy = builderStrategy;
+            _observer.AddAssemblyFilter(AssemblyObserver.OnlyInAppPath);
+            _observer.AddTypeFilter(AssemblyObserver.OnlyConcreateClasses);
+            _observer.AddTypeFilter(type => type.GetCustomAttributes(typeof (ComponentAttribute), false).Length > 0);
+            _observer.TypeScanned += OnType;
         }
 
-        internal IContainerBuilder ContainerBuilder
-        {
-            get { return _builder; }
-        }
-
+        /// <summary>
+        /// Build a container using reflection and the <c>[Component]</c> attribute.
+        /// </summary>
         public void Build()
         {
-            _loader.LoadAllTypes();
+            _observer.Observe();
         }
 
         private void OnType(object sender, TypeScannedEventArgs e)
         {
-            Type componentAttribute = typeof (ComponentAttribute);
-            object[] attrs = e.FoundType.GetCustomAttributes(componentAttribute, false);
-            if (attrs.Length != 1)
-                return;
-
             Add(e.FoundType);
         }
 
 
-        public void StartAll(IStartableContext context)
+        /// <summary>
+        /// Start all services which have implemented <see cref="IStartable"/>.
+        /// </summary>
+        /// <param name="locator">Locator used to find all startables.</param>
+        /// <param name="context">Content being passed to all components. Use it to provide application specific information. Use <see cref="EmptyStartableContext"/> if you don't provide your own.</param>
+        public void StartAll(IServiceLocator locator, IStartableContext context)
         {
             var visited = new List<object>();
 
             try
             {
-                foreach (IStartable startable in _serviceResolver.ResolveAll<IStartable>())
+                foreach (IStartable startable in locator.ResolveAll<IStartable>())
                 {
                     if (visited.Contains(startable))
                         return;
@@ -60,36 +72,48 @@ namespace Griffin.Core.InversionOfControl
             }
         }
 
+        /// <summary>
+        /// Register all interfaces that the specified class implementss
+        /// </summary>
+        /// <param name="implementation">Implementation type</param>
+        /// <param name="parameters">Optional contructors parameters</param>
         public void Add(Type implementation, params Parameter[] parameters)
         {
             _logger.Debug("Registering " + implementation);
 
             var items = new List<Type> {implementation};
-            foreach (Type @interface in implementation.GetInterfaces())
+            foreach (Type service in implementation.GetInterfaces())
             {
-                if (@interface.Namespace.StartsWith("System"))
+                if (service.Namespace.StartsWith("System"))
                     continue;
-                items.Add(@interface);
+                items.Add(service);
             }
             if (parameters.Length > 0)
-                RegisterType(implementation, items, parameters);
+                _builderStrategy.RegisterType(implementation, items, parameters);
             else
-                RegisterType(implementation, items);
+                _builderStrategy.RegisterType(implementation, items);
         }
 
-        public abstract void RegisterType(Type implementation, IEnumerable<Type> services);
-        public abstract void RegisterType(Type implementation, IEnumerable<Type> services, Parameter[] parameters);
-        public abstract void RegisterInstance(object instance, Type service);
 
+        /// <summary>
+        /// Add a implementation
+        /// </summary>
+        /// <typeparam name="TImplementation">The type of the implementation.</typeparam>
+        /// <param name="parameters">Specified constructor parameters (you don't have to specify all).</param>
         public void Add<TImplementation>(params Parameter[] parameters)
         {
             Add(typeof (TImplementation), parameters);
         }
 
 
+        /// <summary>
+        /// Add an existing instance.
+        /// </summary>
+        /// <typeparam name="T">Type of service</typeparam>
+        /// <param name="instance">Implementation</param>
         public void AddInstance<T>(T instance) where T : class
         {
-            RegisterInstance(instance, typeof (T));
+            _builderStrategy.RegisterInstance(instance, typeof (T));
         }
     }
 }

@@ -26,12 +26,35 @@ namespace Griffin.Logging
     /// </summary>
     /// <remarks>
     /// <para>
-    /// A logger can be a facade to multiple targets like a network logger, a file logger or a database logger. It all depends on
-    /// how the <see cref="LogManager"/> implementation is made. Do no try to create logger implementations manually, but use
-    /// the <see cref="LogManager"/> instead.
+    /// It's very important that none of these methods throw exceptions in implementations. 
+    /// </para><para>
+    /// Here is our recommendation to how you should use each log level.
+    /// <list type="table">
+    /// <item>
+    /// <term>Debug</term>
+    /// <description>Debug entries are usually used only when debugging. They can be used to track
+    /// variables or method contracts. There might be several debug entries per method.</description>
+    /// </item>
+    /// <item>
+    /// <term>Info</term>
+    /// <description>Informational messages are used to track state changes such as login, logout, record updates etc. 
+    /// There are at most one entry per method.</description>
+    /// </item>
+    /// <item>
+    /// <term>Warning</term>
+    /// <description>
+    /// Warnings are used when something unexpected happend but the application can handle it and continue as expected.
+    /// </description>
+    /// </item>
+    /// <item>
+    /// <term>Error</term>
+    /// <description>
+    /// Errors are when something unexpected happens and the application cannot deliver result as expected. It might or might not
+    /// mean that the application has to be restarted.
+    /// </description>
+    /// </item>
+    /// </list>
     /// </para>
-    /// <para>
-    /// It's very important that none of the methods in logger implementations throw exceptions. 
     /// </para>
     /// </remarks>
     /// <example>

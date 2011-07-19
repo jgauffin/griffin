@@ -21,28 +21,34 @@ using Griffin.Logging.Filters;
 
 namespace Griffin.Logging.Targets
 {
-    /// <summary>
-    /// Log target
-    /// </summary>
-    /// <remarks>
-    /// A destination that log entries will be written to.
-    /// </remarks>
-    [ContractClass(typeof (ILogTargetContract))]
-    public interface ILogTarget
+    [ContractClassFor(typeof (ILogTarget))]
+    internal abstract class ILogTargetContract : ILogTarget
     {
+        #region ILogTarget Members
+
         /// <summary>
         /// Gets name of target. 
         /// </summary>
         /// <remarks>
         /// It must be unique for each target. The filename works for file targets etc.
         /// </remarks>
-        string Name { get; }
+        public string Name
+        {
+            get
+            {
+                Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
+                return null;
+            }
+        }
 
         /// <summary>
         /// Add a filter for this target.
         /// </summary>
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
-        void AddFilter(ILogFilter filter);
+        public void AddFilter(ILogFilter filter)
+        {
+            Contract.Requires(filter != null);
+        }
 
         /// <summary>
         /// Enqueue to be written
@@ -54,6 +60,11 @@ namespace Griffin.Logging.Targets
         /// introduce delays in the thread execution. If it's possible that it will delay the thread,
         /// enqueue entries instead and write them in a seperate thread.
         /// </remarks>
-        void Enqueue(LogEntry entry);
+        public void Enqueue(LogEntry entry)
+        {
+            Contract.Requires(entry != null);
+        }
+
+        #endregion
     }
 }

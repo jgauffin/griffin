@@ -11,7 +11,7 @@ namespace Griffin.Core.Tests
         [Fact]
         public void TestWithoutSubscribers()
         {
-            ExceptionPolicyHandler.ThrownInWorkerThread(this, new Exception());
+            ExceptionPolicyHandler.GotUnhandled(this, new Exception());
         }
 
         [Fact]
@@ -25,7 +25,7 @@ namespace Griffin.Core.Tests
                                                              };
 
             var realException = new Exception();
-            var policy = ExceptionPolicyHandler.ThrownInWorkerThread(this, realException);
+            var policy = ExceptionPolicyHandler.GotUnhandled(this, realException);
             Assert.Equal(realException, ex);
             Assert.Equal(ExceptionPolicy.Throw, policy);
         }

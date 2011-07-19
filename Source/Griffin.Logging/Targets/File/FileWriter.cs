@@ -1,11 +1,34 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2011, Jonas Gauffin. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301 USA
+ */
+using System;
 using System.Globalization;
 using System.IO;
 using System.Threading;
-using Griffin.Core;
 
 namespace Griffin.Logging.Targets.File
 {
+    /// <summary>
+    /// Used to write entries to files-
+    /// </summary>
+    /// <remarks>
+    /// Will not keep the file open but open it using <see cref="File.AppendAllText(string, string)"/> each time a new entry should be written.
+    /// </remarks>
     internal class FileWriter : IFileWriter
     {
         private readonly FileConfiguration _configuration;
@@ -13,6 +36,11 @@ namespace Griffin.Logging.Targets.File
         private string _fileName;
         private DateTime _logDate;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileWriter"/> class.
+        /// </summary>
+        /// <param name="name">Fle name.</param>
+        /// <param name="configuration">The configuration.</param>
         public FileWriter(string name, FileConfiguration configuration)
         {
             _name = name;
@@ -22,17 +50,27 @@ namespace Griffin.Logging.Targets.File
 
         #region IFileWriter Members
 
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
         public FileConfiguration Configuration
         {
             get { return _configuration; }
         }
 
 
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
         public string Name
         {
             get { return _name; }
         }
 
+        /// <summary>
+        /// Writes the specified log entry.
+        /// </summary>
+        /// <param name="logEntry">The log entry.</param>
         public void Write(string logEntry)
         {
             int attempts = 0;
@@ -47,22 +85,24 @@ namespace Griffin.Logging.Targets.File
                     }
                     catch (IOException err)
                     {
-                        Thread.Sleep(100);
+                        Thread.Sleep(10);
                         ++attempts;
                         if (attempts >= 5)
                         {
                             Console.WriteLine("Failed to write to log {0}: " + err, BuildFileName());
-                            if (ExceptionPolicyHandler.ThrownInWorkerThread(GetType(), err) == ExceptionPolicy.Throw)
+                            if (ExceptionPolicyHandler.GotUnhandled(this, err) == ExceptionPolicy.Throw)
                                 throw;
                             break;
                         }
                     }
                 }
+
+                CheckOldFolder();
             }
             catch (Exception err)
             {
                 Console.WriteLine("Failed to write to log {0}: " + err, BuildFileName());
-                if (ExceptionPolicyHandler.ThrownInWorkerThread(GetType(), err) == ExceptionPolicy.Throw)
+                if (ExceptionPolicyHandler.GotUnhandled(this, err) == ExceptionPolicy.Throw)
                     throw;
             }
         }

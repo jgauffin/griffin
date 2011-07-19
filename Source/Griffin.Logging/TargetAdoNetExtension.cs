@@ -16,33 +16,35 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301 USA
  */
+
 using System;
-using System.Diagnostics.Contracts;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Text;
+using Griffin.Logging.Targets;
 
 namespace Griffin.Logging
 {
     /// <summary>
-    /// Responsible of creating loggers for all types that requests one.
+    /// Extension used to configure the database
     /// </summary>
-    /// <seealso cref="LogManager"/>.
-    /// <remarks>
-    /// The purpose of this class is to create a fascade between the logger creation 
-    /// and the classes that requests a logger. It's up to each implementation to decide
-    /// if the same logger should be used for each class or if more complex filters and 
-    /// loggers are used.
-    /// </remarks>
-    [ContractClass(typeof(ILogManagerContract))]
-    public interface ILogManager
+    public static class TargetAdoNetExtension
     {
         /// <summary>
-        /// Get a logger for the specified type
+        /// Adds a database logger.
         /// </summary>
-        /// <param name="type">Type that requests a logger</param>
-        /// <returns>A logger (always)</returns>
+        /// <param name="instance">fluent configuration instance.</param>
+        /// <param name="connectionStringName">Name of the connection string in app/webb.config.</param>
+        /// <returns>Fluent configuration instance</returns>
         /// <remarks>
-        /// A logger should <c>always</c> be returned by this method. Simply use a empty
-        /// logger if none can be found.
+        /// Use the standard .NET way to define the connection string. This code will use <see cref="ConfigurationManager"/> to find the
+        /// connection string in your config file.
         /// </remarks>
-        ILogger GetLogger(Type type);
+        public static FluentTargetConfiguration DatabaseLogger(this FluentTargetConfigurationTypes instance, string connectionStringName)
+        {
+            instance.Add(new AdoNetTarget(connectionStringName));
+            return instance.Done;
+        }
     }
 }

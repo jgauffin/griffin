@@ -4,18 +4,6 @@ using Griffin.Logging;
 using Griffin.Logging.Targets;
 using Xunit;
 
-namespace Temp
-{
-    public class LoggerTest
-    {
-        private readonly ILogger _logger = LogManager.GetLogger<LoggerTest>();
-
-        public ILogger Logger
-        {
-            get { return _logger; }
-        }
-    }
-}
 
 namespace Griffin.Logging.Tests
 {
@@ -25,7 +13,7 @@ namespace Griffin.Logging.Tests
         public void TestSimpleLog()
         {
             Configure.Griffin.Logging()
-                .LogNamespace("Griffin.Logging.Tests").AndSubNamespaces.ToTargetNamed("Console")
+                .LogNamespace("Griffin.Logging.Tests").AndChildNamespaces.ToTargetNamed("Console")
                 .AddTarget("Console").As.ConsoleLogger().Done
                 .Build();
 
@@ -38,17 +26,30 @@ namespace Griffin.Logging.Tests
         public void Test()
         {
             Configure.Griffin.Logging()
-                .LogNamespace("Griffin.Logging.Tests").AndSubNamespaces.ToTargetNamed("Console")
-                .LogNamespace("System").AndSubNamespaces.ToTargetNamed("DefaultFile")
+                .LogNamespace("Griffin.Logging.Tests").AndChildNamespaces.ToTargetNamed("Console")
+                .LogNamespace("System").AndChildNamespaces.ToTargetNamed("DefaultFile")
                 .LogEverything.ToTargetNamed("DefaultFile")
                 .AddTarget("Console")
-                .As.ConsoleLogger().Filter.OnLogLevelBetween(LogLevel.Info, LogLevel.Warning)
-                .Done
+                    .As.ConsoleLogger().Filter.OnLogLevelBetween(LogLevel.Info, LogLevel.Warning)
+                    .Done
                 .AddTarget("DefaultFile")
-                .As.FileLogger("ErrorsOnly").Filter.OnLogLevel(LogLevel.Error)
-                .As.FileLogger("Everything")
-                .Done
+                    .As.FileLogger("ErrorsOnly").Filter.OnLogLevel(LogLevel.Error)
+                    .As.FileLogger("Everything")
+                    .Done
                 .Build();
+        }
+    }
+}
+
+namespace Temp
+{
+    public class LoggerTest
+    {
+        private readonly ILogger _logger = LogManager.GetLogger<LoggerTest>();
+
+        public ILogger Logger
+        {
+            get { return _logger; }
         }
     }
 }

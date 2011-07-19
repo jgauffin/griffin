@@ -30,6 +30,12 @@ namespace Griffin.InversionOfControl
             Contract.Requires<ArgumentNullException>(implementation != default(TService));
         }
 
+        public void RegisterInstance(Type service, object instance)
+        {
+            Contract.Requires(service != null);
+            Contract.Requires(instance != null);
+        }
+
         public IServiceLocator Build()
         {
 // ReSharper disable InvocationIsSkipped

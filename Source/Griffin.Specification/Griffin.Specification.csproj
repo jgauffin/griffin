@@ -68,9 +68,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configure.cs" />
@@ -83,13 +87,14 @@
     <Compile Include="Data\Repository\NamespaceDoc.cs" />
     <Compile Include="EmptyStartableContext.cs" />
     <Compile Include="InversionOfControl\ServiceFeatureAttribute.cs" />
+    <Compile Include="ExceptionPolicy.cs" />
+    <Compile Include="ExceptionPolicyHandler.cs" />
     <Compile Include="InversionOfControl\ComponentAttribute.cs" />
     <Compile Include="InversionOfControl\ComponentFlags.cs" />
     <Compile Include="InversionOfControl\IContainerBuilder.cs" />
     <Compile Include="InversionOfControl\IContainerBuilderContract.cs" />
     <Compile Include="InversionOfControl\IServiceLocator.cs" />
     <Compile Include="InversionOfControl\IServiceLocatorContract.cs" />
-    <Compile Include="InversionOfControl\NamespaceDoc.cs" />
     <Compile Include="InversionOfControl\Parameter.cs" />
     <Compile Include="IStartable.cs" />
     <Compile Include="IStartableContext.cs" />
@@ -98,7 +103,6 @@
     <Compile Include="Logging\ILogManager.cs" />
     <Compile Include="Logging\ILogManagerContract.cs" />
     <Compile Include="Logging\LogManager.cs" />
-    <Compile Include="Logging\NamespaceDoc.cs" />
     <Compile Include="Logging\NullLogger.cs" />
     <Compile Include="Logging\NullLogManager.cs" />
     <Compile Include="Messaging\IHandlerOf.cs" />
@@ -118,6 +122,7 @@
     <Compile Include="Data\Repository\IRepository.cs" />
     <Compile Include="Data\IDbTransaction.cs" />
     <Compile Include="UnitOfWorkFactory.cs" />
+    <Compile Include="UnhandledExceptionEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
