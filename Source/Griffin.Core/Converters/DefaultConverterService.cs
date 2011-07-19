@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Griffin.Converter;
 
@@ -10,8 +11,24 @@ namespace Griffin.Core.Converters
     /// </summary>
     public class DefaultConverterService : IConverterService
     {
-        private readonly Dictionary<Type, Dictionary<Type, ConverterWrapper>> Converters =
+        private readonly Dictionary<Type, Dictionary<Type, ConverterWrapper>> _converters =
             new Dictionary<Type, Dictionary<Type, ConverterWrapper>>();
+
+        private readonly LinkedList<IConverterProvider> _providers = new LinkedList<IConverterProvider>();
+
+        private ConverterWrapper FindConverterInProviders(Type targetType, MethodInfo providerMethod)
+        {
+            foreach (IConverterProvider provider in _providers)
+            {
+                object converter = providerMethod.Invoke(provider, null);
+                if (converter == null)
+                    continue;
+
+                return new ConverterWrapper(converter, targetType);
+            }
+
+            return null;
+        }
 
         private static object TryDefaultConversion(object source, Type targetType)
         {
@@ -42,6 +59,18 @@ namespace Griffin.Core.Converters
         }
 
         /// <summary>
+        /// Converts all.
+        /// </summary>
+        /// <typeparam name="TFrom">The type to convert from.</typeparam>
+        /// <typeparam name="TTo">The type to convert to.</typeparam>
+        /// <param name="collection">Items to convert.</param>
+        /// <returns>A collection of converted items</returns>
+        public IEnumerable<TTo> ConvertAll<TFrom, TTo>(IEnumerable<TFrom> collection)
+        {
+            return collection.Select(Convert<TFrom, TTo>).ToList();
+        }
+
+        /// <summary>
         /// Convert from one type to another.
         /// </summary>
         /// <param name="source">Source object</param>
@@ -50,13 +79,29 @@ namespace Griffin.Core.Converters
         public object Convert(object source, Type targetType)
         {
             Dictionary<Type, ConverterWrapper> items;
-            if (!Converters.TryGetValue(source.GetType(), out items))
+            MethodInfo providerMethod = typeof (IConverterProvider).GetMethod("Get").MakeGenericMethod(
+                source.GetType(), targetType);
+            if (!_converters.TryGetValue(source.GetType(), out items))
             {
-                return TryDefaultConversion(source, targetType);
+                items = new Dictionary<Type, ConverterWrapper>();
+                _converters.Add(source.GetType(), items);
+
+                ConverterWrapper converter = FindConverterInProviders(targetType, providerMethod);
+                if (converter != null)
+                    items[targetType] = converter;
+                else
+                    return TryDefaultConversion(source, targetType);
             }
 
             ConverterWrapper method;
-            return !items.TryGetValue(targetType, out method)
+            if (items.TryGetValue(targetType, out method))
+                return method.Convert(source);
+
+            method = FindConverterInProviders(targetType, providerMethod);
+            if (method != null)
+                items.Add(targetType, method);
+
+            return method == null
                        ? TryDefaultConversion(source, targetType)
                        : method.Convert(source);
         }
@@ -73,13 +118,18 @@ namespace Griffin.Core.Converters
         public void Register<TFrom, TTo>(IConverter<TFrom, TTo> converter)
         {
             Dictionary<Type, ConverterWrapper> items;
-            if (!Converters.TryGetValue(typeof (TFrom), out items))
+            if (!_converters.TryGetValue(typeof (TFrom), out items))
             {
                 items = new Dictionary<Type, ConverterWrapper>();
-                Converters.Add(typeof (TFrom), items);
+                _converters.Add(typeof (TFrom), items);
             }
 
             items[typeof (TTo)] = new ConverterWrapper(converter, typeof (TFrom));
+        }
+
+        public void Register(IConverterProvider provider)
+        {
+            _providers.AddLast(provider);
         }
 
         #endregion

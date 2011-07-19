@@ -34,6 +34,9 @@ namespace Griffin.InversionOfControl
         /// </summary>
         /// <typeparam name="T">Type of service to locate</typeparam>
         /// <returns>All found implemententations or an empty collection.</returns>
+        /// <remarks>
+        /// Some inversion of control containers (such as Unity) do not allow 
+        /// </remarks>
         IEnumerable<T> ResolveAll<T>() where T : class;
 
         /// <summary>

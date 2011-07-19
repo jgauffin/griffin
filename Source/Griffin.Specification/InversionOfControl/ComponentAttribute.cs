@@ -21,12 +21,19 @@ using System;
 namespace Griffin.InversionOfControl
 {
     /// <summary>
-    /// A class that should be registered as a service in an inversion of control container.
+    /// Used to tag classes that should be registered for services in an inversion of control container. (Convinence over configuration).
     /// </summary>
     /// <remarks>
+    /// <para>
     /// The purpose of the attribute is to be able to load service implementations into an inversion of control
     /// container. All interfaces (except .NET framework interfaces) should be registered for the class that has
     /// this attribute.
+    /// </para>
+    /// <para>
+    /// It's not mandatory to add support for this attribute since you loose a lot of control when registering services
+    /// using an attribute. However, most applications should work fine by using this technique if they have been properly
+    /// designed (by not using an god assembly but been split into several projects).
+    /// </para>
     /// </remarks>
     public class ComponentAttribute : Attribute
     {

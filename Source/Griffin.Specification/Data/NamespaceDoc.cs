@@ -11,7 +11,7 @@ namespace Griffin.Data
     /// easier to work with transactions and database connections (allowing frameworks to hook into
     /// the regular handling).
     /// </summary>
-    public class NamespaceDoc
+    class NamespaceDoc
     {
     }
 }

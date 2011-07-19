@@ -22,6 +22,8 @@ namespace Griffin.Converter
     /// <example>
     /// <code>
     /// <![CDATA[
+    /// // use the automapper converter.
+    /// converterService.Register(new AutoMapperConverter<EntityUser, UserViewModel>());
     /// 
     /// // use it for more complex conversions
     /// var viewUsers = converterService.ConvertAll<EntityUser, UserViewModel>(users);
@@ -31,7 +33,7 @@ namespace Griffin.Converter
     /// ]]>
     /// </code>
     /// </example>
-    public class NamespaceDoc
+    class NamespaceDoc
     {
     }
 }

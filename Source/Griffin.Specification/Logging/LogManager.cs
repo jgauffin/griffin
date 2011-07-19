@@ -39,6 +39,21 @@ namespace Griffin.Logging
     /// create custom implementations without exposing them to the user.
     /// </para>
     /// </remarks>
+    /// <example>
+    /// <code>
+    /// <![CDATA[
+    /// public class YourClass
+    /// {
+    ///     private ILogger _logger = LogManager.GetLogger<YourClass>();
+    /// 
+    ///     public void Start()
+    ///     {
+    ///         _logger.Info("Hello world!");
+    ///     }
+    /// }
+    /// ]]>
+    /// </code>
+    /// </example>
     public class LogManager
     {
         private static ILogManager _logManager = new NullLogManager();

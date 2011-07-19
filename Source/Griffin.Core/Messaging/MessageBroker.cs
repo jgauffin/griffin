@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Griffin.InversionOfControl;
 using Griffin.Logging;
-using Griffin.Logging;
 using Griffin.Messaging;
 
 namespace Griffin.Core.Messaging

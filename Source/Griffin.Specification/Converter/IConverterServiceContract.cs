@@ -49,5 +49,10 @@ namespace Griffin.Converter
         {
             Contract.Requires<ArgumentNullException>(converter != null);
         }
+
+        public void Register(IConverterProvider provider)
+        {
+            Contract.Requires<ArgumentNullException>(provider != null);
+        }
     }
 }

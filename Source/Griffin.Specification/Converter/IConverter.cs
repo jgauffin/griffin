@@ -34,6 +34,11 @@ namespace Griffin.Converter
         /// </summary>
         /// <param name="source">Source type</param>
         /// <returns>Target type</returns>
+        /// <example>
+        /// <code>
+        /// var viewModel = converter.Convert(dbModel);
+        /// </code>
+        /// </example>
         TTo Convert(TFrom source);
     }
 }

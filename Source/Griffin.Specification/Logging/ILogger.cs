@@ -34,6 +34,30 @@ namespace Griffin.Logging
     /// It's very important that none of the methods in logger implementations throw exceptions. 
     /// </para>
     /// </remarks>
+    /// <example>
+    /// <code>
+    /// <![CDATA[
+    /// public void MyClass
+    /// {
+    ///     public ILogger _logger = LogManager.GetLogger<MyClass>();
+    /// 
+    ///     public string CalculateQuestion(int answer)
+    ///     {
+    ///         if (answer != 42)
+    ///         {
+    ///             _logger.Error("User {0} failed to give the correct answer, specified {1} instead", 
+    ///                 Thread.CurrentPrincipal.Identity.Name,
+    ///                 answer);
+    /// 
+    ///             throw new InvalidOperationException("Wrong answer");
+    ///         }
+    /// 
+    ///         return "So you want to know the real question, ehhh?";
+    ///     }
+    /// }
+    /// ]]>
+    /// </code>
+    /// </example>
     [ContractClass(typeof(ILoggerContract))]
     public interface ILogger
     {
@@ -46,6 +70,22 @@ namespace Griffin.Logging
         /// and it's therefore not recommended to have them turned on in production systems unless 
         /// it's really required.
         /// </remarks>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// public void MyClass
+        /// {
+        ///     public ILogger _logger = LogManager.GetLogger<MyClass>();
+        /// 
+        ///     public string CalculateQuestion(int answer)
+        ///     {
+        ///         _logger.Debug("World, here?");
+        ///         return "Hello";
+        ///     }
+        /// }
+        /// ]]>
+        /// </code>
+        /// </example>
         void Debug(string message);
 
         /// <summary>
@@ -58,6 +98,22 @@ namespace Griffin.Logging
         /// and it's therefore not recommended to have them turned on in production systems unless 
         /// it's really required.
         /// </remarks>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// public void MyClass
+        /// {
+        ///     public ILogger _logger = LogManager.GetLogger<MyClass>();
+        /// 
+        ///     public string CalculateQuestion(int answer)
+        ///     {
+        ///         _logger.Debug("Answered {0}.", answer);
+        ///         return "So you want to know the real question, ehhh?";
+        ///     }
+        /// }
+        /// ]]>
+        /// </code>
+        /// </example>
         void Debug(string message, params object[] formatters);
 
         /// <summary>
@@ -70,6 +126,32 @@ namespace Griffin.Logging
         /// and it's therefore not recommended to have them turned on in production systems unless 
         /// it's really required.
         /// </remarks>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// public void MyClass
+        /// {
+        ///     public ILogger _logger = LogManager.GetLogger<MyClass>();
+        /// 
+        ///     public string CalculateQuestion(int answer)
+        ///     {
+        ///         try
+        ///         {
+        ///             return LoadFromCache();
+        ///         }
+        ///         catch (Exception err)
+        ///         {
+        ///             _logger.Debug("Nothing in the cache..", err);
+        ///         }
+        /// 
+        ///         //do complex calculcation here.
+        /// 
+        ///         return "Hello";
+        ///     }
+        /// }
+        /// ]]>
+        /// </code>
+        /// </example>
         void Debug(string message, Exception exception);
 
         /// <summary>
@@ -83,6 +165,32 @@ namespace Griffin.Logging
         /// and it's therefore not recommended to have them turned on in production systems unless 
         /// it's really required.
         /// </remarks>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// public void MyClass
+        /// {
+        ///     public ILogger _logger = LogManager.GetLogger<MyClass>();
+        /// 
+        ///     public string CalculateQuestion(int answer)
+        ///     {
+        ///         try
+        ///         {
+        ///             return LoadFromCache();
+        ///         }
+        ///         catch (Exception err)
+        ///         {
+        ///             _logger.Debug("Nothing in the cache for answer {0}.", err, answer);
+        ///         }
+        /// 
+        ///         //do complex calculcation here.
+        /// 
+        ///         return "Hello";
+        ///     }
+        /// }
+        /// ]]>
+        /// </code>
+        /// </example>
         void Debug(string message, Exception exception, params object[] formatters);
 
         /// <summary>
@@ -104,6 +212,30 @@ namespace Griffin.Logging
         /// Use this method to log errors in your code that prevent the application from continuing as expected,
         /// but the error is not severe enough to shut down the system.
         /// </remarks>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        /// public void MyClass
+        /// {
+        ///     public ILogger _logger = LogManager.GetLogger<MyClass>();
+        /// 
+        ///     public string CalculateQuestion(int answer)
+        ///     {
+        ///         if (answer != 42)
+        ///         {
+        ///             _logger.Error("User {0} failed to give the correct answer, specified {1} instead", 
+        ///                 Thread.CurrentPrincipal.Identity.Name,
+        ///                 answer);
+        /// 
+        ///             throw new InvalidOperationException("Wrong answer");
+        ///         }
+        /// 
+        ///         return "So you want to know the real question, ehhh?";
+        ///     }
+        /// }
+        /// ]]>
+        /// </code>
+        /// </example>
         void Error(string message, params object[] formatters);
 
         /// <summary>

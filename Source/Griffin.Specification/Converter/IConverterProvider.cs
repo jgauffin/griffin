@@ -27,6 +27,9 @@ namespace Griffin.Converter
     /// A provider is used to provide a certain kind of conversion to the layer. 
     /// </summary>
     /// <remarks>
+    /// Providers are used to be able to let the same class handle different types of objects. For instance,
+    /// you might have one provider which converts all db models to view models, or one provider that
+    /// takes care of all conversions to DateTime (from int, different string formats, timespans etc).
     /// </remarks>
     public interface IConverterProvider
     {

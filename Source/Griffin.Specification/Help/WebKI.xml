@@ -6,7 +6,6 @@
   <HelpKINode Title="BeginRequest&lt;TContext&gt; method" Url="html/f376c0aa-65e8-a10a-fddc-8121758025e7.htm" />
   <HelpKINode Title="Build method" Url="html/99dd1e5a-2af2-c215-8d85-bb8313fe21ac.htm" />
   <HelpKINode Title="Cancel property" Url="html/596d3df0-ee91-4316-386a-83eeca679984.htm" />
-  <HelpKINode Title="Cancel property" Url="html/65856ada-5687-8b57-542b-8f6e2123ca5a.htm" />
   <HelpKINode Title="Close method" Url="html/b2e78e54-c52f-893a-81fc-f518d6f8b63d.htm" />
   <HelpKINode Title="Commit method" Url="html/742f5adb-18b7-a4b6-d54e-d4954f456e45.htm" />
   <HelpKINode Title="Committed event" Url="html/9c590edb-514e-5aa9-6044-7cdd28a1af6b.htm" />
@@ -31,9 +30,10 @@
     <HelpKINode Title="properties" Url="html/0da0e33c-c197-ef95-e32d-4609dd14f257.htm" />
   </HelpKINode>
   <HelpKINode Title="Configure.Griffin property" Url="html/97db9406-b1d4-368d-eeec-cce0ea3f0d92.htm" />
-  <HelpKINode Title="Contacts property" Url="html/685f4aca-a24f-13d8-d8a7-3b9e2fb0fca3.htm" />
   <HelpKINode Title="Convert method" Url="html/47137d71-6ef4-2904-84f4-958ef698cce1.htm" />
   <HelpKINode Title="Convert method" Url="html/95558bee-dcd7-1d8e-389c-6c72974814cf.htm" />
+  <HelpKINode Title="ConvertAll(Of TFrom, TTo) method" Url="html/77d2ce09-52b4-2321-2ef5-20b168172be5.htm" />
+  <HelpKINode Title="ConvertAll&lt;TFrom, TTo&gt; method" Url="html/77d2ce09-52b4-2321-2ef5-20b168172be5.htm" />
   <HelpKINode Title="Count method" Url="html/6dac71c1-b433-8b98-c5f4-7d0e1ffeff9b.htm" />
   <HelpKINode Title="Create method" Url="html/4e74417f-7241-5d33-d110-6a0c1c32d02f.htm" />
   <HelpKINode Title="Create method" Url="html/df87f466-eb5d-f413-e393-d49cf76123ef.htm" />
@@ -53,41 +53,6 @@
   <HelpKINode Title="Error method" Url="html/56d84200-c171-f837-2cf2-700aade0e97e.htm" />
   <HelpKINode Title="Find method" Url="html/fff8435f-a0b5-f31a-2c5f-a99f8b695147.htm" />
   <HelpKINode Title="FindAll method" Url="html/481f0f39-a2ea-a95f-d0c2-c3baf1b178f0.htm" />
-  <HelpKINode Title="FindContactsContext class" Url="html/858d1908-8de8-f6a6-54db-4f47cb91e895.htm" />
-  <HelpKINode Title="FindContactsContext class" Url="html/ce7f92c3-c98d-93c7-6111-82c5368e1d8d.htm" />
-  <HelpKINode Title="FindContactsContext class">
-    <HelpKINode Title="about FindContactsContext class" Url="html/858d1908-8de8-f6a6-54db-4f47cb91e895.htm" />
-    <HelpKINode Title="all members" Url="html/ce7f92c3-c98d-93c7-6111-82c5368e1d8d.htm" />
-    <HelpKINode Title="constructor" Url="html/e655c905-e4bb-8692-cc39-d3ac037dda68.htm" />
-    <HelpKINode Title="methods" Url="html/cc514e78-662e-6230-29c7-f881cc407c48.htm" />
-    <HelpKINode Title="properties" Url="html/7e7b31cb-686b-0062-b268-eeb087077baf.htm" />
-  </HelpKINode>
-  <HelpKINode Title="FindContactsContext.Cancel property" Url="html/65856ada-5687-8b57-542b-8f6e2123ca5a.htm" />
-  <HelpKINode Title="FindContactsContext.FindContactsContext constructor" Url="html/e655c905-e4bb-8692-cc39-d3ac037dda68.htm" />
-  <HelpKINode Title="FindContactsContext.Request property" Url="html/5c9569d4-42ed-6527-dea4-3e487ceb6fcc.htm" />
-  <HelpKINode Title="FindContactsContext.Response property" Url="html/1f4518eb-e31c-8632-e328-8a0fa583ab9c.htm" />
-  <HelpKINode Title="FindContactsRequest class" Url="html/2ceca005-fe9c-7a06-35d3-35aaef4ee7f1.htm" />
-  <HelpKINode Title="FindContactsRequest class" Url="html/e668f3a2-c474-660e-8a2a-8e8925f00f67.htm" />
-  <HelpKINode Title="FindContactsRequest class">
-    <HelpKINode Title="about FindContactsRequest class" Url="html/e668f3a2-c474-660e-8a2a-8e8925f00f67.htm" />
-    <HelpKINode Title="all members" Url="html/2ceca005-fe9c-7a06-35d3-35aaef4ee7f1.htm" />
-    <HelpKINode Title="constructor" Url="html/eb40bd89-43b4-ead9-8255-e3bf5681c255.htm" />
-    <HelpKINode Title="methods" Url="html/8f4f8bd7-702a-8733-7fa0-073d1e402f08.htm" />
-    <HelpKINode Title="properties" Url="html/607222a8-2498-d32e-3940-65527768272f.htm" />
-  </HelpKINode>
-  <HelpKINode Title="FindContactsRequest.FindContactsRequest constructor" Url="html/eb40bd89-43b4-ead9-8255-e3bf5681c255.htm" />
-  <HelpKINode Title="FindContactsRequest.SearchValue property" Url="html/71df4005-e72c-9c29-f720-018f0c2b078d.htm" />
-  <HelpKINode Title="FindContactsResponse class" Url="html/592d99b8-e573-a3ae-7b13-1a6d02edc6e8.htm" />
-  <HelpKINode Title="FindContactsResponse class" Url="html/94090df4-3532-f930-bdf3-2083afed12d6.htm" />
-  <HelpKINode Title="FindContactsResponse class">
-    <HelpKINode Title="about FindContactsResponse class" Url="html/94090df4-3532-f930-bdf3-2083afed12d6.htm" />
-    <HelpKINode Title="all members" Url="html/592d99b8-e573-a3ae-7b13-1a6d02edc6e8.htm" />
-    <HelpKINode Title="constructor" Url="html/5f6d16e1-d306-2c86-a619-c873f7471d89.htm" />
-    <HelpKINode Title="methods" Url="html/31787811-5ab5-709f-8875-213dcd87bff5.htm" />
-    <HelpKINode Title="properties" Url="html/f29d3488-cf5d-6ff2-b5d1-b4fa7373549c.htm" />
-  </HelpKINode>
-  <HelpKINode Title="FindContactsResponse.Contacts property" Url="html/685f4aca-a24f-13d8-d8a7-3b9e2fb0fca3.htm" />
-  <HelpKINode Title="FindContactsResponse.FindContactsResponse constructor" Url="html/5f6d16e1-d306-2c86-a619-c873f7471d89.htm" />
   <HelpKINode Title="Flags property" Url="html/29438051-870a-8e1a-533d-fa3dc78ba4d6.htm" />
   <HelpKINode Title="Get method" Url="html/004dbfa4-bbe0-a9c5-bdf0-94d4f602d4a4.htm" />
   <HelpKINode Title="Get(Of TFrom, TTo) method" Url="html/c8eae1a9-3321-e595-1abc-9b03021b29b7.htm" />
@@ -140,8 +105,12 @@
   <HelpKINode Title="Griffin.InversionOfControl.IContainerBuilder interface" Url="html/a64f39a4-301e-49e7-755b-3b512bcda712.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.IServiceLocator interface" Url="html/cfea11b1-249a-f7c4-df12-fe4f5631d00c.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.IServiceLocator interface" Url="html/da33e1ba-b202-8c52-bd1f-1c8a146874f5.htm" />
+  <HelpKINode Title="Griffin.InversionOfControl.NamespaceDoc class" Url="html/597bdec4-55f4-6b69-77e6-098c70cafe68.htm" />
+  <HelpKINode Title="Griffin.InversionOfControl.NamespaceDoc class" Url="html/eec94132-c04f-3be2-5d5a-a4f9db4cde7c.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.Parameter class" Url="html/5404e7f6-5a08-2109-ba6d-227022f10642.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.Parameter class" Url="html/b4f2d6ef-c9a5-5556-c2c7-818edcfd738e.htm" />
+  <HelpKINode Title="Griffin.InversionOfControl.ServiceFeatureAttribute class" Url="html/52e15c55-4577-1a7b-2217-229e319dcb12.htm" />
+  <HelpKINode Title="Griffin.InversionOfControl.ServiceFeatureAttribute class" Url="html/957af2e5-364a-d2a0-d32e-feedfcad7dc9.htm" />
   <HelpKINode Title="Griffin.IStartable interface" Url="html/80197420-357c-53d5-a62d-2fe91472fde6.htm" />
   <HelpKINode Title="Griffin.IStartable interface" Url="html/ddbca588-db92-cfb9-cee2-53a949c5ea0d.htm" />
   <HelpKINode Title="Griffin.IStartableContext interface" Url="html/cf8bc681-e94e-6b84-8e59-1d787ce93cf9.htm" />
@@ -153,12 +122,6 @@
   <HelpKINode Title="Griffin.Logging.LogManager class" Url="html/3adfb766-0d10-0d47-cc7a-14779e51b02b.htm" />
   <HelpKINode Title="Griffin.Logging.LogManager class" Url="html/99a4e384-d356-73fb-3fc6-1093751dd0af.htm" />
   <HelpKINode Title="Griffin.Messaging namespace" Url="html/66cd9481-6fb9-0178-260f-0eaeb3957ba9.htm" />
-  <HelpKINode Title="Griffin.Messaging.FindContactsContext class" Url="html/858d1908-8de8-f6a6-54db-4f47cb91e895.htm" />
-  <HelpKINode Title="Griffin.Messaging.FindContactsContext class" Url="html/ce7f92c3-c98d-93c7-6111-82c5368e1d8d.htm" />
-  <HelpKINode Title="Griffin.Messaging.FindContactsRequest class" Url="html/2ceca005-fe9c-7a06-35d3-35aaef4ee7f1.htm" />
-  <HelpKINode Title="Griffin.Messaging.FindContactsRequest class" Url="html/e668f3a2-c474-660e-8a2a-8e8925f00f67.htm" />
-  <HelpKINode Title="Griffin.Messaging.FindContactsResponse class" Url="html/592d99b8-e573-a3ae-7b13-1a6d02edc6e8.htm" />
-  <HelpKINode Title="Griffin.Messaging.FindContactsResponse class" Url="html/94090df4-3532-f930-bdf3-2083afed12d6.htm" />
   <HelpKINode Title="Griffin.Messaging.IHandlerOf(Of TRequestContext) interface" Url="html/4a01719e-5441-b9d9-ef3b-3db4eba3efbd.htm" />
   <HelpKINode Title="Griffin.Messaging.IHandlerOf(Of TRequestContext) interface" Url="html/f265452d-68af-5b53-ee7d-0cb4c3d8aeea.htm" />
   <HelpKINode Title="Griffin.Messaging.IHandlerOf&lt;TRequestContext&gt; interface" Url="html/4a01719e-5441-b9d9-ef3b-3db4eba3efbd.htm" />
@@ -178,15 +141,11 @@
   <HelpKINode Title="Griffin.Messaging.ISubscriberOf(Of T) interface" Url="html/c35cddee-26df-45be-ec5a-e042b0b00255.htm" />
   <HelpKINode Title="Griffin.Messaging.ISubscriberOf&lt;T&gt; interface" Url="html/9e614eef-b0b3-b47a-3e88-0a24762968c7.htm" />
   <HelpKINode Title="Griffin.Messaging.ISubscriberOf&lt;T&gt; interface" Url="html/c35cddee-26df-45be-ec5a-e042b0b00255.htm" />
-  <HelpKINode Title="Griffin.Messaging.UserService class" Url="html/97dfefc9-7c00-355e-5dcb-3b34fb086127.htm" />
-  <HelpKINode Title="Griffin.Messaging.UserService class" Url="html/c017151d-7958-4334-8366-59b5f7aa0e78.htm" />
   <HelpKINode Title="Griffin.NamespaceDoc class" Url="html/cf363751-051c-6844-a608-c201a2b28ac3.htm" />
   <HelpKINode Title="Griffin.NamespaceDoc class" Url="html/f5c88dd9-30a9-a13e-f500-dff06f9da43a.htm" />
   <HelpKINode Title="Griffin.Repository namespace" Url="html/dcd189cf-9708-3e42-930b-b3aeec90348a.htm" />
   <HelpKINode Title="Griffin.Repository.RepositoryException class" Url="html/4627fdf9-2060-7dc4-b968-5f65904b9378.htm" />
   <HelpKINode Title="Griffin.Repository.RepositoryException class" Url="html/dc8460de-7c5e-7562-6b84-4547c38b30f2.htm" />
-  <HelpKINode Title="Griffin.UnitOfWork class" Url="html/c7726905-77b1-1dbc-5b61-5b6501bebb44.htm" />
-  <HelpKINode Title="Griffin.UnitOfWork class" Url="html/dc22405b-5bef-7e3f-c822-35769958190e.htm" />
   <HelpKINode Title="Griffin.UnitOfWorkFactory class" Url="html/15a267aa-644b-befa-dd07-f4f9a8847efa.htm" />
   <HelpKINode Title="IContainerBuilder interface" Url="html/2777045f-6e2f-01b7-552f-2c5f0bb8245a.htm" />
   <HelpKINode Title="IContainerBuilder interface" Url="html/a64f39a4-301e-49e7-755b-3b512bcda712.htm" />
@@ -199,6 +158,7 @@
   <HelpKINode Title="IContainerBuilder.Register method" Url="html/3bf825b5-2617-acc7-8a72-1ad0521f45e3.htm" />
   <HelpKINode Title="IContainerBuilder.RegisterInstance(Of TService) method" Url="html/f05db50a-be95-2c2c-679f-fbb7bd0a686e.htm" />
   <HelpKINode Title="IContainerBuilder.RegisterInstance&lt;TService&gt; method" Url="html/f05db50a-be95-2c2c-679f-fbb7bd0a686e.htm" />
+  <HelpKINode Title="IContainerBuilder.Update method" Url="html/bc2218dd-6a71-d6fe-ebe9-e5b8ba3aaee4.htm" />
   <HelpKINode Title="IConverter(Of TFrom, TTo) interface" Url="html/7879e469-e1f0-3f85-4eae-92ccd136da0d.htm" />
   <HelpKINode Title="IConverter(Of TFrom, TTo) interface" Url="html/b0ff6922-a161-3ed7-fa92-0eafcd532880.htm" />
   <HelpKINode Title="IConverter(Of TFrom, TTo) interface">
@@ -232,8 +192,9 @@
     <HelpKINode Title="methods" Url="html/41d031fd-ccdd-8a9b-f682-ae5a84837ef7.htm" />
   </HelpKINode>
   <HelpKINode Title="IConverterService.Convert method" Url="html/95558bee-dcd7-1d8e-389c-6c72974814cf.htm" />
-  <HelpKINode Title="IConverterService.Register(Of TFrom, TTo) method" Url="html/18906d33-a408-5c3e-b367-a0bb01774d86.htm" />
-  <HelpKINode Title="IConverterService.Register&lt;TFrom, TTo&gt; method" Url="html/18906d33-a408-5c3e-b367-a0bb01774d86.htm" />
+  <HelpKINode Title="IConverterService.ConvertAll(Of TFrom, TTo) method" Url="html/77d2ce09-52b4-2321-2ef5-20b168172be5.htm" />
+  <HelpKINode Title="IConverterService.ConvertAll&lt;TFrom, TTo&gt; method" Url="html/77d2ce09-52b4-2321-2ef5-20b168172be5.htm" />
+  <HelpKINode Title="IConverterService.Register method" Url="html/8368e9be-3838-4d3e-3753-1fe1c52ac41b.htm" />
   <HelpKINode Title="IDbSession interface" Url="html/2ea73b1b-4367-1030-0f84-7bf2353d0fca.htm" />
   <HelpKINode Title="IDbSession interface" Url="html/a36ab5ca-dbea-9008-c7e6-578451710ae8.htm" />
   <HelpKINode Title="IDbSession interface">
@@ -459,34 +420,41 @@
   <HelpKINode Title="Message property" Url="html/f440d476-cc91-24f5-1887-37b1840b6d51.htm" />
   <HelpKINode Title="Name property" Url="html/7de0990d-a64b-243e-2c4c-0bd4efd762be.htm" />
   <HelpKINode Title="NamespaceDoc class" Url="html/34578a0a-02cb-1373-6953-6957e7a75f06.htm" />
+  <HelpKINode Title="NamespaceDoc class" Url="html/597bdec4-55f4-6b69-77e6-098c70cafe68.htm" />
   <HelpKINode Title="NamespaceDoc class" Url="html/5d5dca48-bf3b-36ce-afc2-7f0680fc96ca.htm" />
   <HelpKINode Title="NamespaceDoc class" Url="html/a89e1c05-870d-50a1-2326-00a9f7a67f38.htm" />
   <HelpKINode Title="NamespaceDoc class" Url="html/ba4d9b98-bda8-426e-6512-27975aa47918.htm" />
   <HelpKINode Title="NamespaceDoc class" Url="html/cf363751-051c-6844-a608-c201a2b28ac3.htm" />
+  <HelpKINode Title="NamespaceDoc class" Url="html/eec94132-c04f-3be2-5d5a-a4f9db4cde7c.htm" />
   <HelpKINode Title="NamespaceDoc class" Url="html/f5c88dd9-30a9-a13e-f500-dff06f9da43a.htm" />
   <HelpKINode Title="NamespaceDoc class" Url="html/ff1cda6d-5ebf-f99f-db6c-801b142bd6c4.htm" />
   <HelpKINode Title="NamespaceDoc class" Url="html/ff4b3c1d-b570-46e6-cef0-7fec5f725d29.htm" />
   <HelpKINode Title="NamespaceDoc class">
     <HelpKINode Title="about NamespaceDoc class" Url="html/a89e1c05-870d-50a1-2326-00a9f7a67f38.htm" />
     <HelpKINode Title="about NamespaceDoc class" Url="html/ba4d9b98-bda8-426e-6512-27975aa47918.htm" />
+    <HelpKINode Title="about NamespaceDoc class" Url="html/eec94132-c04f-3be2-5d5a-a4f9db4cde7c.htm" />
     <HelpKINode Title="about NamespaceDoc class" Url="html/f5c88dd9-30a9-a13e-f500-dff06f9da43a.htm" />
     <HelpKINode Title="about NamespaceDoc class" Url="html/ff4b3c1d-b570-46e6-cef0-7fec5f725d29.htm" />
     <HelpKINode Title="all members" Url="html/34578a0a-02cb-1373-6953-6957e7a75f06.htm" />
+    <HelpKINode Title="all members" Url="html/597bdec4-55f4-6b69-77e6-098c70cafe68.htm" />
     <HelpKINode Title="all members" Url="html/5d5dca48-bf3b-36ce-afc2-7f0680fc96ca.htm" />
     <HelpKINode Title="all members" Url="html/cf363751-051c-6844-a608-c201a2b28ac3.htm" />
     <HelpKINode Title="all members" Url="html/ff1cda6d-5ebf-f99f-db6c-801b142bd6c4.htm" />
     <HelpKINode Title="constructor" Url="html/257fad63-0eaf-dd36-9c45-7a4e349e49f8.htm" />
     <HelpKINode Title="constructor" Url="html/551e7e23-3e3c-926c-f217-0483d199604a.htm" />
     <HelpKINode Title="constructor" Url="html/59d93c53-5da3-947f-a4f3-aafae04266dd.htm" />
+    <HelpKINode Title="constructor" Url="html/95028944-5216-af4f-a323-a430f4f88e07.htm" />
     <HelpKINode Title="constructor" Url="html/bc3935d2-66e1-5810-24fa-505157543763.htm" />
     <HelpKINode Title="methods" Url="html/1a174a61-b690-1432-376b-fc52dc6ee17b.htm" />
     <HelpKINode Title="methods" Url="html/635b2cf0-5596-0a11-f741-cbec33b809db.htm" />
     <HelpKINode Title="methods" Url="html/681dc47b-632a-95ab-9747-7ef01da4960d.htm" />
+    <HelpKINode Title="methods" Url="html/8d7e39eb-25cd-dd9c-c54a-271d7fd786a8.htm" />
     <HelpKINode Title="methods" Url="html/c912169b-3f6d-609d-09fa-c9d964df1455.htm" />
   </HelpKINode>
   <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/257fad63-0eaf-dd36-9c45-7a4e349e49f8.htm" />
   <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/551e7e23-3e3c-926c-f217-0483d199604a.htm" />
   <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/59d93c53-5da3-947f-a4f3-aafae04266dd.htm" />
+  <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/95028944-5216-af4f-a323-a430f4f88e07.htm" />
   <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/bc3935d2-66e1-5810-24fa-505157543763.htm" />
   <HelpKINode Title="Paging method" Url="html/bde47c79-2c55-2d35-b43e-7e307c45c245.htm" />
   <HelpKINode Title="Parameter class" Url="html/5404e7f6-5a08-2109-ba6d-227022f10642.htm" />
@@ -503,13 +471,11 @@
   <HelpKINode Title="Parameter.Value property" Url="html/a560ac75-49bd-fe55-1703-955ec24d56ee.htm" />
   <HelpKINode Title="Parameters property" Url="html/06142c5d-b3b3-3a8a-9652-17f71c3d97af.htm" />
   <HelpKINode Title="ProcessMessage method" Url="html/0c86a721-b2c5-f142-7d70-6f33949e98e5.htm" />
-  <HelpKINode Title="ProcessRequest method" Url="html/4a22fe68-a70e-309d-9449-870e863468ce.htm" />
   <HelpKINode Title="ProcessRequest method" Url="html/6f141fea-3468-9935-e02a-e0ccd197b404.htm" />
   <HelpKINode Title="Publish(Of T) method" Url="html/10088cdb-f594-ac31-9d38-652f8cc91942.htm" />
   <HelpKINode Title="Publish&lt;T&gt; method" Url="html/10088cdb-f594-ac31-9d38-652f8cc91942.htm" />
   <HelpKINode Title="Register method" Url="html/3bf825b5-2617-acc7-8a72-1ad0521f45e3.htm" />
-  <HelpKINode Title="Register(Of TFrom, TTo) method" Url="html/18906d33-a408-5c3e-b367-a0bb01774d86.htm" />
-  <HelpKINode Title="Register&lt;TFrom, TTo&gt; method" Url="html/18906d33-a408-5c3e-b367-a0bb01774d86.htm" />
+  <HelpKINode Title="Register method" Url="html/8368e9be-3838-4d3e-3753-1fe1c52ac41b.htm" />
   <HelpKINode Title="RegisterInstance(Of TService) method" Url="html/f05db50a-be95-2c2c-679f-fbb7bd0a686e.htm" />
   <HelpKINode Title="RegisterInstance&lt;TService&gt; method" Url="html/f05db50a-be95-2c2c-679f-fbb7bd0a686e.htm" />
   <HelpKINode Title="Remove method" Url="html/a9c46281-6467-46db-a08b-d0a89edf72c3.htm" />
@@ -529,48 +495,37 @@
   <HelpKINode Title="RepositoryException.RepositoryException constructor" Url="html/7b9e1151-7d39-cbb2-c804-cc2176870b4d.htm" />
   <HelpKINode Title="RepositoryException.RequestedResource property" Url="html/77385a83-53ab-8922-6573-046e9ed5719c.htm" />
   <HelpKINode Title="RepositoryException.Target property" Url="html/f4e7d2c6-378d-97ec-7042-f86b2a5441fa.htm" />
-  <HelpKINode Title="Request property" Url="html/5c9569d4-42ed-6527-dea4-3e487ceb6fcc.htm" />
   <HelpKINode Title="Request property" Url="html/eb23ea03-4442-1cef-dd46-68d44bc61017.htm" />
   <HelpKINode Title="RequestedResource property" Url="html/77385a83-53ab-8922-6573-046e9ed5719c.htm" />
   <HelpKINode Title="Resolve method" Url="html/26ff1d1b-6253-5bda-7f5d-3d7b9c50d247.htm" />
   <HelpKINode Title="ResolveAll(Of T) method" Url="html/0073602d-a44c-6992-98f2-485cca0de987.htm" />
   <HelpKINode Title="ResolveAll&lt;T&gt; method" Url="html/0073602d-a44c-6992-98f2-485cca0de987.htm" />
-  <HelpKINode Title="Response property" Url="html/1f4518eb-e31c-8632-e328-8a0fa583ab9c.htm" />
   <HelpKINode Title="Response property" Url="html/f072db9f-fb49-f4f2-7778-07a5892e6c8a.htm" />
   <HelpKINode Title="Rollback method" Url="html/f5d56b92-d093-20dd-f7a7-a1f7325cf0cf.htm" />
   <HelpKINode Title="RolledBack event" Url="html/80e00065-8193-76d3-9df6-cf6bbd52a296.htm" />
   <HelpKINode Title="Save method" Url="html/25712ca2-57f0-48b6-462b-4d21cabc88fa.htm" />
   <HelpKINode Title="Scoped enumeration member" Url="html/b43b632c-fa14-3ce4-b13c-6218809f11f3.htm" />
-  <HelpKINode Title="SearchValue property" Url="html/71df4005-e72c-9c29-f720-018f0c2b078d.htm" />
+  <HelpKINode Title="ServiceFeatureAttribute class" Url="html/52e15c55-4577-1a7b-2217-229e319dcb12.htm" />
+  <HelpKINode Title="ServiceFeatureAttribute class" Url="html/957af2e5-364a-d2a0-d32e-feedfcad7dc9.htm" />
+  <HelpKINode Title="ServiceFeatureAttribute class">
+    <HelpKINode Title="about ServiceFeatureAttribute class" Url="html/957af2e5-364a-d2a0-d32e-feedfcad7dc9.htm" />
+    <HelpKINode Title="all members" Url="html/52e15c55-4577-1a7b-2217-229e319dcb12.htm" />
+    <HelpKINode Title="constructor" Url="html/f02cc0be-813e-fe47-1a89-fe316ac38c79.htm" />
+    <HelpKINode Title="methods" Url="html/0d20d25d-843b-67ba-126e-5045ac5abe6a.htm" />
+    <HelpKINode Title="properties" Url="html/c471af79-0bb4-8eae-aeb1-ae93d2d70424.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ServiceFeatureAttribute.ServiceFeatureAttribute constructor" Url="html/f02cc0be-813e-fe47-1a89-fe316ac38c79.htm" />
   <HelpKINode Title="Singleton enumeration member" Url="html/b43b632c-fa14-3ce4-b13c-6218809f11f3.htm" />
   <HelpKINode Title="SortBy method" Url="html/14bb6c55-f976-352a-a428-808695b9680e.htm" />
   <HelpKINode Title="SortByDescending method" Url="html/d01e1506-9698-a02d-d970-da22a7d78aac.htm" />
   <HelpKINode Title="Start method" Url="html/ec3c8d6b-dfc5-3c13-a5c4-606f01ccb920.htm" />
   <HelpKINode Title="Stop method" Url="html/0cae8a95-abce-83b0-a946-fc2d01fd95c7.htm" />
   <HelpKINode Title="Target property" Url="html/f4e7d2c6-378d-97ec-7042-f86b2a5441fa.htm" />
-  <HelpKINode Title="UnitOfWork class" Url="html/c7726905-77b1-1dbc-5b61-5b6501bebb44.htm" />
-  <HelpKINode Title="UnitOfWork class" Url="html/dc22405b-5bef-7e3f-c822-35769958190e.htm" />
-  <HelpKINode Title="UnitOfWork class">
-    <HelpKINode Title="about UnitOfWork class" Url="html/dc22405b-5bef-7e3f-c822-35769958190e.htm" />
-    <HelpKINode Title="all members" Url="html/c7726905-77b1-1dbc-5b61-5b6501bebb44.htm" />
-    <HelpKINode Title="constructor" Url="html/93f6d2b7-446b-824e-a51e-a972d8ab2d41.htm" />
-    <HelpKINode Title="methods" Url="html/f6053cc6-1792-ac3e-33ea-e00fad8c9355.htm" />
-  </HelpKINode>
-  <HelpKINode Title="UnitOfWork.UnitOfWork constructor" Url="html/93f6d2b7-446b-824e-a51e-a972d8ab2d41.htm" />
   <HelpKINode Title="UnitOfWorkFactory class" Url="html/15a267aa-644b-befa-dd07-f4f9a8847efa.htm" />
   <HelpKINode Title="UnitOfWorkFactory class">
     <HelpKINode Title="about UnitOfWorkFactory class" Url="html/15a267aa-644b-befa-dd07-f4f9a8847efa.htm" />
   </HelpKINode>
-  <HelpKINode Title="UserService class" Url="html/97dfefc9-7c00-355e-5dcb-3b34fb086127.htm" />
-  <HelpKINode Title="UserService class" Url="html/c017151d-7958-4334-8366-59b5f7aa0e78.htm" />
-  <HelpKINode Title="UserService class">
-    <HelpKINode Title="about UserService class" Url="html/c017151d-7958-4334-8366-59b5f7aa0e78.htm" />
-    <HelpKINode Title="all members" Url="html/97dfefc9-7c00-355e-5dcb-3b34fb086127.htm" />
-    <HelpKINode Title="constructor" Url="html/a3b1b93a-f191-e82e-7faa-e957a09f9e18.htm" />
-    <HelpKINode Title="methods" Url="html/71af2b5c-43cd-2dd1-0d1c-1779b077a92c.htm" />
-  </HelpKINode>
-  <HelpKINode Title="UserService.ProcessRequest method" Url="html/4a22fe68-a70e-309d-9449-870e863468ce.htm" />
-  <HelpKINode Title="UserService.UserService constructor" Url="html/a3b1b93a-f191-e82e-7faa-e957a09f9e18.htm" />
+  <HelpKINode Title="Update method" Url="html/bc2218dd-6a71-d6fe-ebe9-e5b8ba3aaee4.htm" />
   <HelpKINode Title="Value property" Url="html/a560ac75-49bd-fe55-1703-955ec24d56ee.htm" />
   <HelpKINode Title="Warning method" Url="html/9092ac31-365e-7d54-eb71-4b01a5630810.htm" />
   <HelpKINode Title="Where method" Url="html/4c3a3404-a5eb-f109-1443-4fb224bfb4bf.htm" />

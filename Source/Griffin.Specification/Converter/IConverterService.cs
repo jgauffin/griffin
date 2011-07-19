@@ -67,8 +67,24 @@ namespace Griffin.Converter
         /// <typeparam name="TTo">Type being created</typeparam>
         /// <param name="converter">Actual converter</param>
         /// <remarks>
-        /// Any existing converter will be replaced with the new one.
+        /// <para>
+        /// All converters registered with this method will always be used before the converters specified by
+        /// <see cref="Register(IConverterProvider)"/> method.
+        /// </para>
+        /// <para>
+        /// Any existing converter will be replaced with the one specified in this method call.
+        /// </para>
         /// </remarks>
         void Register<TFrom, TTo>(IConverter<TFrom, TTo> converter);
+
+        /// <summary>
+        /// Register a provider which can take care of different kind of conversions
+        /// </summary>
+        /// <param name="provider">Provider name</param>
+        /// <remarks>
+        /// All converters that have been registered with <see cref="Register{TFrom,TTo}"/> will always be used before the converters specified by
+        /// this method.
+        /// </remarks>
+        void Register(IConverterProvider provider);
     }
 }

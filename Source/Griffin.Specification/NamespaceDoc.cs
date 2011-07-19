@@ -9,7 +9,7 @@ namespace Griffin
     /// The specification assembly is used to provide abstractions between your code and commonly used frameworks
     /// such as Inversion of Control and Logging.
     /// </summary>
-    public class NamespaceDoc
+    class NamespaceDoc
     {
     }
 }

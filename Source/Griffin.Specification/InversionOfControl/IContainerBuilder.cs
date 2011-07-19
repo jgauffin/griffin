@@ -29,11 +29,28 @@ namespace Griffin.InversionOfControl
     /// All instances should be considered to be scoped. What the scope is depends on the type
     /// of application. For a web application it should be for the lifetime of an request/response,
     /// while for an winforms application or a windows service it's for the lifetime of the application.
-    /// </para>
-    /// <para>
     /// It will of course depends on the implementation that you use.
     /// </para>
+    /// <para>
+    /// All implementations should return the same instance for all services that are registered as scoped/singletons for
+    /// a specific class. In other words, the following code should return the same instance:
+    /// <example>
+    /// <code>
+    /// <![CDATA[
+    /// builder.Register<IUserService, UserService>();
+    /// builder.Register<IStartable, UserService>();
+    /// 
+    /// var container = builder.Build();
+    /// var service = container.Resolve<IUserService>();
+    /// var startable = container.ResolveAll<IStartable>().First();
+    /// if (service != startable)
+    ///   throw new InvalidOperationException("Same instance should have been returned");
+    /// ]]>
+    /// </code>
+    /// </example>
+    /// </para>
     /// </remarks>
+    /// <seealso cref="ServiceFeatureAttribute"/>
     [ContractClass(typeof(IContainerBuilderContract))]
     public interface IContainerBuilder
     {
@@ -42,20 +59,29 @@ namespace Griffin.InversionOfControl
         /// </summary>
         /// <typeparam name="TService">Service to register</typeparam>
         /// <typeparam name="TImplementation">Class that provides the specified service.</typeparam>
-        void Register<TService, TImplementation>();
+        /// <param name="flags">Defines how the service should be created</param>
+        void Register<TService, TImplementation>(ComponentFlags flags = ComponentFlags.Scoped);
 
         /// <summary>
         /// Register a service
         /// </summary>
         /// <param name="service">Service to register</param>
         /// <param name="implementation">Class that provides the service.</param>
-        void Register(Type service, Type implementation);
+        /// <param name="flags">Defines how the service should be created</param>
+        void Register(Type service, Type implementation, ComponentFlags flags = ComponentFlags.Scoped);
 
         /// <summary>
         /// Register a service
         /// </summary>
         /// <typeparam name="TService">Service to register</typeparam>
         /// <param name="factoryMethod">Method creating the service</param>
+        /// <example>
+        /// <code>
+        /// <![CDATA[
+        ///     builder.Register<IUserService>(() => proxyGenerator.CreateService<IUserService>());
+        /// ]]>
+        /// </code>
+        /// </example>
         void Register<TService>(Func<TService> factoryMethod);
 
         /// <summary>
@@ -66,9 +92,15 @@ namespace Griffin.InversionOfControl
         void RegisterInstance<TService>(TService implementation) where TService : class;
 
         /// <summary>
-        /// Build the service locator
+        /// Build a new service locator
         /// </summary>
         /// <returns>Created container</returns>
         IServiceLocator Build();
+
+        /// <summary>
+        /// Update an existing container with the configuration in this builder.
+        /// </summary>
+        /// <param name="locator">Locator to update</param>
+        void Update(IServiceLocator locator);
     }
 }

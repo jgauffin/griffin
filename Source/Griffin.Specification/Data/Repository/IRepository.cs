@@ -31,9 +31,11 @@ namespace Griffin.Data.Repository
     /// <typeparam name="TKey">Primary key type</typeparam>
     /// <example>
     /// <code>
+    /// <![CDATA[
     /// var user = repos.Get(user => user.LastName == "Gauffin" && user.FirstName == "Jonas");
     /// if (user == null)
     ///     Console.WriteLine("Failed to find user");
+    /// ]]>
     /// </code>
     /// </example>
     /// <remarks>
@@ -109,8 +111,9 @@ namespace Griffin.Data.Repository
         /// </remarks>
         /// <example>
         /// <code>
+        /// <![CDATA[
         /// var query = repository.CreateQuery()
-        ///     .Where(user => user.Age >= 20 and user.Age >= 65);
+        ///     .Where(user => user.Age >= 20 && user.Age >= 65);
         ///     .Paging(1, 50);
         /// 
         /// // paging is ignored
@@ -118,6 +121,7 @@ namespace Griffin.Data.Repository
         ///
         /// // paging is used
         /// var users = repository.Find(query);
+        /// ]]>
         /// </code>
         /// </example>
         int Count(IQuery<TEntity> query);
@@ -143,7 +147,7 @@ namespace Griffin.Data.Repository
         /// <exception cref="RepositoryException">Data layer failed to complete the operation.</exception>
         /// <example>
         /// <code>
-        /// var user = repository.Get(user => user.Id = 10);
+        /// var user = repository.Get(user => user.Id == 10);
         /// if (user == null)
         ///     user = new User(Session["FirstName"], Session["LastName"]);
         /// 
@@ -176,9 +180,11 @@ namespace Griffin.Data.Repository
         /// <exception cref="RepositoryException">Data layer failed to complete the operation.</exception>
         /// <example>
         /// <code>
+        /// <![CDATA[
         /// var user = repository.GetById(10);
         /// if (user != null && user.CompanyId == Session["CompanyId"])
         ///     repository.Remove(user);
+        /// ]]>
         /// </code>
         /// </example>
         void Remove(TEntity item);
@@ -190,7 +196,9 @@ namespace Griffin.Data.Repository
         /// <exception cref="RepositoryException">Data layer failed to complete the operation.</exception>
         /// <example>
         /// <code>
+        /// <![CDATA[
         /// repository.Remove(user => user.FirstName == "Jonas" && user.LastName == "Gauffin");
+        /// ]]>
         /// </code>
         /// </example>
         void Remove(Expression<Func<TEntity, bool>> query);

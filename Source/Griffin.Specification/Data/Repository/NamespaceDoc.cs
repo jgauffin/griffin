@@ -14,7 +14,7 @@ namespace Griffin.Data.Repository
     /// We stronly discourage you from exposig the <see cref="IRepository{TEntity,TKey}"/>
     /// </para>
     /// </remarks>
-    public class NamespaceDoc
+    class NamespaceDoc
     {
     }
 }

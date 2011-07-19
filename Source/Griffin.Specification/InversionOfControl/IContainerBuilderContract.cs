@@ -10,11 +10,11 @@ namespace Griffin.InversionOfControl
     {
         #region IContainerBuilder Members
 
-        public void Register<TService, TImplementation>()
+        public void Register<TService, TImplementation>(ComponentFlags flags)
         {
         }
 
-        public void Register(Type service, Type implementation)
+        public void Register(Type service, Type implementation, ComponentFlags flags)
         {
             Contract.Requires<ArgumentNullException>(service != null);
             Contract.Requires<ArgumentNullException>(implementation != null);
@@ -36,6 +36,11 @@ namespace Griffin.InversionOfControl
             Contract.Ensures(Contract.Result<IServiceLocator>() != null);
 // ReSharper restore InvocationIsSkipped
             return null;
+        }
+
+        public void Update(IServiceLocator locator)
+        {
+            Contract.Requires<ArgumentNullException>(locator != null);
         }
 
         #endregion

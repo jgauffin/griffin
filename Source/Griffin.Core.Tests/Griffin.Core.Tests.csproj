@@ -52,6 +52,10 @@
     <Compile Include="Data\TestUser.cs" />
     <Compile Include="ExceptionExtensionsTests.cs" />
     <Compile Include="ExceptionPolicyHandlerTests.cs" />
+    <Compile Include="Messaging\FindContactsContext.cs" />
+    <Compile Include="Messaging\FindContactsResponse.cs" />
+    <Compile Include="Messaging\FindContactsRequest.cs" />
+    <Compile Include="Messaging\UserService.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
