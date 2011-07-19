@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -87,6 +88,49 @@ namespace Griffin.Core
             }
 
             return toUnwrap as MemberExpression;
+        }
+
+        /// <summary>
+        /// Create a setter delegate
+        /// </summary>
+        /// <typeparam name="TEntity">Class type</typeparam>
+        /// <typeparam name="TProperty">Property type</typeparam>
+        /// <param name="expression">Expression that a delegate should be created for.</param>
+        /// <returns>Property setter delegate</returns>
+        public static Action<TEntity, TProperty> CreateSetter<TEntity, TProperty>(this Expression<Func<TEntity, TProperty>> expression)
+        {
+            Contract.Requires(expression != null);
+            Contract.Ensures(Contract.Result<Action<TEntity, TProperty>>() != null);
+
+            MemberExpression memberExpression;
+            switch (expression.Body.NodeType)
+            {
+                case ExpressionType.Convert:
+                    memberExpression = (MemberExpression)((UnaryExpression)expression.Body).Operand;
+                    break;
+                case ExpressionType.MemberAccess:
+                    memberExpression = (MemberExpression)expression.Body;
+                    break;
+                default:
+                    throw new InvalidOperationException(
+                        "Member '{0}' of type '{1}' is not a property.".FormatWith(expression.GetMember().Name,
+                                                                     typeof(TEntity).FullName));
+            }
+
+            var property = memberExpression.Member as PropertyInfo;
+            if (property == null)
+                throw new InvalidOperationException(
+                    "Member '{0}' of type '{1}' is not a property.".FormatWith(expression.GetMember().Name,
+                                                                 typeof(TEntity).FullName));
+            if (!property.CanWrite)
+                throw new InvalidOperationException(
+                    "Property '{0}' of type '{1}' is not writable.".FormatWith(expression.GetMember().Name,
+                                                                 typeof(TEntity).FullName));
+
+            var setMethod = property.GetSetMethod(true);
+            return (Action<TEntity, TProperty>)
+                   Delegate.CreateDelegate(typeof(Action<TEntity, TProperty>),
+                                           setMethod);
         }
     }
 }

@@ -60,9 +60,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NHibernate">
-      <HintPath>..\Griffin.Repository.NHibernate\assemblies\NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -80,8 +77,19 @@
     <Compile Include="Converters\NameValueModelBinder.cs" />
     <Compile Include="Converters\StringToDateTimeConverter.cs" />
     <Compile Include="Converters\StringToIntegers.cs" />
-    <Compile Include="Data\SimpleDataLayer\Mappings\IEntityMapper.cs" />
-    <Compile Include="Data\SimpleDataLayer\Mappings\MappingException.cs" />
+    <Compile Include="Data\CommandExtensions.cs" />
+    <Compile Include="Data\SimpleDataLayer\CommandExtensions.cs" />
+    <Compile Include="Data\SimpleDataLayer\QueryOptions.cs" />
+    <Compile Include="Data\SimpleMapper\ExtensionMethods.cs" />
+    <Compile Include="Data\SimpleMapper\MappingProvider.cs" />
+    <Compile Include="Data\SimpleMapper\ValueContext.cs" />
+    <Compile Include="Data\SimpleMapper\ValueConverter.cs" />
+    <Compile Include="Data\SimpleMapper\IValueConverterContext.cs" />
+    <Compile Include="Data\SimpleMapper\EntityMapper.cs" />
+    <Compile Include="Data\SimpleMapper\IEntityMapper.cs" />
+    <Compile Include="Data\SimpleMapper\MappingException.cs" />
+    <Compile Include="Data\SimpleMapper\IPropertyMapping.cs" />
+    <Compile Include="Data\SimpleMapper\ColumnPropertyMapping.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="ExpressionExtensions.cs" />
     <Compile Include="InversionOfControl\IBuilderStrategy.cs" />
@@ -106,12 +114,7 @@
     <Compile Include="Multitenancy\TenantPrincipal.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Data\SimpleDataLayer\Mappings\ContainerMappingProvider.cs" />
-    <Compile Include="Data\SimpleDataLayer\Mappings\EntityMapper.cs" />
-    <Compile Include="Data\SimpleDataLayer\Mappings\IMappingProvider.cs" />
-    <Compile Include="Data\SimpleDataLayer\Mappings\IPropertyMapperWithConverter.cs" />
-    <Compile Include="Data\SimpleDataLayer\Mappings\IPropertyMapping.cs" />
-    <Compile Include="Data\SimpleDataLayer\Mappings\PropertyMapping.cs" />
+    <Compile Include="Reflection\Mapping\IPropertyMapping.cs" />
     <Compile Include="ReflectionHelpers.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="Threading\TimedJob.cs">

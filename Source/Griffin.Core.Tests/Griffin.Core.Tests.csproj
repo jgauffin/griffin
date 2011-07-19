@@ -46,6 +46,10 @@
     <Compile Include="CollectionExtensionTests.cs" />
     <Compile Include="ConsoleHelperTests.cs" />
     <Compile Include="ConverterTester.cs" />
+    <Compile Include="Data\DataRecord.cs" />
+    <Compile Include="Data\Mappings\EntityMappingTest.cs" />
+    <Compile Include="Data\Mappings\PropertyMappingTests.cs" />
+    <Compile Include="Data\TestUser.cs" />
     <Compile Include="ExceptionExtensionsTests.cs" />
     <Compile Include="ExceptionPolicyHandlerTests.cs" />
     <Compile Include="ObjectExtensionsTests.cs" />
@@ -61,7 +65,9 @@
       <Name>Griffin.Specification</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data\NewFolder1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

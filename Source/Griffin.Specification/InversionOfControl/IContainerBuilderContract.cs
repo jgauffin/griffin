@@ -4,7 +4,9 @@ using System.Diagnostics.Contracts;
 namespace Griffin.InversionOfControl
 {
     [ContractClassFor(typeof (IContainerBuilder))]
+// ReSharper disable InconsistentNaming
     internal abstract class IContainerBuilderContract : IContainerBuilder
+// ReSharper restore InconsistentNaming
     {
         #region IContainerBuilder Members
 
@@ -36,7 +38,9 @@ namespace Griffin.InversionOfControl
 
         public IServiceLocator Build()
         {
+// ReSharper disable InvocationIsSkipped
             Contract.Ensures(Contract.Result<IServiceLocator>() != null);
+// ReSharper restore InvocationIsSkipped
             return null;
         }
 
