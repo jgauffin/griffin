@@ -55,7 +55,6 @@ namespace Griffin.Logging
     /// </item>
     /// </list>
     /// </para>
-    /// </para>
     /// </remarks>
     /// <example>
     /// <code>

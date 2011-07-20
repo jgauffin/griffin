@@ -37,6 +37,11 @@ namespace Griffin.Logging
         public DateTime CreatedAt { get; set; }
 
         /// <summary>
+        /// Gets or sets type that has the logger as a member
+        /// </summary>
+        public Type LoggedType { get; set; }
+
+        /// <summary>
         /// Gets or sets stack frames
         /// </summary>
         public StackFrame[] StackFrames { get; set; }

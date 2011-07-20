@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Griffin.Repository
+namespace Griffin.Data.Repository
 {
     /// <summary>
     /// Something failed in the data layer.

@@ -8,7 +8,7 @@ namespace Griffin.Messaging
 {
     /// <summary>
     /// The messaging specification should be used to define a messaging solution in a framework. It's usually an in-process
-    /// solution.
+    /// messaging solution.
     /// </summary>
     [CompilerGenerated]
     class NamespaceDoc

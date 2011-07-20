@@ -32,21 +32,19 @@ namespace Griffin.Logging
     /// </summary>
     /// <remarks>
     /// Log manager that will return the same logger for all classes that requests one. You can however use
-    /// <see cref="ILogFilter"/>s to determine which classes may log or not.
+    /// <see cref="IPostFilter"/>s to determine which classes may log or not.
     /// </remarks>
     public class SimpleLogManager : ILogManager
     {
         private static SimpleLogManager _instance;
-        private static readonly List<ILogFilter> Filters = new List<ILogFilter>();
+        private static readonly List<IPreFilter> Filters = new List<IPreFilter>();
         private static readonly List<ILogTarget> Targets = new List<ILogTarget>();
-        private readonly ILogger _logger;
 
         /// <summary>
         /// Prevents a default instance of the <see cref="SimpleLogManager"/> class from being created.
         /// </summary>
         private SimpleLogManager()
         {
-            _logger = new Logger(Filters, Targets);
         }
 
         #region ILogManager Members
@@ -60,7 +58,7 @@ namespace Griffin.Logging
         /// </returns>
         public ILogger GetLogger(Type type)
         {
-            return _logger;
+            return new Logger(type, Filters, Targets);
         }
 
         #endregion
@@ -123,9 +121,9 @@ namespace Griffin.Logging
         /// </summary>
         /// <param name="targetName">Name of the target (filename without path and extension, or "console" for the console).</param>
         /// <param name="logFilter">The log filter.</param>
-        public static void AddFilter(string targetName, ILogFilter logFilter)
+        public static void AddFilter(string targetName, IPreFilter logFilter)
         {
-            Targets.First(t => Path.GetFileNameWithoutExtension(t.Name) == targetName).AddFilter(logFilter);
+            //Targets.First(t => Path.GetFileNameWithoutExtension(t.Name) == targetName).AddFilter(logFilter);
         }
     }
 }

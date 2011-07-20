@@ -29,7 +29,7 @@ namespace Griffin.Logging.Targets.File
     /// <remarks>
     /// Will not keep the file open but open it using <see cref="File.AppendAllText(string, string)"/> each time a new entry should be written.
     /// </remarks>
-    internal class FileWriter : IFileWriter
+    public class FileWriter : IFileWriter
     {
         private readonly FileConfiguration _configuration;
         private readonly string _name;

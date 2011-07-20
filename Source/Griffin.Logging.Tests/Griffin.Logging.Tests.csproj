@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,23 +46,21 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="ConfigTester.cs" />
+    <Compile Include="Filters\LevelFilterTest.cs" />
+    <Compile Include="Filters\NamespaceFilterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleLogManager.cs" />
+    <Compile Include="Targets\AdoNetTargetTest.cs" />
+    <Compile Include="Targets\CompositeTargetTests.cs" />
     <Compile Include="Targets\FileTargetTest.cs" />
+    <Compile Include="Targets\File\FileTargetTest.cs" />
+    <Compile Include="Targets\File\FileWriterTest.cs" />
+    <Compile Include="Targets\File\TestWriter.cs" />
+    <Compile Include="Targets\TestPostFilter.cs" />
+    <Compile Include="Targets\TestTarget.cs" />
     <Compile Include="TextLogger.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Targets\.svn\all-wcprops" />
-    <None Include="Targets\.svn\entries" />
-    <None Include="Targets\.svn\text-base\FileTargetTest.cs.svn-base" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Targets\.svn\prop-base\" />
-    <Folder Include="Targets\.svn\props\" />
-    <Folder Include="Targets\.svn\tmp\prop-base\" />
-    <Folder Include="Targets\.svn\tmp\props\" />
-    <Folder Include="Targets\.svn\tmp\text-base\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Griffin.Core\Griffin.Core.csproj">
       <Project>{8287F9BC-1727-447A-B12B-7AFF9C09DC5A}</Project>
@@ -74,6 +73,10 @@
     <ProjectReference Include="..\Griffin.Specification\Griffin.Specification.csproj">
       <Project>{0A92E936-4A23-48D4-A792-181211EC0F2B}</Project>
       <Name>Griffin.Specification</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Griffin.TestTools\Griffin.TestTools.csproj">
+      <Project>{F3D934A8-CAF8-4F73-BA94-1FA5AF6A1527}</Project>
+      <Name>Griffin.TestTools</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

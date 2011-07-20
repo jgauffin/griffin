@@ -20,7 +20,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Griffin.Repository;
 
 namespace Griffin.Data.Repository
 {

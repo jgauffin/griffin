@@ -3,8 +3,13 @@
     /// <summary>
     /// Log entries must be between (or equal to) the specified limits.
     /// </summary>
-    public class LevelFilter : ILogFilter
+    public class LevelFilter : IPostFilter
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LevelFilter"/> class.
+        /// </summary>
+        /// <param name="minLevel">Minimum (inclusive) level that can be logged.</param>
+        /// <param name="maxLevel">Maximum (inclusive) level that can be logged.</param>
         public LevelFilter(LogLevel minLevel, LogLevel maxLevel)
         {
             MinLevel = minLevel;
@@ -12,7 +17,7 @@
         }
 
         /// <summary>
-        /// All log entries must be at least this level
+        /// Gets or sets minimum (inclusive) log level of log entries that should be logged.
         /// </summary>
         /// <remarks>
         /// Check the actual enum to see which one is the lowest and largest values.
@@ -20,7 +25,7 @@
         public LogLevel MinLevel { get; set; }
 
         /// <summary>
-        /// All log entries must be at most this level
+        /// Gets or sets maximum (inclusive) log level of log entries that should be logged.
         /// </summary>
         /// <remarks>
         /// Check the actual enum to see which one is the lowest and largest values.

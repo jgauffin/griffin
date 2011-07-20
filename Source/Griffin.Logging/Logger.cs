@@ -35,16 +35,19 @@ namespace Griffin.Logging
     /// </remarks>
     public class Logger : ILogger
     {
-        private readonly IEnumerable<ILogFilter> _filters;
+        private readonly Type _loggedType;
+        private readonly IEnumerable<IPreFilter> _filters;
         private readonly IEnumerable<ILogTarget> _targets;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class.
         /// </summary>
+        /// <param name="loggedType">Type that requested the logger.</param>
         /// <param name="filters">The filters.</param>
         /// <param name="targets">The targets.</param>
-        public Logger(IEnumerable<ILogFilter> filters, IEnumerable<ILogTarget> targets)
+        public Logger(Type loggedType, IEnumerable<IPreFilter> filters, IEnumerable<ILogTarget> targets)
         {
+            _loggedType = loggedType;
             _filters = filters;
             _targets = targets;
         }
@@ -52,17 +55,19 @@ namespace Griffin.Logging
         /// <summary>
         /// Initializes a new instance of the <see cref="Logger"/> class.
         /// </summary>
+        /// <param name="loggedType">Type that requested the logger.</param>
         /// <param name="targets">The targets.</param>
-        public Logger(IEnumerable<ILogTarget> targets)
+        public Logger(Type loggedType, IEnumerable<ILogTarget> targets)
         {
+            _loggedType = loggedType;
             _targets = targets;
-            _filters = new List<ILogFilter>();
+            _filters = new List<IPreFilter>();
         }
 
         /// <summary>
         /// Gets all filters
         /// </summary>
-        internal IEnumerable<ILogFilter> Filters
+        internal IEnumerable<IPreFilter> Filters
         {
             get { return _filters; }
         }
@@ -310,6 +315,14 @@ namespace Griffin.Logging
 
         private void WriteEntry(LogLevel level, string message, Exception exception)
         {
+            // find any filter that says no to logging
+            if (_filters.Any(filter => !filter.CanLog(_loggedType, level)))
+            {
+                Console.WriteLine("Filter blocks");
+                return;
+            }
+
+
             StackFrame[] frames = new StackTrace(2).GetFrames();
             if (frames != null)
                 frames = frames.Take(5).ToArray();
@@ -328,13 +341,6 @@ namespace Griffin.Logging
                                 ThreadId = Thread.CurrentThread.ManagedThreadId,
                                 UserName = userName
                             };
-
-            // find any filter that says no to logging
-            if (_filters.Any(filter => !filter.CanLog(entry)))
-            {
-                Console.WriteLine("Filter blocks");
-                return;
-            }
 
             foreach (var target in _targets)
             {

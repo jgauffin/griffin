@@ -12,6 +12,7 @@
     <AssemblyName>Griffin.Logging</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,31 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>True</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>False</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>False</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>False</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,8 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigureExtension.cs" />
+    <Compile Include="Filters\IPostFilterContract.cs" />
+    <Compile Include="Filters\IPostFilter.cs" />
+    <Compile Include="Filters\IPreFilter.cs" />
+    <Compile Include="Filters\IPreFilterContract.cs" />
+    <Compile Include="Filters\NamespaceDoc.cs" />
     <Compile Include="FluentConfiguration.cs" />
-    <Compile Include="Filters\ILogFilter.cs" />
     <Compile Include="Filters\LevelFilter.cs" />
     <Compile Include="Filters\NamespaceFilter.cs" />
     <Compile Include="FluentFilterConfiguration.cs" />
@@ -60,6 +90,7 @@
     <Compile Include="SimpleLogManager.cs" />
     <Compile Include="TargetAdoNetExtension.cs" />
     <Compile Include="Targets\AdoNetTarget.cs" />
+    <Compile Include="Targets\CommandExtensions.cs" />
     <Compile Include="Targets\CompositeTarget.cs" />
     <Compile Include="Targets\ConsoleConfiguration.cs" />
     <Compile Include="Targets\ConsoleHelper.cs" />
@@ -68,9 +99,11 @@
     <Compile Include="Targets\File\FileTarget.cs" />
     <Compile Include="Targets\File\FileWriter.cs" />
     <Compile Include="Targets\File\IFileWriter.cs" />
+    <Compile Include="Targets\File\NamespaceDoc.cs" />
     <Compile Include="Targets\File\PaddedFileTarget.cs" />
     <Compile Include="Targets\ILogTarget.cs" />
     <Compile Include="Targets\ILogTargetContract.cs" />
+    <Compile Include="Targets\LogEntryExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Griffin.Specification\Griffin.Specification.csproj">

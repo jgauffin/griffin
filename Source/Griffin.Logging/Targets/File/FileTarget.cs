@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using Griffin.Logging.Filters;
 
 namespace Griffin.Logging.Targets.File
@@ -33,7 +34,7 @@ namespace Griffin.Logging.Targets.File
     public class FileTarget : ILogTarget
     {
         private readonly IFileWriter _fileWriter;
-        private readonly List<ILogFilter> _filters = new List<ILogFilter>();
+        private readonly List<IPostFilter> _filters = new List<IPostFilter>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileTarget"/> class.
@@ -42,6 +43,9 @@ namespace Griffin.Logging.Targets.File
         /// <param name="configuration">The configuration.</param>
         public FileTarget(string name, FileConfiguration configuration)
         {
+            Contract.Requires(!String.IsNullOrEmpty(name));
+            Contract.Requires<ArgumentNullException>(configuration != null);
+
             _fileWriter = new FileWriter(name, configuration);
         }
 
@@ -51,6 +55,7 @@ namespace Griffin.Logging.Targets.File
         /// <param name="writer">Writer being used to to write log entries.</param>
         public FileTarget(IFileWriter writer)
         {
+            Contract.Requires<ArgumentNullException>(writer != null);
             _fileWriter = writer;
         }
 
@@ -76,7 +81,7 @@ namespace Griffin.Logging.Targets.File
         /// Add a filter for this target.
         /// </summary>
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
-        public void AddFilter(ILogFilter filter)
+        public void AddFilter(IPostFilter filter)
         {
             _filters.Add(filter);
         }
@@ -97,18 +102,21 @@ namespace Griffin.Logging.Targets.File
         /// Format an exception
         /// </summary>
         /// <param name="exception">Exception (and it's nested innner exceptions) that will be formatted</param>
-        /// <param name="itendentation">Number of tabs to use for intendation</param>
+        /// <param name="intendation">Number of tabs to use for intendation</param>
         /// <returns>A string</returns>
         /// <remarks>
         /// Will call itself reursivly to be able it add all inner exceptions properly. Intendation will be
         /// increased for each found inner exception.
         /// </remarks>
-        protected virtual string FormatException(Exception exception, int itendentation)
+        protected virtual string FormatException(Exception exception, int intendation)
         {
+            Contract.Requires<ArgumentNullException>(exception != null);
+            Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<string>()));
+
             string text = "\r\n******* EXCEPTION ********\r\n"
-                          + exception.ToString().Replace("\r\n", "\r\n".PadRight(itendentation, '\t'));
+                          + exception.ToString().Replace("\r\n", "\r\n".PadRight(intendation, '\t'));
             if (exception.InnerException != null)
-                return text + FormatException(exception.InnerException, itendentation + 1);
+                return text + FormatException(exception.InnerException, intendation + 1);
             return text;
         }
 
@@ -119,6 +127,9 @@ namespace Griffin.Logging.Targets.File
         /// <returns>Formatted entry</returns>
         protected virtual string FormatLogEntry(LogEntry entry)
         {
+            Contract.Requires<ArgumentNullException>(entry != null);
+            Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<string>()));
+
             if (entry.Exception != null)
             {
                 return string.Format("{0}|{1}|{2}|{3}|{4}|{5}\r\n{6}\r\n",
@@ -149,6 +160,9 @@ namespace Griffin.Logging.Targets.File
         /// <returns>New lines with be prefixed with a tab to be able to detect when an entry ends.</returns>
         protected virtual string FormatMessage(string message)
         {
+            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<string>()));
+
             return message.Replace("\r\n", "\r\n\t").Replace('|', ';');
         }
 
@@ -160,6 +174,7 @@ namespace Griffin.Logging.Targets.File
         /// <returns>Returns ClassName.MethodName if it's within the size limit, else the method name (might be truncated to fit size limit)</returns>
         protected virtual string FormatStackTrace(StackFrame[] frames, int maxSize)
         {
+
             string typeName = frames[0].GetMethod().ReflectedType.Name;
             string methodName = frames[0].GetMethod().Name;
             string result = string.Format("{0}.{1}", typeName, methodName);

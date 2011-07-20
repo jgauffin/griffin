@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <HelpKI>
 
+  <HelpKINode Title="ActionToTake property" Url="html/25d841ec-7db5-2a44-be83-cf23ef68e235.htm" />
   <HelpKINode Title="Assign method" Url="html/751e9845-8b1b-4862-0102-ecbc4731b9fb.htm" />
   <HelpKINode Title="BeginRequest(Of TContext) method" Url="html/f376c0aa-65e8-a10a-fddc-8121758025e7.htm" />
   <HelpKINode Title="BeginRequest&lt;TContext&gt; method" Url="html/f376c0aa-65e8-a10a-fddc-8121758025e7.htm" />
@@ -51,6 +52,19 @@
   <HelpKINode Title="EmptyStartableContext.Instance property" Url="html/715869f5-081e-e693-4fdf-75ce3be29a85.htm" />
   <HelpKINode Title="EndRequest method" Url="html/bf448bff-cc80-09fb-0eec-a1cd37dd5008.htm" />
   <HelpKINode Title="Error method" Url="html/56d84200-c171-f837-2cf2-700aade0e97e.htm" />
+  <HelpKINode Title="ExceptionPolicy enumeration" Url="html/ebdc8fd8-c7ae-5713-7e3f-535c0b373d79.htm" />
+  <HelpKINode Title="ExceptionPolicyHandler class" Url="html/990200b5-38ad-82d3-5af6-cac74c6cbef2.htm" />
+  <HelpKINode Title="ExceptionPolicyHandler class" Url="html/d13407f6-539a-706d-73f7-b49001c3ee42.htm" />
+  <HelpKINode Title="ExceptionPolicyHandler class">
+    <HelpKINode Title="about ExceptionPolicyHandler class" Url="html/990200b5-38ad-82d3-5af6-cac74c6cbef2.htm" />
+    <HelpKINode Title="all members" Url="html/d13407f6-539a-706d-73f7-b49001c3ee42.htm" />
+    <HelpKINode Title="events" Url="html/fbd29256-0474-6f81-526d-c27d69f78dda.htm" />
+    <HelpKINode Title="methods" Url="html/9f8e53bf-b68d-e076-1a36-b9a4ad7c8459.htm" />
+    <HelpKINode Title="properties" Url="html/d7165059-8b5b-4f72-5f40-c58680f923c9.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ExceptionPolicyHandler.GotUnhandled method" Url="html/88ef0ab1-d6d0-0a46-05a0-92e50c5aaecb.htm" />
+  <HelpKINode Title="ExceptionPolicyHandler.MainThreadId property" Url="html/c39e6137-618e-9b70-103e-f0194cb40a71.htm" />
+  <HelpKINode Title="ExceptionPolicyHandler.UnhandledException event" Url="html/4c38c9ea-afab-3635-d4f0-b01e88e467e0.htm" />
   <HelpKINode Title="Find method" Url="html/fff8435f-a0b5-f31a-2c5f-a99f8b695147.htm" />
   <HelpKINode Title="FindAll method" Url="html/481f0f39-a2ea-a95f-d0c2-c3baf1b178f0.htm" />
   <HelpKINode Title="Flags property" Url="html/29438051-870a-8e1a-533d-fa3dc78ba4d6.htm" />
@@ -60,6 +74,7 @@
   <HelpKINode Title="GetById method" Url="html/12bcf609-f1df-2dfc-c953-9373a7f2614a.htm" />
   <HelpKINode Title="GetLogger method" Url="html/1948230d-2113-9e94-d9f6-6c227a3d1a76.htm" />
   <HelpKINode Title="GetLogger method" Url="html/c8fb77e0-96e4-49ff-d18c-9aeb1c5e1f6c.htm" />
+  <HelpKINode Title="GotUnhandled method" Url="html/88ef0ab1-d6d0-0a46-05a0-92e50c5aaecb.htm" />
   <HelpKINode Title="Griffin namespace" Url="html/0cfd3755-b33f-bcbc-526b-c3282a64065e.htm" />
   <HelpKINode Title="Griffin property" Url="html/97db9406-b1d4-368d-eeec-cce0ea3f0d92.htm" />
   <HelpKINode Title="Griffin.Configure class" Url="html/b6ccd1e4-dac2-208d-1258-b37e17b4925b.htm" />
@@ -73,8 +88,6 @@
   <HelpKINode Title="Griffin.Converter.IConverterProvider interface" Url="html/44f1125e-b8e4-1877-4bdb-48a7e2a135a1.htm" />
   <HelpKINode Title="Griffin.Converter.IConverterService interface" Url="html/1b329241-064a-f333-8ea8-2385a0fa9ce4.htm" />
   <HelpKINode Title="Griffin.Converter.IConverterService interface" Url="html/7788a080-584a-0d6b-1e4c-ede293cfa06b.htm" />
-  <HelpKINode Title="Griffin.Converter.NamespaceDoc class" Url="html/5d5dca48-bf3b-36ce-afc2-7f0680fc96ca.htm" />
-  <HelpKINode Title="Griffin.Converter.NamespaceDoc class" Url="html/a89e1c05-870d-50a1-2326-00a9f7a67f38.htm" />
   <HelpKINode Title="Griffin.Data namespace" Url="html/b5cf6a78-bba7-1a23-9de9-fd1229474ab9.htm" />
   <HelpKINode Title="Griffin.Data.IDbSession interface" Url="html/2ea73b1b-4367-1030-0f84-7bf2353d0fca.htm" />
   <HelpKINode Title="Griffin.Data.IDbSession interface" Url="html/a36ab5ca-dbea-9008-c7e6-578451710ae8.htm" />
@@ -82,8 +95,6 @@
   <HelpKINode Title="Griffin.Data.IDbSessionFactory interface" Url="html/f41f71d8-2ef2-3c17-f155-8bd8ed4507ae.htm" />
   <HelpKINode Title="Griffin.Data.IDbTransaction interface" Url="html/0235a019-8793-ac4f-a0dd-4502f60246bf.htm" />
   <HelpKINode Title="Griffin.Data.IDbTransaction interface" Url="html/e6fa300b-01d9-df09-7c2f-96e9846c3387.htm" />
-  <HelpKINode Title="Griffin.Data.NamespaceDoc class" Url="html/ff1cda6d-5ebf-f99f-db6c-801b142bd6c4.htm" />
-  <HelpKINode Title="Griffin.Data.NamespaceDoc class" Url="html/ff4b3c1d-b570-46e6-cef0-7fec5f725d29.htm" />
   <HelpKINode Title="Griffin.Data.Repository namespace" Url="html/050b7d84-7022-db14-d722-0ceb79e2815b.htm" />
   <HelpKINode Title="Griffin.Data.Repository.IQuery(Of TEntity) interface" Url="html/58ed6ef1-8e0d-2c15-0a80-e78e8a796836.htm" />
   <HelpKINode Title="Griffin.Data.Repository.IQuery(Of TEntity) interface" Url="html/8b028c00-f2f9-9250-24fe-7ed62ba103a8.htm" />
@@ -93,10 +104,13 @@
   <HelpKINode Title="Griffin.Data.Repository.IRepository(Of TEntity, TKey) interface" Url="html/76d07918-58e0-02a9-8c25-089d937fff3b.htm" />
   <HelpKINode Title="Griffin.Data.Repository.IRepository&lt;TEntity, TKey&gt; interface" Url="html/20849115-5fff-f3dd-6cfd-0cecbfe77af7.htm" />
   <HelpKINode Title="Griffin.Data.Repository.IRepository&lt;TEntity, TKey&gt; interface" Url="html/76d07918-58e0-02a9-8c25-089d937fff3b.htm" />
-  <HelpKINode Title="Griffin.Data.Repository.NamespaceDoc class" Url="html/34578a0a-02cb-1373-6953-6957e7a75f06.htm" />
-  <HelpKINode Title="Griffin.Data.Repository.NamespaceDoc class" Url="html/ba4d9b98-bda8-426e-6512-27975aa47918.htm" />
+  <HelpKINode Title="Griffin.Data.Repository.RepositoryException class" Url="html/14b29b66-a47b-fae9-f83b-029c7b117827.htm" />
+  <HelpKINode Title="Griffin.Data.Repository.RepositoryException class" Url="html/faa4e922-7d0a-0d08-1fb1-89051004d741.htm" />
   <HelpKINode Title="Griffin.EmptyStartableContext class" Url="html/8edb3b98-0b9c-b00e-68b5-cc4518509342.htm" />
   <HelpKINode Title="Griffin.EmptyStartableContext class" Url="html/eded4aa8-85c1-3fa8-600a-eea9d0a73742.htm" />
+  <HelpKINode Title="Griffin.ExceptionPolicy enumeration" Url="html/ebdc8fd8-c7ae-5713-7e3f-535c0b373d79.htm" />
+  <HelpKINode Title="Griffin.ExceptionPolicyHandler class" Url="html/990200b5-38ad-82d3-5af6-cac74c6cbef2.htm" />
+  <HelpKINode Title="Griffin.ExceptionPolicyHandler class" Url="html/d13407f6-539a-706d-73f7-b49001c3ee42.htm" />
   <HelpKINode Title="Griffin.InversionOfControl namespace" Url="html/bef86909-704d-6b1d-4d29-9c83e40f4474.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.ComponentAttribute class" Url="html/822c03f0-15cd-b236-29d4-f55698884381.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.ComponentAttribute class" Url="html/b22628b9-c609-f854-34f2-b3e39907893c.htm" />
@@ -105,8 +119,6 @@
   <HelpKINode Title="Griffin.InversionOfControl.IContainerBuilder interface" Url="html/a64f39a4-301e-49e7-755b-3b512bcda712.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.IServiceLocator interface" Url="html/cfea11b1-249a-f7c4-df12-fe4f5631d00c.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.IServiceLocator interface" Url="html/da33e1ba-b202-8c52-bd1f-1c8a146874f5.htm" />
-  <HelpKINode Title="Griffin.InversionOfControl.NamespaceDoc class" Url="html/597bdec4-55f4-6b69-77e6-098c70cafe68.htm" />
-  <HelpKINode Title="Griffin.InversionOfControl.NamespaceDoc class" Url="html/eec94132-c04f-3be2-5d5a-a4f9db4cde7c.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.Parameter class" Url="html/5404e7f6-5a08-2109-ba6d-227022f10642.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.Parameter class" Url="html/b4f2d6ef-c9a5-5556-c2c7-818edcfd738e.htm" />
   <HelpKINode Title="Griffin.InversionOfControl.ServiceFeatureAttribute class" Url="html/52e15c55-4577-1a7b-2217-229e319dcb12.htm" />
@@ -141,12 +153,8 @@
   <HelpKINode Title="Griffin.Messaging.ISubscriberOf(Of T) interface" Url="html/c35cddee-26df-45be-ec5a-e042b0b00255.htm" />
   <HelpKINode Title="Griffin.Messaging.ISubscriberOf&lt;T&gt; interface" Url="html/9e614eef-b0b3-b47a-3e88-0a24762968c7.htm" />
   <HelpKINode Title="Griffin.Messaging.ISubscriberOf&lt;T&gt; interface" Url="html/c35cddee-26df-45be-ec5a-e042b0b00255.htm" />
-  <HelpKINode Title="Griffin.NamespaceDoc class" Url="html/cf363751-051c-6844-a608-c201a2b28ac3.htm" />
-  <HelpKINode Title="Griffin.NamespaceDoc class" Url="html/f5c88dd9-30a9-a13e-f500-dff06f9da43a.htm" />
-  <HelpKINode Title="Griffin.Repository namespace" Url="html/dcd189cf-9708-3e42-930b-b3aeec90348a.htm" />
-  <HelpKINode Title="Griffin.Repository.RepositoryException class" Url="html/4627fdf9-2060-7dc4-b968-5f65904b9378.htm" />
-  <HelpKINode Title="Griffin.Repository.RepositoryException class" Url="html/dc8460de-7c5e-7562-6b84-4547c38b30f2.htm" />
-  <HelpKINode Title="Griffin.UnitOfWorkFactory class" Url="html/15a267aa-644b-befa-dd07-f4f9a8847efa.htm" />
+  <HelpKINode Title="Griffin.UnhandledExceptionEventArgs class" Url="html/0d4e347d-d183-5ce6-12f4-76be75679f5c.htm" />
+  <HelpKINode Title="Griffin.UnhandledExceptionEventArgs class" Url="html/92891247-b0b3-b179-2ab1-6f0f0c1ef843.htm" />
   <HelpKINode Title="IContainerBuilder interface" Url="html/2777045f-6e2f-01b7-552f-2c5f0bb8245a.htm" />
   <HelpKINode Title="IContainerBuilder interface" Url="html/a64f39a4-301e-49e7-755b-3b512bcda712.htm" />
   <HelpKINode Title="IContainerBuilder interface">
@@ -226,6 +234,7 @@
   <HelpKINode Title="IDbTransaction.Committed event" Url="html/9c590edb-514e-5aa9-6044-7cdd28a1af6b.htm" />
   <HelpKINode Title="IDbTransaction.Rollback method" Url="html/f5d56b92-d093-20dd-f7a7-a1f7325cf0cf.htm" />
   <HelpKINode Title="IDbTransaction.RolledBack event" Url="html/80e00065-8193-76d3-9df6-cf6bbd52a296.htm" />
+  <HelpKINode Title="Ignore enumeration member" Url="html/ebdc8fd8-c7ae-5713-7e3f-535c0b373d79.htm" />
   <HelpKINode Title="IHandlerOf(Of TRequestContext) interface" Url="html/4a01719e-5441-b9d9-ef3b-3db4eba3efbd.htm" />
   <HelpKINode Title="IHandlerOf(Of TRequestContext) interface" Url="html/f265452d-68af-5b53-ee7d-0cb4c3d8aeea.htm" />
   <HelpKINode Title="IHandlerOf(Of TRequestContext) interface">
@@ -417,45 +426,9 @@
   <HelpKINode Title="LogManager.Assign method" Url="html/751e9845-8b1b-4862-0102-ecbc4731b9fb.htm" />
   <HelpKINode Title="LogManager.GetLogger method" Url="html/1948230d-2113-9e94-d9f6-6c227a3d1a76.htm" />
   <HelpKINode Title="LogManager.LogManager constructor" Url="html/08982807-bd75-c4c6-b028-14f831c20c0e.htm" />
-  <HelpKINode Title="Message property" Url="html/f440d476-cc91-24f5-1887-37b1840b6d51.htm" />
+  <HelpKINode Title="MainThreadId property" Url="html/c39e6137-618e-9b70-103e-f0194cb40a71.htm" />
+  <HelpKINode Title="Message property" Url="html/e8b20299-1df2-e89f-0f9d-e569516dcb42.htm" />
   <HelpKINode Title="Name property" Url="html/7de0990d-a64b-243e-2c4c-0bd4efd762be.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/34578a0a-02cb-1373-6953-6957e7a75f06.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/597bdec4-55f4-6b69-77e6-098c70cafe68.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/5d5dca48-bf3b-36ce-afc2-7f0680fc96ca.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/a89e1c05-870d-50a1-2326-00a9f7a67f38.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/ba4d9b98-bda8-426e-6512-27975aa47918.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/cf363751-051c-6844-a608-c201a2b28ac3.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/eec94132-c04f-3be2-5d5a-a4f9db4cde7c.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/f5c88dd9-30a9-a13e-f500-dff06f9da43a.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/ff1cda6d-5ebf-f99f-db6c-801b142bd6c4.htm" />
-  <HelpKINode Title="NamespaceDoc class" Url="html/ff4b3c1d-b570-46e6-cef0-7fec5f725d29.htm" />
-  <HelpKINode Title="NamespaceDoc class">
-    <HelpKINode Title="about NamespaceDoc class" Url="html/a89e1c05-870d-50a1-2326-00a9f7a67f38.htm" />
-    <HelpKINode Title="about NamespaceDoc class" Url="html/ba4d9b98-bda8-426e-6512-27975aa47918.htm" />
-    <HelpKINode Title="about NamespaceDoc class" Url="html/eec94132-c04f-3be2-5d5a-a4f9db4cde7c.htm" />
-    <HelpKINode Title="about NamespaceDoc class" Url="html/f5c88dd9-30a9-a13e-f500-dff06f9da43a.htm" />
-    <HelpKINode Title="about NamespaceDoc class" Url="html/ff4b3c1d-b570-46e6-cef0-7fec5f725d29.htm" />
-    <HelpKINode Title="all members" Url="html/34578a0a-02cb-1373-6953-6957e7a75f06.htm" />
-    <HelpKINode Title="all members" Url="html/597bdec4-55f4-6b69-77e6-098c70cafe68.htm" />
-    <HelpKINode Title="all members" Url="html/5d5dca48-bf3b-36ce-afc2-7f0680fc96ca.htm" />
-    <HelpKINode Title="all members" Url="html/cf363751-051c-6844-a608-c201a2b28ac3.htm" />
-    <HelpKINode Title="all members" Url="html/ff1cda6d-5ebf-f99f-db6c-801b142bd6c4.htm" />
-    <HelpKINode Title="constructor" Url="html/257fad63-0eaf-dd36-9c45-7a4e349e49f8.htm" />
-    <HelpKINode Title="constructor" Url="html/551e7e23-3e3c-926c-f217-0483d199604a.htm" />
-    <HelpKINode Title="constructor" Url="html/59d93c53-5da3-947f-a4f3-aafae04266dd.htm" />
-    <HelpKINode Title="constructor" Url="html/95028944-5216-af4f-a323-a430f4f88e07.htm" />
-    <HelpKINode Title="constructor" Url="html/bc3935d2-66e1-5810-24fa-505157543763.htm" />
-    <HelpKINode Title="methods" Url="html/1a174a61-b690-1432-376b-fc52dc6ee17b.htm" />
-    <HelpKINode Title="methods" Url="html/635b2cf0-5596-0a11-f741-cbec33b809db.htm" />
-    <HelpKINode Title="methods" Url="html/681dc47b-632a-95ab-9747-7ef01da4960d.htm" />
-    <HelpKINode Title="methods" Url="html/8d7e39eb-25cd-dd9c-c54a-271d7fd786a8.htm" />
-    <HelpKINode Title="methods" Url="html/c912169b-3f6d-609d-09fa-c9d964df1455.htm" />
-  </HelpKINode>
-  <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/257fad63-0eaf-dd36-9c45-7a4e349e49f8.htm" />
-  <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/551e7e23-3e3c-926c-f217-0483d199604a.htm" />
-  <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/59d93c53-5da3-947f-a4f3-aafae04266dd.htm" />
-  <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/95028944-5216-af4f-a323-a430f4f88e07.htm" />
-  <HelpKINode Title="NamespaceDoc.NamespaceDoc constructor" Url="html/bc3935d2-66e1-5810-24fa-505157543763.htm" />
   <HelpKINode Title="Paging method" Url="html/bde47c79-2c55-2d35-b43e-7e307c45c245.htm" />
   <HelpKINode Title="Parameter class" Url="html/5404e7f6-5a08-2109-ba6d-227022f10642.htm" />
   <HelpKINode Title="Parameter class" Url="html/b4f2d6ef-c9a5-5556-c2c7-818edcfd738e.htm" />
@@ -469,7 +442,7 @@
   <HelpKINode Title="Parameter.Name property" Url="html/7de0990d-a64b-243e-2c4c-0bd4efd762be.htm" />
   <HelpKINode Title="Parameter.Parameter constructor" Url="html/c5268239-ad38-bff1-0c3e-44f7bfd5e64a.htm" />
   <HelpKINode Title="Parameter.Value property" Url="html/a560ac75-49bd-fe55-1703-955ec24d56ee.htm" />
-  <HelpKINode Title="Parameters property" Url="html/06142c5d-b3b3-3a8a-9652-17f71c3d97af.htm" />
+  <HelpKINode Title="Parameters property" Url="html/7e850ec0-711a-e701-9312-2f5ca9029873.htm" />
   <HelpKINode Title="ProcessMessage method" Url="html/0c86a721-b2c5-f142-7d70-6f33949e98e5.htm" />
   <HelpKINode Title="ProcessRequest method" Url="html/6f141fea-3468-9935-e02a-e0ccd197b404.htm" />
   <HelpKINode Title="Publish(Of T) method" Url="html/10088cdb-f594-ac31-9d38-652f8cc91942.htm" />
@@ -480,23 +453,23 @@
   <HelpKINode Title="RegisterInstance&lt;TService&gt; method" Url="html/f05db50a-be95-2c2c-679f-fbb7bd0a686e.htm" />
   <HelpKINode Title="Remove method" Url="html/a9c46281-6467-46db-a08b-d0a89edf72c3.htm" />
   <HelpKINode Title="RemoveById method" Url="html/ce0942f6-5eb5-8eee-1339-89a2bab74028.htm" />
-  <HelpKINode Title="RepositoryException class" Url="html/4627fdf9-2060-7dc4-b968-5f65904b9378.htm" />
-  <HelpKINode Title="RepositoryException class" Url="html/dc8460de-7c5e-7562-6b84-4547c38b30f2.htm" />
+  <HelpKINode Title="RepositoryException class" Url="html/14b29b66-a47b-fae9-f83b-029c7b117827.htm" />
+  <HelpKINode Title="RepositoryException class" Url="html/faa4e922-7d0a-0d08-1fb1-89051004d741.htm" />
   <HelpKINode Title="RepositoryException class">
-    <HelpKINode Title="about RepositoryException class" Url="html/4627fdf9-2060-7dc4-b968-5f65904b9378.htm" />
-    <HelpKINode Title="all members" Url="html/dc8460de-7c5e-7562-6b84-4547c38b30f2.htm" />
-    <HelpKINode Title="constructor" Url="html/7b9e1151-7d39-cbb2-c804-cc2176870b4d.htm" />
-    <HelpKINode Title="events" Url="html/212ca69a-6bd5-83c9-e859-5236c66cd565.htm" />
-    <HelpKINode Title="methods" Url="html/60a02e4a-3ba4-167d-f43b-f0cc2e30c4c4.htm" />
-    <HelpKINode Title="properties" Url="html/0dfcffcd-0a23-5de0-d574-619d77947ffc.htm" />
+    <HelpKINode Title="about RepositoryException class" Url="html/faa4e922-7d0a-0d08-1fb1-89051004d741.htm" />
+    <HelpKINode Title="all members" Url="html/14b29b66-a47b-fae9-f83b-029c7b117827.htm" />
+    <HelpKINode Title="constructor" Url="html/b35f5c4a-3f6a-c829-ecb3-dc3a9033e5d2.htm" />
+    <HelpKINode Title="events" Url="html/c52b00e8-3d49-498f-f031-102134ee5bdb.htm" />
+    <HelpKINode Title="methods" Url="html/bfa6c2ed-75c2-d293-9fe9-a45d16b9f365.htm" />
+    <HelpKINode Title="properties" Url="html/3634a466-a76c-642b-23ec-8d9aeece9677.htm" />
   </HelpKINode>
-  <HelpKINode Title="RepositoryException.Message property" Url="html/f440d476-cc91-24f5-1887-37b1840b6d51.htm" />
-  <HelpKINode Title="RepositoryException.Parameters property" Url="html/06142c5d-b3b3-3a8a-9652-17f71c3d97af.htm" />
-  <HelpKINode Title="RepositoryException.RepositoryException constructor" Url="html/7b9e1151-7d39-cbb2-c804-cc2176870b4d.htm" />
-  <HelpKINode Title="RepositoryException.RequestedResource property" Url="html/77385a83-53ab-8922-6573-046e9ed5719c.htm" />
-  <HelpKINode Title="RepositoryException.Target property" Url="html/f4e7d2c6-378d-97ec-7042-f86b2a5441fa.htm" />
+  <HelpKINode Title="RepositoryException.Message property" Url="html/e8b20299-1df2-e89f-0f9d-e569516dcb42.htm" />
+  <HelpKINode Title="RepositoryException.Parameters property" Url="html/7e850ec0-711a-e701-9312-2f5ca9029873.htm" />
+  <HelpKINode Title="RepositoryException.RepositoryException constructor" Url="html/b35f5c4a-3f6a-c829-ecb3-dc3a9033e5d2.htm" />
+  <HelpKINode Title="RepositoryException.RequestedResource property" Url="html/cb8720df-5077-065c-7088-9be8e6514773.htm" />
+  <HelpKINode Title="RepositoryException.Target property" Url="html/003c1044-0a52-684f-30dc-340524d9185f.htm" />
   <HelpKINode Title="Request property" Url="html/eb23ea03-4442-1cef-dd46-68d44bc61017.htm" />
-  <HelpKINode Title="RequestedResource property" Url="html/77385a83-53ab-8922-6573-046e9ed5719c.htm" />
+  <HelpKINode Title="RequestedResource property" Url="html/cb8720df-5077-065c-7088-9be8e6514773.htm" />
   <HelpKINode Title="Resolve method" Url="html/26ff1d1b-6253-5bda-7f5d-3d7b9c50d247.htm" />
   <HelpKINode Title="ResolveAll(Of T) method" Url="html/0073602d-a44c-6992-98f2-485cca0de987.htm" />
   <HelpKINode Title="ResolveAll&lt;T&gt; method" Url="html/0073602d-a44c-6992-98f2-485cca0de987.htm" />
@@ -518,13 +491,26 @@
   <HelpKINode Title="Singleton enumeration member" Url="html/b43b632c-fa14-3ce4-b13c-6218809f11f3.htm" />
   <HelpKINode Title="SortBy method" Url="html/14bb6c55-f976-352a-a428-808695b9680e.htm" />
   <HelpKINode Title="SortByDescending method" Url="html/d01e1506-9698-a02d-d970-da22a7d78aac.htm" />
+  <HelpKINode Title="Source property" Url="html/3df0ce46-1e75-2e5b-d089-f0e2e5c1f632.htm" />
   <HelpKINode Title="Start method" Url="html/ec3c8d6b-dfc5-3c13-a5c4-606f01ccb920.htm" />
   <HelpKINode Title="Stop method" Url="html/0cae8a95-abce-83b0-a946-fc2d01fd95c7.htm" />
-  <HelpKINode Title="Target property" Url="html/f4e7d2c6-378d-97ec-7042-f86b2a5441fa.htm" />
-  <HelpKINode Title="UnitOfWorkFactory class" Url="html/15a267aa-644b-befa-dd07-f4f9a8847efa.htm" />
-  <HelpKINode Title="UnitOfWorkFactory class">
-    <HelpKINode Title="about UnitOfWorkFactory class" Url="html/15a267aa-644b-befa-dd07-f4f9a8847efa.htm" />
+  <HelpKINode Title="Target property" Url="html/003c1044-0a52-684f-30dc-340524d9185f.htm" />
+  <HelpKINode Title="Throw enumeration member" Url="html/ebdc8fd8-c7ae-5713-7e3f-535c0b373d79.htm" />
+  <HelpKINode Title="UnhandledException event" Url="html/4c38c9ea-afab-3635-d4f0-b01e88e467e0.htm" />
+  <HelpKINode Title="UnhandledException property" Url="html/9c9e11d5-e4e6-0bbd-209d-82dc47b1d4ba.htm" />
+  <HelpKINode Title="UnhandledExceptionEventArgs class" Url="html/0d4e347d-d183-5ce6-12f4-76be75679f5c.htm" />
+  <HelpKINode Title="UnhandledExceptionEventArgs class" Url="html/92891247-b0b3-b179-2ab1-6f0f0c1ef843.htm" />
+  <HelpKINode Title="UnhandledExceptionEventArgs class">
+    <HelpKINode Title="about UnhandledExceptionEventArgs class" Url="html/92891247-b0b3-b179-2ab1-6f0f0c1ef843.htm" />
+    <HelpKINode Title="all members" Url="html/0d4e347d-d183-5ce6-12f4-76be75679f5c.htm" />
+    <HelpKINode Title="constructor" Url="html/db28bdbe-cd9e-9c04-87b1-608bba2d62c2.htm" />
+    <HelpKINode Title="methods" Url="html/524d1679-9d68-8292-b872-ef228ae95a8f.htm" />
+    <HelpKINode Title="properties" Url="html/96f2215b-db4d-d204-f63d-1c9939b7393a.htm" />
   </HelpKINode>
+  <HelpKINode Title="UnhandledExceptionEventArgs.ActionToTake property" Url="html/25d841ec-7db5-2a44-be83-cf23ef68e235.htm" />
+  <HelpKINode Title="UnhandledExceptionEventArgs.Source property" Url="html/3df0ce46-1e75-2e5b-d089-f0e2e5c1f632.htm" />
+  <HelpKINode Title="UnhandledExceptionEventArgs.UnhandledException property" Url="html/9c9e11d5-e4e6-0bbd-209d-82dc47b1d4ba.htm" />
+  <HelpKINode Title="UnhandledExceptionEventArgs.UnhandledExceptionEventArgs constructor" Url="html/db28bdbe-cd9e-9c04-87b1-608bba2d62c2.htm" />
   <HelpKINode Title="Update method" Url="html/bc2218dd-6a71-d6fe-ebe9-e5b8ba3aaee4.htm" />
   <HelpKINode Title="Value property" Url="html/a560ac75-49bd-fe55-1703-955ec24d56ee.htm" />
   <HelpKINode Title="Warning method" Url="html/9092ac31-365e-7d54-eb71-4b01a5630810.htm" />

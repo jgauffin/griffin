@@ -45,7 +45,7 @@ namespace Griffin.Logging.Tests
                                                ?? Environment.UserName
                                 });
 
-            var logger = new Logger(new List<ILogFilter>(), new[] {target2, target});
+            var logger = new Logger(GetType(), new[] {target2, target});
             logger.Info("Hello");
             logger.Debug("Hello");
             logger.Warning("Hello");

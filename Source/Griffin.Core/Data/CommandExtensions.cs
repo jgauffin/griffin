@@ -18,7 +18,7 @@ namespace Griffin.Core.Data
         /// <param name="name">Parameter name</param>
         /// <param name="value">Value</param>
         /// <returns>Created parameter</returns>
-        public static IDataParameter AddParameter(this IDbCommand command, string name, string value)
+        public static IDataParameter AddParameter(this IDbCommand command, string name, object value)
         {
             var p = command.CreateParameter();
             p.ParameterName = name;

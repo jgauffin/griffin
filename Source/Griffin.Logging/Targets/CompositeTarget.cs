@@ -16,7 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301 USA
  */
+
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Griffin.Logging.Filters;
 
@@ -27,7 +30,7 @@ namespace Griffin.Logging.Targets
     /// </summary>
     public class CompositeTarget : ILogTarget
     {
-        private readonly List<ILogFilter> _filters = new List<ILogFilter>();
+        private readonly List<IPostFilter> _filters = new List<IPostFilter>();
         private readonly string _name;
         private readonly List<ILogTarget> _targets = new List<ILogTarget>();
 
@@ -37,6 +40,8 @@ namespace Griffin.Logging.Targets
         /// <param name="name">Name of this target.</param>
         public CompositeTarget(string name)
         {
+            Contract.Requires(!String.IsNullOrEmpty(name));
+
             _name = name;
         }
 
@@ -62,8 +67,10 @@ namespace Griffin.Logging.Targets
         /// Add a filter for this target.
         /// </summary>
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
-        public void AddFilter(ILogFilter filter)
+        public void AddFilter(IPostFilter filter)
         {
+            Contract.Requires<ArgumentNullException>(filter != null);
+
             _filters.Add(filter);
         }
 
@@ -86,6 +93,8 @@ namespace Griffin.Logging.Targets
         /// </remarks>
         public void Enqueue(LogEntry entry)
         {
+            Contract.Requires<ArgumentNullException>(entry != null);
+
             if (_filters.Any(f => !f.CanLog(entry)))
                 return;
 

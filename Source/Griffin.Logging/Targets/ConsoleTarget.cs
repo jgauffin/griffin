@@ -18,6 +18,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using Griffin.Logging.Filters;
 
 namespace Griffin.Logging.Targets
@@ -28,7 +29,7 @@ namespace Griffin.Logging.Targets
     public class ConsoleTarget : ILogTarget
     {
         private readonly ConsoleConfiguration _configuration;
-        private readonly List<ILogFilter> _filters = new List<ILogFilter>();
+        private readonly List<IPostFilter> _filters = new List<IPostFilter>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConsoleTarget"/> class.
@@ -36,6 +37,8 @@ namespace Griffin.Logging.Targets
         /// <param name="configuration">The configuration.</param>
         public ConsoleTarget(ConsoleConfiguration configuration)
         {
+            Contract.Requires<ArgumentNullException>(configuration != null);
+
             _configuration = configuration;
         }
 
@@ -61,8 +64,10 @@ namespace Griffin.Logging.Targets
         /// Add a filter for this target.
         /// </summary>
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
-        public void AddFilter(ILogFilter filter)
+        public void AddFilter(IPostFilter filter)
         {
+            Contract.Requires<ArgumentNullException>(filter != null);
+
             _filters.Add(filter);
         }
 
@@ -78,8 +83,9 @@ namespace Griffin.Logging.Targets
         /// </remarks>
         public void Enqueue(LogEntry entry)
         {
-            string method = entry.StackFrames[0].GetMethod().ReflectedType.Name + "." +
-                            entry.StackFrames[0].GetMethod().Name;
+            Contract.Requires<ArgumentNullException>(entry != null);
+
+            string method = entry.StackFrameOrType();
 
             string tmp = String.Format("{0} {1} {2} {3} {4}",
                                        entry.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss.fff"),
@@ -114,6 +120,8 @@ namespace Griffin.Logging.Targets
         /// <returns>Console color</returns>
         protected virtual ConsoleColor GetColor(LogEntry entry)
         {
+            Contract.Requires<ArgumentNullException>(entry != null);
+
             switch (entry.LogLevel)
             {
                 case LogLevel.Debug:

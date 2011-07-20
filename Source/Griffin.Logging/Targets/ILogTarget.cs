@@ -42,7 +42,7 @@ namespace Griffin.Logging.Targets
         /// Add a filter for this target.
         /// </summary>
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
-        void AddFilter(ILogFilter filter);
+        void AddFilter(IPostFilter filter);
 
         /// <summary>
         /// Enqueue to be written

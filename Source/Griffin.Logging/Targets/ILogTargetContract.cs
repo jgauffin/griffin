@@ -45,7 +45,7 @@ namespace Griffin.Logging.Targets
         /// Add a filter for this target.
         /// </summary>
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
-        public void AddFilter(ILogFilter filter)
+        public void AddFilter(IPostFilter filter)
         {
             Contract.Requires(filter != null);
         }

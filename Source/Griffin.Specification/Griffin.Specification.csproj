@@ -86,6 +86,7 @@
     <Compile Include="Data\NamespaceDoc.cs" />
     <Compile Include="Data\Repository\NamespaceDoc.cs" />
     <Compile Include="EmptyStartableContext.cs" />
+    <Compile Include="InversionOfControl\NamespaceDoc.cs" />
     <Compile Include="InversionOfControl\ServiceFeatureAttribute.cs" />
     <Compile Include="ExceptionPolicy.cs" />
     <Compile Include="ExceptionPolicyHandler.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Logging\ILogManager.cs" />
     <Compile Include="Logging\ILogManagerContract.cs" />
     <Compile Include="Logging\LogManager.cs" />
+    <Compile Include="Logging\NamespaceDoc.cs" />
     <Compile Include="Logging\NullLogger.cs" />
     <Compile Include="Logging\NullLogManager.cs" />
     <Compile Include="Messaging\IHandlerOf.cs" />
@@ -121,7 +123,6 @@
     <Compile Include="Data\Repository\IQuery.cs" />
     <Compile Include="Data\Repository\IRepository.cs" />
     <Compile Include="Data\IDbTransaction.cs" />
-    <Compile Include="UnitOfWorkFactory.cs" />
     <Compile Include="UnhandledExceptionEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -53,7 +53,6 @@ namespace Griffin.Logging
         /// </returns>
         public ILogger GetLogger(Type type)
         {
-            ILogger logger = null;
             var targets = new List<ILogTarget>();
 
             foreach (FluentNamespaceLogging ns in _namespaces)
@@ -73,7 +72,7 @@ namespace Griffin.Logging
                 }
             }
 
-            return new Logger(targets);
+            return new Logger(type, targets);
         }
 
         #endregion

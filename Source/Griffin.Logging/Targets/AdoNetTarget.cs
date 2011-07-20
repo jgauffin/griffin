@@ -1,29 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
-using System.Text;
 using Griffin.Logging.Filters;
 
 namespace Griffin.Logging.Targets
 {
-    class AdoNetTarget : ILogTarget
+    /// <summary>
+    /// Log log entries to a database
+    /// </summary>
+    /// <remarks>
+    /// Was initially created as a demonstration to show how easy it is to add a new target. Instead it got included in
+    /// the framework too. You need to create a table in a database to get everything working. Any primary key
+    /// should be auto generated and not required in the INSERT statement. Sample table:
+    /// <example>
+    /// <code lang="sql">
+    /// create database LogEntries
+    /// (
+    ///     id int not null auto_increment primary key,
+    ///     UserName varchar(40) not null,
+    ///     CreatedAt datetime not null,
+    ///     Source varchar(255) not null,
+    ///     Message text not null,
+    ///     Exception text,
+    ///     ThreadId int not null,
+    ///     LogLevel int not null
+    /// );
+    /// </code>
+    /// </example>
+    /// <para>
+    /// Check the <see cref="LogLevel"/> enum to see what kind of values each level has.
+    /// </para>
+    /// </remarks>
+    public class AdoNetTarget : ILogTarget
     {
-        private DbProviderFactory _providerFactory;
-        private ConnectionStringSettings _configurationString;
-        private List<ILogFilter> _filters = new List<ILogFilter>();
-
         private const string InsertStatement =
             @"INSERT INTO LogEntries (UserName, CreatedAt, Source, Message, Exception, ThreadId, LogLevel)" +
-            "(@user, @createdAt, @source, @message, @exception, @threadId, @logLevel)";
+            " VALUES(@user, @createdAt, @source, @message, @exception, @threadId, @logLevel)";
 
+        private readonly ConnectionStringSettings _configurationString;
+        private readonly List<IPostFilter> _filters = new List<IPostFilter>();
+        private readonly DbProviderFactory _providerFactory;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AdoNetTarget"/> class.
+        /// </summary>
+        /// <param name="connectionStringName">Name of the connection string in app/web.config.</param>
         public AdoNetTarget(string connectionStringName)
         {
+            Contract.Requires<ArgumentNullException>(connectionStringName != null);
+
             _configurationString = ConfigurationManager.ConnectionStrings[connectionStringName];
             _providerFactory = DbProviderFactories.GetFactory(_configurationString.ProviderName);
         }
+
+        private void SaveEntry(LogEntry entry)
+        {
+            Contract.Requires<ArgumentNullException>(entry != null);
+
+            using (DbConnection connection = _providerFactory.CreateConnection())
+            {
+                Debug.Assert(connection != null, "connection != null");
+
+                connection.ConnectionString = _configurationString.ConnectionString;
+                connection.Open();
+
+                using (DbCommand cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = InsertStatement;
+                    cmd.AddParameter("userName", entry.UserName);
+                    cmd.AddParameter("createdAt", entry.CreatedAt);
+
+                    string value = entry.StackFrameOrType();
+                    cmd.AddParameter("source", value);
+                    cmd.AddParameter("message", entry.Message);
+                    cmd.AddParameter("exception", entry.Exception);
+                    cmd.AddParameter("threadId", entry.ThreadId);
+                    cmd.AddParameter("logLevel", (int) entry.LogLevel);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        #region ILogTarget Members
 
         /// <summary>
         /// Gets name of target. 
@@ -40,15 +102,17 @@ namespace Griffin.Logging.Targets
         /// Add a filter for this target.
         /// </summary>
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
-        public void AddFilter(ILogFilter filter)
+        public void AddFilter(IPostFilter filter)
         {
+            Contract.Requires<ArgumentNullException>(filter != null);
+
             _filters.Add(filter);
         }
 
         /// <summary>
         /// Enqueue to be written
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="entry">Entry being enqueued for logging</param>
         /// <remarks>
         /// The entry might be written directly in the same thread or enqueued to be written
         /// later. It's up to each implementation to decide. Keep in mind that a logger should not
@@ -57,48 +121,22 @@ namespace Griffin.Logging.Targets
         /// </remarks>
         public void Enqueue(LogEntry entry)
         {
+            Contract.Requires<ArgumentNullException>(entry != null);
+
             try
             {
                 SaveEntry(entry);
             }
+// ReSharper disable EmptyGeneralCatchClause
             catch
-            { }
-        }
-
-        private void SaveEntry(LogEntry entry)
-        {
-            using (var connection = _providerFactory.CreateConnection())
+// ReSharper restore EmptyGeneralCatchClause
             {
-                connection.ConnectionString = _configurationString.ConnectionString;
-                connection.Open();
-
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = InsertStatement;
-                    cmd.AddParameter("userName", entry.UserName);
-                    cmd.AddParameter("createdAt", entry.CreatedAt);
-
-                    var value = entry.StackFrames.First().GetMethod().ReflectedType.Name + "."
-                              + entry.StackFrames.First().GetMethod().Name;
-                    cmd.AddParameter("source", value);
-                    cmd.AddParameter("message", entry.Message);
-                    cmd.AddParameter("exception", entry.Exception);
-                    cmd.AddParameter("threadId", entry.ThreadId);
-                    cmd.AddParameter("logLevel", entry.LogLevel.ToString());
-                    cmd.ExecuteNonQuery();
-                }
+#if DEBUG
+                throw;
+#endif
             }
         }
-    }
 
-    public static class IDbCommandExtensions
-    {
-        public static void AddParameter(this IDbCommand command, string name, object value)
-        {
-            var p = command.CreateParameter();
-            p.ParameterName = name;
-            p.Value = value;
-            command.Parameters.Add(p);
-        }
+        #endregion
     }
 }
