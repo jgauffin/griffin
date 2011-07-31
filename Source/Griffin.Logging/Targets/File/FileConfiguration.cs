@@ -16,6 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301 USA
  */
+
+using System;
+using System.Configuration;
+using System.Diagnostics.Contracts;
+
 namespace Griffin.Logging.Targets.File
 {
     /// <summary>
@@ -34,6 +39,18 @@ namespace Griffin.Logging.Targets.File
             DateFormat = "yyyy-MM-dd";
             DateTimeFormat = "yyyy-MM-dd HH:mm:ss.fff";
             DaysToKeep = 30;
+            Path = AppDomain.CurrentDomain.BaseDirectory;
+            if (string.IsNullOrEmpty(Path))
+                throw new InvalidOperationException("AppDomain.CurrentDomain.BaseDirectory is not specified.");
+        }
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(!string.IsNullOrEmpty(Path), "Path must have been specified.");
+            Contract.Invariant(!string.IsNullOrEmpty(DateFormat), "DateFormat must have been specified.");
+            Contract.Invariant(!string.IsNullOrEmpty(DateTimeFormat), "DateTimeFormat must have been specified.");
+            Contract.Invariant(DaysToKeep >= 0, "Days to keep must be 0 or more.");
         }
 
         /// <summary>
@@ -50,6 +67,7 @@ namespace Griffin.Logging.Targets.File
         /// <value>
         /// Default is 30 days
         /// </value>
+        /// <remarks>0 = keep for ever.</remarks>
         public int DaysToKeep { get; set; }
 
         /// <summary>

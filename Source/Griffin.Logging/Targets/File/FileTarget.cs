@@ -110,14 +110,18 @@ namespace Griffin.Logging.Targets.File
         /// </remarks>
         protected virtual string FormatException(Exception exception, int intendation)
         {
+            Contract.Requires(intendation >= 0);
             Contract.Requires<ArgumentNullException>(exception != null);
             Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<string>()));
 
-            string text = "\r\n******* EXCEPTION ********\r\n"
-                          + exception.ToString().Replace("\r\n", "\r\n".PadRight(intendation, '\t'));
+            var msg = exception.ToString().Replace("\r\n", "\r\n".PadRight(intendation, '\t'));
+            string text = string.Format("\r\n******* EXCEPTION ********\r\n\t{0}", msg);
             if (exception.InnerException != null)
-                return text + FormatException(exception.InnerException, intendation + 1);
-            return text;
+                text += FormatException(exception.InnerException, intendation + 1);
+
+            // check is added to make code contracts co quite.
+            // it should have been fulfilled but keeps complaining.
+            return string.IsNullOrEmpty(text) ? "Invalid exception" : text;
         }
 
         /// <summary>
@@ -130,27 +134,35 @@ namespace Griffin.Logging.Targets.File
             Contract.Requires<ArgumentNullException>(entry != null);
             Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<string>()));
 
-            if (entry.Exception != null)
+            var result = "";
+            var ex = entry.Exception;
+            if (ex != null)
             {
-                return string.Format("{0}|{1}|{2}|{3}|{4}|{5}\r\n{6}\r\n",
+                result = string.Format("{0}|{1}|{2}|{3}|{4}|{5}\r\n{6}\r\n",
                                      entry.CreatedAt.ToString(Configuration.DateTimeFormat),
                                      entry.LogLevel,
                                      entry.ThreadId,
                                      FormatUserName(entry.UserName, 40),
                                      FormatStackTrace(entry.StackFrames, 100),
                                      FormatMessage(entry.Message),
-                                     FormatException(entry.Exception, 1)
+                                     FormatException(ex, 1)
+                    );
+            }
+            else
+            {
+                result = string.Format("{0}|{1}|{2}|{3}|{4}|{5}\r\n",
+                                       entry.CreatedAt.ToString(Configuration.DateTimeFormat),
+                                       entry.LogLevel,
+                                       entry.ThreadId,
+                                       FormatUserName(entry.UserName, 40),
+                                       FormatStackTrace(entry.StackFrames, 100),
+                                       FormatMessage(entry.Message)
                     );
             }
 
-            return string.Format("{0}|{1}|{2}|{3}|{4}|{5}\r\n",
-                                 entry.CreatedAt.ToString(Configuration.DateTimeFormat),
-                                 entry.LogLevel,
-                                 entry.ThreadId,
-                                 FormatUserName(entry.UserName, 40),
-                                 FormatStackTrace(entry.StackFrames, 100),
-                                 FormatMessage(entry.Message)
-                );
+            // check is added to make code contracts co quite.
+            // it should have been fulfilled but keeps complaining.
+            return string.IsNullOrEmpty(result) ? "Invalid log entry" : result;
         }
 
         /// <summary>
@@ -161,7 +173,7 @@ namespace Griffin.Logging.Targets.File
         protected virtual string FormatMessage(string message)
         {
             Contract.Requires<ArgumentNullException>(message != null);
-            Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<string>()));
+            Contract.Ensures(Contract.Result<string>() != null);
 
             return message.Replace("\r\n", "\r\n\t").Replace('|', ';');
         }
@@ -214,7 +226,7 @@ namespace Griffin.Logging.Targets.File
         /// <returns>Original string if its within the limit, else a truncated string with "." as suffix to indicate truncation.</returns>
         protected string MaxSize(string value, int size)
         {
-            if (value.Length > size)
+            if (value.Length > size && size > 0)
                 return value.Substring(0, size - 1) + ".";
             return value;
         }

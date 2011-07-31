@@ -40,7 +40,7 @@ namespace Griffin.Logging.Targets
         /// <param name="name">Name of this target.</param>
         public CompositeTarget(string name)
         {
-            Contract.Requires(!String.IsNullOrEmpty(name));
+            Contract.Requires(!string.IsNullOrEmpty(name));
 
             _name = name;
         }
@@ -60,7 +60,12 @@ namespace Griffin.Logging.Targets
         /// </summary>
         public string Name
         {
-            get { return _name; }
+            get
+            {
+                //constructor validates this.
+                Contract.Assume(!string.IsNullOrEmpty(_name));
+                return _name;
+            }
         }
 
         /// <summary>
@@ -69,8 +74,6 @@ namespace Griffin.Logging.Targets
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
         public void AddFilter(IPostFilter filter)
         {
-            Contract.Requires<ArgumentNullException>(filter != null);
-
             _filters.Add(filter);
         }
 
@@ -93,8 +96,7 @@ namespace Griffin.Logging.Targets
         /// </remarks>
         public void Enqueue(LogEntry entry)
         {
-            Contract.Requires<ArgumentNullException>(entry != null);
-
+            Contract.Assume(_filters != null);
             if (_filters.Any(f => !f.CanLog(entry)))
                 return;
 

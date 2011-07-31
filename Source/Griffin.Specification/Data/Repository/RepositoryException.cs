@@ -46,10 +46,13 @@ namespace Griffin.Data.Repository
         {
             get
             {
-                var msg = Target ?? string.Empty + " "
-                                    + RequestedResource + "(" + string.Join(", ", Parameters.ToArray()) + ")";
+                if (Target != null)
+                    return Target;
 
-                return msg;
+                if (Parameters != null )
+                    return string.Format(" {0}({1})", RequestedResource, string.Join(", ", Parameters.ToArray()));
+
+                return base.Message;
             }
         }
     }

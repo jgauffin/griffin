@@ -17,6 +17,8 @@
  * MA 02110-1301 USA
  */
 using System.Collections.Generic;
+using System.Configuration;
+using System.Diagnostics.Contracts;
 using Griffin.Logging.Targets;
 
 namespace Griffin.Logging
@@ -44,6 +46,14 @@ namespace Griffin.Logging
             Done = configuration;
             _name = name;
         }
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(!string.IsNullOrEmpty(Name), "Name must have been specified.");
+            Contract.Invariant(Targets != null, "Targets must have been specified.");
+        }
+
 
         /// <summary>
         /// Gets alias name (as used by namespace definitions)

@@ -30,89 +30,97 @@ namespace Griffin.Logging
 
         public void Debug(string message)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
         }
 
         public void Debug(string message, params object[] formatters)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
+            Contract.Requires<ArgumentNullException>(formatters != null);
         }
 
         public void Debug(string message, Exception exception)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
             Contract.Requires<ArgumentNullException>(exception != null);
         }
 
         public void Debug(string message, Exception exception, params object[] formatters)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
+            Contract.Requires<ArgumentNullException>(formatters != null);
             Contract.Requires<ArgumentNullException>(exception != null);
         }
 
         public void Error(string message)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
         }
 
         public void Error(string message, params object[] formatters)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
+            Contract.Requires<ArgumentNullException>(formatters != null);
         }
 
         public void Error(string message, Exception exception)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
             Contract.Requires<ArgumentNullException>(exception != null);
         }
 
         public void Error(string message, Exception exception, params object[] formatters)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
+            Contract.Requires<ArgumentNullException>(formatters != null);
             Contract.Requires<ArgumentNullException>(exception != null);
         }
 
         public void Info(string message)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
         }
 
         public void Info(string message, params object[] formatters)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
+            Contract.Requires<ArgumentNullException>(formatters != null);
         }
 
         public void Info(string message, Exception exception)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
             Contract.Requires<ArgumentNullException>(exception != null);
         }
 
         public void Info(string message, Exception exception, params object[] formatters)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
+            Contract.Requires<ArgumentNullException>(formatters != null);
             Contract.Requires<ArgumentNullException>(exception != null);
         }
 
         public void Warning(string message)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
         }
 
         public void Warning(string message, params object[] formatters)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
+            Contract.Requires<ArgumentNullException>(formatters != null);
         }
 
         public void Warning(string message, Exception exception)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
             Contract.Requires<ArgumentNullException>(exception != null);
         }
 
         public void Warning(string message, Exception exception, params object[] formatters)
         {
-            Contract.Requires<ArgumentNullException>(message != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(message));
+            Contract.Requires<ArgumentNullException>(formatters != null);
             Contract.Requires<ArgumentNullException>(exception != null);
         }
 

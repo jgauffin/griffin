@@ -18,6 +18,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using Griffin.Logging.Targets;
 
@@ -28,8 +29,8 @@ namespace Griffin.Logging
     /// </summary>
     internal class FluentLogManager : ILogManager
     {
-        private List<FluentNamespaceLogging> _namespaces;
-        private List<FluentTargetConfiguration> _targets;
+        private List<FluentNamespaceLogging> _namespaces = new List<FluentNamespaceLogging>();
+        private List<FluentTargetConfiguration> _targets = new List<FluentTargetConfiguration>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FluentLogManager"/> class.
@@ -63,6 +64,7 @@ namespace Griffin.Logging
                 foreach (string targetName in ns.Targets)
                 {
                     string name = targetName;
+                    Contract.Assume(_targets != null);
                     foreach (ILogTarget target in _targets.First(tg => tg.Name == name).Targets)
                     {
                         ILogTarget target1 = target;
@@ -103,6 +105,7 @@ namespace Griffin.Logging
 
         internal void AddTargets(List<FluentTargetConfiguration> targets)
         {
+            Contract.Requires<ArgumentNullException>(targets != null);
             _targets = targets;
         }
     }

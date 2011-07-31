@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using Griffin.Logging.Targets;
@@ -43,6 +44,9 @@ namespace Griffin.Logging
         /// </remarks>
         public static FluentTargetConfiguration DatabaseLogger(this FluentTargetConfigurationTypes instance, string connectionStringName)
         {
+            Contract.Requires<ArgumentNullException>(instance != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(connectionStringName));
+
             instance.Add(new AdoNetTarget(connectionStringName));
             return instance.Done;
         }

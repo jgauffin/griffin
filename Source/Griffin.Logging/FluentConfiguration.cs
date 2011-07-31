@@ -16,7 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301 USA
  */
+
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Griffin.Logging
 {
@@ -44,8 +47,6 @@ namespace Griffin.Logging
         public FluentConfiguration()
         {
             _generated = this;
-            AddTarget("fileLogger").As.ConsoleLogger().Filter.OnLogLevelBetween(LogLevel.Debug, LogLevel.Warning).Done
-                .LogNamespace("*").AndChildNamespaces.ToTargetNamed("fileLogger");
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace Griffin.Logging
         {
             get
             {
-                var ns = new FluentNamespaceLogging(this, null);
+                var ns = new FluentNamespaceLogging(this, "Everything");
                 _namespaces.Add(ns);
                 return ns;
             }
@@ -68,6 +69,8 @@ namespace Griffin.Logging
         /// <returns>Current configuration instance (to be able to configure fluently)</returns>
         public FluentTargetConfiguration AddTarget(string name)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+
             return new FluentTargetConfiguration(this, name);
         }
 
@@ -78,6 +81,8 @@ namespace Griffin.Logging
         /// <returns>Current configuration instance (to be able to configure fluently)</returns>
         public FluentNamespaceLogging LogNamespace(string name)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+
             var ns = new FluentNamespaceLogging(this, name);
             _namespaces.Add(ns);
             return ns;
@@ -95,6 +100,7 @@ namespace Griffin.Logging
         {
             var logManager = new FluentLogManager();
             logManager.AddNamespaceFilters(_namespaces);
+            Contract.Assume(_targets != null);
             logManager.AddTargets(_targets);
             LogManager.Assign(logManager);
             return Configure.Griffin;

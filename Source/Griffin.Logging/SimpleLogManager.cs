@@ -18,6 +18,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using Griffin.Logging.Filters;
@@ -70,6 +71,10 @@ namespace Griffin.Logging
         /// <param name="configuration">Configuration used to control how entries should be written to the file</param>
         public static void AddFile(string fileName, FileConfiguration configuration)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(fileName));
+            Contract.Requires<ArgumentNullException>(configuration != null);
+
+
             CreateIfNeeded();
             Targets.Add(new PaddedFileTarget(fileName, configuration));
         }
@@ -95,13 +100,23 @@ namespace Griffin.Logging
         /// </remarks>
         public static void AddFile(string fileName)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(fileName));
+            var path = Path.IsPathRooted(fileName)
+                           ? Path.GetDirectoryName(fileName)
+                           : AppDomain.CurrentDomain.BaseDirectory;
+
+            if (string.IsNullOrEmpty(path))
+                throw new InvalidOperationException("Expected AppDomain.CurrentDomain.BaseDirectory to be set.");
+
             var configuration = new FileConfiguration
                                     {
-                                        Path = Path.IsPathRooted(fileName)
-                                                   ? Path.GetDirectoryName(fileName)
-                                                   : AppDomain.CurrentDomain.BaseDirectory
+                                        Path = path
                                     };
-            AddFile(Path.GetFileNameWithoutExtension(fileName), configuration);
+
+            fileName = Path.GetFileNameWithoutExtension(fileName);
+            if (string.IsNullOrEmpty(fileName))
+                throw new InvalidOperationException(string.Format("fileName '{0}' was not specified correctly.", fileName));
+            AddFile(fileName, configuration);
         }
 
         /// <summary>
@@ -123,6 +138,10 @@ namespace Griffin.Logging
         /// <param name="logFilter">The log filter.</param>
         public static void AddFilter(string targetName, IPreFilter logFilter)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(targetName));
+            Contract.Requires<ArgumentNullException>(logFilter != null);
+
+
             //Targets.First(t => Path.GetFileNameWithoutExtension(t.Name) == targetName).AddFilter(logFilter);
         }
     }

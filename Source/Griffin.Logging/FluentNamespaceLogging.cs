@@ -18,6 +18,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 namespace Griffin.Logging
 {
@@ -45,6 +46,9 @@ namespace Griffin.Logging
         /// <param name="name">Namespace name.</param>
         public FluentNamespaceLogging(FluentConfiguration configuration, string name)
         {
+            Contract.Requires<ArgumentNullException>(configuration != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+
             Name = name;
             _configuration = configuration;
         }
@@ -95,6 +99,8 @@ namespace Griffin.Logging
         /// <seealso cref="FluentTargetConfiguration"/>.
         public FluentConfiguration ToTargetNamed(string name)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+
             _targets.Add(name);
             return _configuration;
         }
@@ -107,6 +113,7 @@ namespace Griffin.Logging
         /// <seealso cref="FluentTargetConfiguration"/>.
         public FluentConfiguration ToTargetsNamed(params string[] names)
         {
+            Contract.Requires<ArgumentNullException>(names != null);
             _targets.AddRange(names);
             return _configuration;
         }
@@ -118,7 +125,9 @@ namespace Griffin.Logging
         /// <returns><c>true</c> if this namespace can log the specified type; otherwise <c>false</c>.</returns>
         public bool IsForType(Type type)
         {
-            return LogChildNamespaces ? Name.StartsWith(type.Namespace) : Name == type.Namespace;
+            Contract.Requires<ArgumentNullException>(type != null);
+
+            return LogChildNamespaces ? Name.StartsWith(type.Namespace ?? "") : Name == type.Namespace;
         }
     }
 }

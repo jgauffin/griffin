@@ -63,7 +63,10 @@ namespace Griffin.Logging.Targets
 
             using (DbConnection connection = _providerFactory.CreateConnection())
             {
-                Debug.Assert(connection != null, "connection != null");
+                if (connection == null)
+                    throw new InvalidOperationException(
+                        string.Format("expected to get an connection back from the factory using {0} by provider {1}.",
+                                      _configurationString.ConnectionString, _configurationString.ProviderName));
 
                 connection.ConnectionString = _configurationString.ConnectionString;
                 connection.Open();
@@ -95,7 +98,12 @@ namespace Griffin.Logging.Targets
         /// </remarks>
         public string Name
         {
-            get { return _configurationString.Name; }
+            get
+            {
+                if (string.IsNullOrEmpty(_configurationString.Name))
+                    throw new InvalidOperationException("Connection string used for AdoNetTarget must have a name.");
+                return  _configurationString.Name;
+            }
         }
 
         /// <summary>
@@ -104,8 +112,6 @@ namespace Griffin.Logging.Targets
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
         public void AddFilter(IPostFilter filter)
         {
-            Contract.Requires<ArgumentNullException>(filter != null);
-
             _filters.Add(filter);
         }
 
@@ -121,8 +127,6 @@ namespace Griffin.Logging.Targets
         /// </remarks>
         public void Enqueue(LogEntry entry)
         {
-            Contract.Requires<ArgumentNullException>(entry != null);
-
             try
             {
                 SaveEntry(entry);

@@ -53,6 +53,7 @@
     <Compile Include="Targets\AdoNetTargetTest.cs" />
     <Compile Include="Targets\CompositeTargetTests.cs" />
     <Compile Include="Targets\FileTargetTest.cs" />
+    <Compile Include="Targets\File\PaddedFileTargetTest.cs" />
     <Compile Include="Targets\File\FileTargetTest.cs" />
     <Compile Include="Targets\File\FileWriterTest.cs" />
     <Compile Include="Targets\File\TestWriter.cs" />

@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Griffin.Logging.Tests.Targets.File
 {
-    public class FileTargetTest : FileTarget
+    public class PaddedFileTargetTest : PaddedFileTarget
     {
         private string _message;
         private string _exception;
@@ -18,7 +18,7 @@ namespace Griffin.Logging.Tests.Targets.File
         private string _logEntry;
         private string _userName;
 
-        public FileTargetTest()
+        public PaddedFileTargetTest()
             : base(TestWriter.Instance)
         {
         }

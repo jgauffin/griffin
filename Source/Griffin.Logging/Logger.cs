@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Threading;
 using Griffin.Logging.Filters;
@@ -47,6 +48,10 @@ namespace Griffin.Logging
         /// <param name="targets">The targets.</param>
         public Logger(Type loggedType, IEnumerable<IPreFilter> filters, IEnumerable<ILogTarget> targets)
         {
+            Contract.Requires<ArgumentNullException>(loggedType != null);
+            Contract.Requires<ArgumentNullException>(filters != null);
+            Contract.Requires<ArgumentNullException>(targets != null);
+
             _loggedType = loggedType;
             _filters = filters;
             _targets = targets;
@@ -59,6 +64,9 @@ namespace Griffin.Logging
         /// <param name="targets">The targets.</param>
         public Logger(Type loggedType, IEnumerable<ILogTarget> targets)
         {
+            Contract.Requires<ArgumentNullException>(loggedType != null);
+            Contract.Requires<ArgumentNullException>(targets != null);
+
             _loggedType = loggedType;
             _targets = targets;
             _filters = new List<IPreFilter>();
@@ -108,7 +116,7 @@ namespace Griffin.Logging
         /// </remarks>
         public void Debug(string message, params object[] formatters)
         {
-            WriteEntry(LogLevel.Debug, string.Format(message, formatters), null);
+            WriteEntry(LogLevel.Debug, ContractFormat(message, formatters), null);
         }
 
         /// <summary>
@@ -139,7 +147,7 @@ namespace Griffin.Logging
         /// </remarks>
         public void Debug(string message, Exception exception, params object[] formatters)
         {
-            WriteEntry(LogLevel.Debug, string.Format(message, formatters), exception);
+            WriteEntry(LogLevel.Debug, ContractFormat(message, formatters), exception);
         }
 
         /// <summary>
@@ -154,7 +162,7 @@ namespace Griffin.Logging
         /// </remarks>
         public void Error(string message, Exception exception, params object[] formatters)
         {
-            WriteEntry(LogLevel.Error, string.Format(message, formatters), exception);
+            WriteEntry(LogLevel.Error, ContractFormat(message, formatters), exception);
         }
 
         /// <summary>
@@ -181,7 +189,7 @@ namespace Griffin.Logging
         /// </remarks>
         public void Info(string message, params object[] formatters)
         {
-            WriteEntry(LogLevel.Info, string.Format(message, formatters), null);
+            WriteEntry(LogLevel.Info, ContractFormat(message, formatters), null);
         }
 
         /// <summary>
@@ -210,7 +218,7 @@ namespace Griffin.Logging
         /// </remarks>
         public void Info(string message, Exception exception, params object[] formatters)
         {
-            WriteEntry(LogLevel.Info, string.Format(message, formatters), null);
+            WriteEntry(LogLevel.Info, ContractFormat(message, formatters), null);
         }
 
         /// <summary>
@@ -237,7 +245,7 @@ namespace Griffin.Logging
         /// </remarks>
         public void Warning(string message, params object[] formatters)
         {
-            WriteEntry(LogLevel.Warning, string.Format(message, formatters), null);
+            WriteEntry(LogLevel.Warning, ContractFormat(message, formatters), null);
         }
 
         /// <summary>
@@ -266,7 +274,7 @@ namespace Griffin.Logging
         /// </remarks>
         public void Warning(string message, Exception exception, params object[] formatters)
         {
-            WriteEntry(LogLevel.Warning, string.Format(message, formatters), exception);
+            WriteEntry(LogLevel.Warning, ContractFormat(message, formatters), exception);
         }
 
         /// <summary>
@@ -293,7 +301,7 @@ namespace Griffin.Logging
         /// </remarks>
         public void Error(string message, params object[] formatters)
         {
-            WriteEntry(LogLevel.Error, string.Format(message, formatters), null);
+            WriteEntry(LogLevel.Error, ContractFormat(message, formatters), null);
         }
 
 
@@ -315,7 +323,10 @@ namespace Griffin.Logging
 
         private void WriteEntry(LogLevel level, string message, Exception exception)
         {
+            Contract.Requires<ArgumentNullException>(!String.IsNullOrEmpty(message));
+
             // find any filter that says no to logging
+            Contract.Assume(_filters != null);
             if (_filters.Any(filter => !filter.CanLog(_loggedType, level)))
             {
                 Console.WriteLine("Filter blocks");
@@ -331,21 +342,28 @@ namespace Griffin.Logging
             if (string.IsNullOrEmpty(userName))
                 userName = Environment.UserName;
 
-            var entry = new LogEntry
-                            {
-                                CreatedAt = DateTime.Now,
-                                Exception = exception,
-                                LogLevel = level,
-                                Message = message,
-                                StackFrames = frames,
-                                ThreadId = Thread.CurrentThread.ManagedThreadId,
-                                UserName = userName
-                            };
+            var threadId = Thread.CurrentThread.ManagedThreadId;
+            if (threadId<= 0)
+                throw new InvalidOperationException("Expected to get a valid thread id.");
+
+            Contract.Assume(_loggedType != null);
+            var entry = new LogEntry(_loggedType, level, DateTime.Now, threadId,
+                                     userName, message) {Exception = exception, StackFrames = frames};
 
             foreach (var target in _targets)
             {
                 target.Enqueue(entry);
             }
+        }
+
+        private string ContractFormat(string format, params object[] arguments)
+        {
+            Contract.Requires<ArgumentNullException>(!String.IsNullOrEmpty(format));
+            Contract.Requires<ArgumentNullException>(arguments != null);
+            Contract.Ensures(!string.IsNullOrEmpty(Contract.Result<string>()));
+
+            var result = string.Format(format, arguments);
+            return string.IsNullOrEmpty(result) ? "Invalid format: " + format : result;
         }
     }
 }

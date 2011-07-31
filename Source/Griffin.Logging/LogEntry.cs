@@ -18,14 +18,42 @@
  */
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 
 namespace Griffin.Logging
 {
     /// <summary>
     /// entry that should be written to a file
     /// </summary>
+    [ContractVerification(true)]
     public class LogEntry
     {
+        public LogEntry(Type loggedType, LogLevel logLevel, DateTime createdAt, int threadId, string userName, string message)
+        {
+            Contract.Requires<ArgumentNullException>(loggedType != null);
+            Contract.Requires<ArgumentException>(threadId > 0);
+            Contract.Requires<ArgumentNullException>(!String.IsNullOrEmpty(userName));
+            Contract.Requires<ArgumentNullException>(!String.IsNullOrEmpty(message));
+
+            LoggedType = loggedType;
+            LogLevel = logLevel;
+            CreatedAt = createdAt;
+            ThreadId = threadId;
+            UserName = userName;
+            Message = message;
+        }
+
+
+        [ContractInvariantMethod]
+        private void ObjectInvariant()
+        {
+            Contract.Invariant(ThreadId > 0, "Thread ID must have been specified.");
+            Contract.Invariant(!string.IsNullOrEmpty(UserName), "UserName must have been specified");
+            Contract.Invariant(!string.IsNullOrEmpty(Message), "Message must have been specified.");
+            Contract.Invariant(LoggedType != null, "Logged type must have been specifie");
+        }
+
+
         /// <summary>
         /// Gets or sets name of the current identity.
         /// </summary>

@@ -24,13 +24,16 @@ namespace Griffin.Logging.Targets
         public static string StackFrameOrType(this LogEntry entry)
         {
             Contract.Requires<ArgumentNullException>(entry != null);
-            Contract.Ensures(!String.IsNullOrEmpty(Contract.Result<string>()));
+            Contract.Ensures(Contract.Result<string>() != null);
 
             if (entry.StackFrames == null)
-                return entry.LoggedType.Name;
+            {
+                return entry.LoggedType == null ? "UnknownSource" : entry.LoggedType.Name;
+            }
 
-            return entry.StackFrames[0].GetMethod().ReflectedType.Name + "."
-                   + entry.StackFrames[0].GetMethod().Name;
+            
+            return string.Format("{0}:{1}", entry.StackFrames[0].GetMethod().ReflectedType.Name,
+                                 entry.StackFrames[0].GetMethod().Name);
         }
     }
 }

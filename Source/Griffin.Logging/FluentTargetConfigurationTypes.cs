@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301 USA
  */
+
+using System;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Reflection;
@@ -40,6 +42,8 @@ namespace Griffin.Logging
         /// <param name="configuration">The configuration.</param>
         public FluentTargetConfigurationTypes(FluentTargetConfiguration configuration)
         {
+            Contract.Requires<ArgumentNullException>(configuration != null);
+
             _configuration = configuration;
         }
 
@@ -77,6 +81,8 @@ namespace Griffin.Logging
         /// <returns>Target configuration</returns>
         public FluentTargetConfiguration ConsoleLogger(ConsoleConfiguration config)
         {
+            Contract.Requires<ArgumentNullException>(config != null);
+
             Add(new ConsoleTarget(config));
 
             return _configuration;
@@ -90,6 +96,9 @@ namespace Griffin.Logging
         /// <returns>Target configuration</returns>
         public FluentTargetConfiguration FileLogger(string name, FileConfiguration config)
         {
+            Contract.Requires<ArgumentNullException>(config != null);
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+
             Add(new FileTarget(name, config));
             return _configuration;
         }
@@ -101,24 +110,36 @@ namespace Griffin.Logging
         /// <returns></returns>
         public FluentTargetConfiguration FileLogger(string name)
         {
-            var config = new FileConfiguration();
-            config.Path = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) + "\\logs\\";
-            config.DaysToKeep = 7;
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+
+            var config = new FileConfiguration
+                             {
+                                 Path = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) + "\\logs\\",
+                                 DaysToKeep = 7
+                             };
+
             Add(new FileTarget(name, config));
             return _configuration;
         }
 
         public FluentTargetConfiguration PaddedFileLogger(string name, FileConfiguration config)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+            Contract.Requires<ArgumentNullException>(config != null);
+
             Add(new PaddedFileTarget(name, config));
             return _configuration;
         }
 
         public FluentTargetConfiguration PaddedFileLogger(string name)
         {
-            var config = new FileConfiguration();
-            config.Path = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) + "\\logs\\";
-            config.DaysToKeep = 7;
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+
+            var config = new FileConfiguration
+                             {
+                                 Path = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location) + "\\logs\\",
+                                 DaysToKeep = 7
+                             };
             Add(new PaddedFileTarget(name, config));
             return _configuration;
         }

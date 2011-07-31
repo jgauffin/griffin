@@ -66,8 +66,6 @@ namespace Griffin.Logging.Targets
         /// <param name="filter">Filters are used to validate if an entry can be written to a target or not.</param>
         public void AddFilter(IPostFilter filter)
         {
-            Contract.Requires<ArgumentNullException>(filter != null);
-
             _filters.Add(filter);
         }
 
@@ -83,8 +81,6 @@ namespace Griffin.Logging.Targets
         /// </remarks>
         public void Enqueue(LogEntry entry)
         {
-            Contract.Requires<ArgumentNullException>(entry != null);
-
             string method = entry.StackFrameOrType();
 
             string tmp = String.Format("{0} {1} {2} {3} {4}",

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 
 namespace Griffin.Logging.Filters
 {
@@ -21,6 +22,8 @@ namespace Griffin.Logging.Filters
         /// <param name="includeChildNameSpaces">Included all child namespaces</param>
         public NamespaceFilter(string name, bool includeChildNameSpaces)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+
             _name = name;
             _logSubNamespaces = includeChildNameSpaces;
         }
@@ -35,6 +38,7 @@ namespace Griffin.Logging.Filters
         /// </returns>
         public bool CanLog(Type loggedType, LogLevel logLevel)
         {
+            Contract.Assume(_name != null);
             if (_logSubNamespaces)
                 return loggedType.Namespace.StartsWith(_name);
 

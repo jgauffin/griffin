@@ -17,6 +17,7 @@
  * MA 02110-1301 USA
  */
 using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
 using System.Threading;
@@ -43,6 +44,10 @@ namespace Griffin.Logging.Targets.File
         /// <param name="configuration">The configuration.</param>
         public FileWriter(string name, FileConfiguration configuration)
         {
+            Contract.Requires<ArgumentNullException>(!string.IsNullOrEmpty(name));
+            Contract.Requires<ArgumentNullException>(configuration != null);
+
+
             _name = name;
             _configuration = configuration;
             _logDate = DateTime.Today;
@@ -55,7 +60,11 @@ namespace Griffin.Logging.Targets.File
         /// </summary>
         public FileConfiguration Configuration
         {
-            get { return _configuration; }
+            get
+            {
+                Contract.Assume(_configuration != null); // dunno why? It's checked in the constructor
+                return _configuration;
+            }
         }
 
 
@@ -64,7 +73,11 @@ namespace Griffin.Logging.Targets.File
         /// </summary>
         public string Name
         {
-            get { return _name; }
+            get
+            {
+                Contract.Assume(!string.IsNullOrEmpty(_name)); // dunno why? It's checked in the constructor
+                return _name;
+            }
         }
 
         /// <summary>

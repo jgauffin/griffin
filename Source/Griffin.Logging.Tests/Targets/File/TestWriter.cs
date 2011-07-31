@@ -6,8 +6,7 @@ namespace Griffin.Logging.Tests.Targets.File
     {
         public static readonly TestWriter Instance = new TestWriter();
 
-        FileConfiguration _configuration = new FileConfiguration();
-        private string _writtenEntry;
+        private readonly FileConfiguration _configuration = new FileConfiguration();
 
         public FileConfiguration Configuration
         {
@@ -19,14 +18,11 @@ namespace Griffin.Logging.Tests.Targets.File
             get { return "TestWriter"; }
         }
 
-        public string WrittenEntry
-        {
-            get { return _writtenEntry; }
-        }
+        public string WrittenEntry { get; private set; }
 
         public void Write(string logEntry)
         {
-            _writtenEntry = logEntry;
+            WrittenEntry = logEntry;
         }
     }
 }
